@@ -6,20 +6,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmpleadoComponent } from './empleado/empleado.component';
-import { ClienteComponent } from './cliente/cliente.component';
-import { CuentaComponent } from './cuenta/cuenta.component';
 import { EmpleadoLoginComponent } from './empleado-login/empleado-login.component';
 import { ClienteLoginComponent } from './cliente-login/cliente-login.component';
+import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     EmpleadoComponent,
-    ClienteComponent,
-    CuentaComponent,
     EmpleadoLoginComponent,
-    ClienteLoginComponent
+    ClienteLoginComponent,
+    EcrearClienteComponent
   ],
   imports: [
     BrowserModule,
