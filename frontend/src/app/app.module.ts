@@ -10,6 +10,7 @@ import { EmpleadoLoginComponent } from './empleado-login/empleado-login.componen
 import { ClienteLoginComponent } from './cliente-login/cliente-login.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
+import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
     EmpleadoLoginComponent,
     ClienteLoginComponent,
     EcrearClienteComponent,
-    EcrearCuentaComponent
+    EcrearCuentaComponent,
+    TransferenciaInternaComponent
   ],
   imports: [
     BrowserModule,
