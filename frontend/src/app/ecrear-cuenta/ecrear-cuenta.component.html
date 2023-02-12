@@ -14,6 +14,8 @@
                             </div>
 
                             <form class="user" #formCta="ngForm">
+
+
                                 <div class="form-group">
                                     <input type="text" name="id" #id="ngModel" [(ngModel)]="cta.id" required
                                         pattern="[0-9]+" class="form-control form-control-user"
@@ -26,14 +28,27 @@
 
 
                                 <div class="form-group">
+                                    <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
+                                        class="form-control form-control-user" required pattern="(Ahorros|Corriente)">
+                                        <option value="">Elige una opción &dtrif; </option>
+                                        <option>Ahorros</option>
+                                        <option>Corriente</option>
+                                    </select>
+                                    <span *ngIf="tipo.touched && !tipo.valid">
+                                        * El tipo es obligatorio
+                                    </span>
+                                </div>
+
+                                <!--
+                                <div class="form-group">
 
                                     <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo" required
                                         pattern="[a-zA-Z]+" class="form-control form-control-user" placeholder="Tipo" />
                                     <span *ngIf="tipo.touched && !tipo.valid">
                                         * El tipo es obligatorio
                                     </span>
-
                                 </div>
+                                -->
 
                                 <br>
                                 <input type="submit" name="Crear" [disabled]="!formCta.form.valid"
@@ -42,13 +57,14 @@
 
 
                             <hr>
+                            <!-- perpectiva usuario
                             <div class="text-center">
                                 <a class="small">Olvidaste tú contraseña?</a>
                             </div>
                             <div class="text-center">
                                 <a class="small">¿Ya tienes una cuenta? ¡Ingresa!</a>
                             </div>
-
+-->
                         </div>
                     </div>
                 </div>
