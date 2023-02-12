@@ -10,7 +10,7 @@ import { ClienteB } from '../models/cliente';
 export class EcrearClienteComponent {
   public cli: ClienteB;
   constructor() {
-    this.cli = new ClienteB('', '', '', '', '')
+    this.cli = new ClienteB('', '', '', '', '','','')
   }
   ngOnInit(): void {
 
