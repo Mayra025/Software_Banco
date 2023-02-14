@@ -9,7 +9,7 @@ import { TransferenciaInternaComponent } from './transferencia-interna/transfere
 import { EscritorioComponent } from './escritorio/escritorio.component';
 
 const routes: Routes = [
-  { path: 'cliente-login', component: ClienteComponent },
+
   { path: 'empleado-login', component: EmpleadoLoginComponent },
   { path: 'empleado', component: EmpleadoComponent },
   { path: 'ecrear-cliente', component: EcrearClienteComponent },
