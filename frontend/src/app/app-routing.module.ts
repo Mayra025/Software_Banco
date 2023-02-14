@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmpleadoLoginComponent } from './empleado-login/empleado-login.component';
+import { EmpleadoLoginComponent } from './login/empleado-login.component';
 import { ClienteComponent } from './cliente/cliente.component'
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
