@@ -8,6 +8,9 @@ import { CuentaB } from '../models/cuenta';
 })
 export class EcrearCuentaComponent implements OnInit {
   public cta: CuentaB;
+  opcion:number =2;
+
+
   constructor() {
     this.cta = new CuentaB('', '')
   }
@@ -15,3 +18,4 @@ export class EcrearCuentaComponent implements OnInit {
 
   }
 }
+

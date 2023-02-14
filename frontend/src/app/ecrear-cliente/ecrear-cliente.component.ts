@@ -9,6 +9,9 @@ import { ClienteB } from '../models/cliente';
 })
 export class EcrearClienteComponent {
   public cli: ClienteB;
+  opcion:number =1;
+
+
   constructor() {
     this.cli = new ClienteB('', '', '', '', '','','')
   }
