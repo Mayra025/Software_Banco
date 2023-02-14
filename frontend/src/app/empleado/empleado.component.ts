@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output  } from '@angular/core';
 
 
 @Component({
@@ -6,6 +6,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './empleado.component.html',
   styleUrls: ['./empleado.component.css']
 })
-export class EmpleadoComponent {
+export class EmpleadoComponent implements OnInit {
+  option:number =0;
+
+
+ activarComponente(@Output() opcion:number ){
+   this.option = opcion;
+ }
+
+
+  constructor() { 
+  }
+
+  ngOnInit(): void {
+  }
 
 }
