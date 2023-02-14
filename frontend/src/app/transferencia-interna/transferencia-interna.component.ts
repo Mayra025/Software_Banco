@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TransferenciaI } from '../models/transferenciaI';
 
 @Component({
   selector: 'app-transferencia-interna',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./transferencia-interna.component.css']
 })
 export class TransferenciaInternaComponent {
+  public ti: TransferenciaI;
+  opcion:number =1;
 
+
+  constructor() {
+    this.ti = new TransferenciaI('', '', '', '')
+  }
+  ngOnInit(): void {
+
+  }
 }
