@@ -14,6 +14,7 @@ import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.componen
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
 import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
 import { EscritorioComponent } from './escritorio/escritorio.component';
+import { CuentaComponent } from './cuenta/cuenta.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EscritorioComponent } from './escritorio/escritorio.component';
     EcrearCuentaComponent,
     TransferenciaInternaComponent,
     ClienteComponent,
-    EscritorioComponent
+    EscritorioComponent,
+    CuentaComponent
   ],
 
   imports: [
