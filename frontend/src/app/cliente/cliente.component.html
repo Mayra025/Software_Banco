@@ -22,7 +22,7 @@
         <!--Cuenta-->
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
-            <a class="nav-link" >
+            <a class="nav-link" (click)=activarComponente(1)>
                 <span>Cuenta</span></a>
         </li>
 
@@ -48,6 +48,10 @@
 
                 <div *ngIf="option == 0">
                     <app-escritorio></app-escritorio>
+                </div>
+
+                <div *ngIf="option == 1">
+                    <app-cuenta></app-cuenta>
                 </div>
 
                 <div *ngIf="option == 2">

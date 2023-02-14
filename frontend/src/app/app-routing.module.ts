@@ -7,6 +7,7 @@ import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.componen
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
 import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
 import { EscritorioComponent } from './escritorio/escritorio.component';
+import { CuentaComponent } from './cuenta/cuenta.component';
 
 const routes: Routes = [
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'ecrear-cuenta', component: EcrearCuentaComponent },
   { path: 'transferencia-interna', component: TransferenciaInternaComponent },
   { path: 'cliente', component: ClienteComponent },
-  { path: 'escritorio', component: EscritorioComponent}
+  { path: 'escritorio', component: EscritorioComponent},
+  { path: 'cuenta', component: CuentaComponent}
 
 
 ];
