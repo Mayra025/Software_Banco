@@ -1,4 +1,6 @@
-<body class="bg-gradient-primary">
+<!-- direccion-->
+
+<body class="bg-gradient-primary">  
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -12,6 +14,8 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crear Cliente</h1>
                             </div>
+
+
                             <form class="user" #formCli="ngForm">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -26,24 +30,14 @@
                                         <br>
                                     </div>
 
-                                    <div class="col-sm-6">
-                                        <label for="telefono">Telefono</label> <br>
-                                        <input type="text" name="telefono" #telefono="ngModel"
-                                            [(ngModel)]="cli.telefono" required pattern="[0-9]+"
-                                            class="form-control form-control-user" placeholder="Teléfono" />
-                                        <span *ngIf="telefono.touched && !telefono.valid">
-                                            * Telefono es obligatorio
-                                        </span>
-                                        <br>
-                                    </div>
-                                </div>
 
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="nombre">Nombre</label> <br>
+                                        <label for="nombre">Nombres</label> <br>
                                         <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="cli.nombre"
                                             required pattern="[a-zA-Z]+" class="form-control form-control-user"
-                                            placeholder="Nombre" />
+                                            placeholder="Nombres" />
                                         <span *ngIf="nombre.touched && !nombre.valid">
                                             * Nombre es obligatorio
                                         </span>
@@ -51,11 +45,11 @@
                                     </div>
                                     <div class="col-sm-6">
 
-                                        <label for="apellido">Apellido</label>
+                                        <label for="apellido">Apellidos</label>
                                         <br>
                                         <input type="text" name="apellido" #apellido="ngModel"
                                             [(ngModel)]="cli.apellido" required pattern="[a-zA-Z]+"
-                                            class="form-control form-control-user" placeholder="Apellido" />
+                                            class="form-control form-control-user" placeholder="Apellidos" />
                                         <span *ngIf="apellido.touched && !apellido.valid">
                                             * Apellido es obligatorio
                                         </span>
@@ -66,6 +60,46 @@
 
                                 <div class="form-group">
 
+                                    <label for="provincia">Provincia</label>
+                                    <br>
+                                    <input type="text" name="provincia" #provincia="ngModel" [(ngModel)]="cli.provincia"
+                                        required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                        placeholder="Provincia" />
+                                    <span *ngIf="provincia.touched && !provincia.valid">
+                                        * Provincia es obligatorio
+                                    </span>
+
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="ciudad">Ciudad</label> <br>
+                                        <input type="text" name="ciudad" #ciudad="ngModel" [(ngModel)]="cli.ciudad"
+                                            required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                            placeholder="Ciudad" />
+                                        <span *ngIf="ciudad.touched && !ciudad.valid">
+                                            * Ciudad es obligatorio
+                                        </span>
+                                        <br>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <label for="codigo">Código Postal</label>
+                                        <br>
+                                        <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo"
+                                            required pattern="[0-9]+" class="form-control form-control-user"
+                                            placeholder="Código Postal" />
+                                        <span *ngIf="codigo.touched && !codigo.valid">
+                                            * Codigo postal es obligatorio
+                                        </span>
+                                        <br>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
                                     <label for="email">Correo</label>
                                     <br>
                                     <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email" required

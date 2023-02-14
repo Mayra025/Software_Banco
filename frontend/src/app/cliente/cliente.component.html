@@ -1,20 +1,3 @@
-<!--<br>
-
-<form class="user">
-
-    <input type="submit" name="CrearCliente" value="Crear Cliente" class="btn btn-primary btn-user btn-block"
-        [routerLink]="'/ecrear-cliente'">
-
-    <br>
-    <br>
-
-    <input type="submit" name="CrearCuenta" value="Crear Cuenta" class="btn btn-primary btn-user btn-block"
-        [routerLink]="'/ecrear-cuenta'">
-
-
-</form>
--->
-
 
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -23,7 +6,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
-            <div class="sidebar-brand-text mx-3">Empleado 000 0</div>
+            <div class="sidebar-brand-text mx-3">Nombre del cliente</div>
         </a>
 
         <!-- Divider -->
@@ -31,21 +14,21 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" (click)=activarComponente(0)>
+            <a class="nav-link" >
                 <span>Dashboard</span></a>
         </li>
 
 
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
-            <a class="nav-link" (click)=activarComponente(1)>
-                <span>Crear Cliente</span></a>
+            <a class="nav-link" >
+                <span>Cuenta</span></a>
         </li>
 
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
-            <a class="nav-link" (click)=activarComponente(2)>
-                <span>Crear Cuenta</span></a>
+            <a class="nav-link">
+                <span>Transferencias</span></a>
         </li>
     </ul>
 
@@ -62,18 +45,12 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <div *ngIf="option == 1">
-                  <app-ecrear-cliente></app-ecrear-cliente>
-                              </div>
-
-                <div *ngIf="option == 2">
-                    <app-ecrear-cuenta></app-ecrear-cuenta> 
-                </div>
+               
 
             </div>
             <!-- End of Main Content -->
         </div>
-
-        <!-- End of Content Wrapper --> 
+        
+        <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
