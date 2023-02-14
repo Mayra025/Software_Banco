@@ -6,6 +6,7 @@ import { EmpleadoComponent } from './empleado/empleado.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
 import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
+import { EscritorioComponent } from './escritorio/escritorio.component';
 
 const routes: Routes = [
   { path: 'cliente-login', component: ClienteComponent },
@@ -13,7 +14,10 @@ const routes: Routes = [
   { path: 'empleado', component: EmpleadoComponent },
   { path: 'ecrear-cliente', component: EcrearClienteComponent },
   { path: 'ecrear-cuenta', component: EcrearCuentaComponent },
-  { path: 'transferencia-interna', component: TransferenciaInternaComponent }
+  { path: 'transferencia-interna', component: TransferenciaInternaComponent },
+  { path: 'cliente', component: ClienteComponent },
+  { path: 'escritorio', component: EscritorioComponent}
+
 
 ];
 

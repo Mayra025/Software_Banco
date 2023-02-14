@@ -14,11 +14,12 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" >
+            <a class="nav-link" (click)=activarComponente(0)>
                 <span>Dashboard</span></a>
         </li>
 
-
+        
+        <!--Cuenta-->
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
             <a class="nav-link" >
@@ -45,8 +46,8 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <div *ngIf="option == 1">
-                    
+                <div *ngIf="option == 0">
+                    <app-escritorio></app-escritorio>
                 </div>
 
                 <div *ngIf="option == 2">
@@ -59,4 +60,4 @@
 
         <!-- End of Content Wrapper -->
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Page Wrapper --> 

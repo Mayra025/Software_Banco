@@ -11,7 +11,8 @@ import { ClienteLoginComponent } from './cliente-login/cliente-login.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
 import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
-
+import { EscritorioComponent } from './escritorio/escritorio.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,11 @@ import { TransferenciaInternaComponent } from './transferencia-interna/transfere
     ClienteLoginComponent,
     EcrearClienteComponent,
     EcrearCuentaComponent,
-    TransferenciaInternaComponent
+    TransferenciaInternaComponent,
+    ClienteComponent,
+    EscritorioComponent
   ],
+
   imports: [
     BrowserModule,
     FormsModule,   //para el modulo 
