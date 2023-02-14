@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { EmpleadoLoginComponent } from './empleado-login/empleado-login.component';
 import { ClienteLoginComponent } from './cliente-login/cliente-login.component';
+import { ClienteComponent } from './cliente/cliente.component';
+
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
 import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
