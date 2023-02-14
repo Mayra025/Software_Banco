@@ -34,6 +34,22 @@
 
                                 </div>
 
+
+                                <br>
+                                <div class="form-group">
+                                    <select class="form-control form-control-user" type="text" name="rol" #rol="ngModel"
+                                        [(ngModel)]="empl.rol" required pattern="(Empleado|Cliente)">
+                                        <option value="">Elige una opción &dtrif; </option>
+                                        <option>Empleado</option>
+                                        
+                                        <option>Cliente</option>
+                                    </select>
+                                    <span *ngIf="rol.touched && !rol.valid">
+                                        * El rol es obligatorio
+                                    </span>
+                                </div>
+
+
                                 <br>
 
                                 <input type="submit" name="Ingresar" value="Ingresar" [disabled]="!formEl.form.valid"
@@ -44,7 +60,6 @@
                             <div class="text-center">
                                 <a class="small">Olvidaste tú contraseña?</a>
                             </div>
-
                         </div>
                     </div>
                 </div>

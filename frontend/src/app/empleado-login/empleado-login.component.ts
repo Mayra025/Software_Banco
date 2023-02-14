@@ -11,7 +11,7 @@ export class EmpleadoLoginComponent implements OnInit {
   public empl: EmpleadoB;
 
   constructor() {
-    this.empl = new EmpleadoB('', '')
+    this.empl = new EmpleadoB('', '', '')
   }
   ngOnInit(): void {
 
