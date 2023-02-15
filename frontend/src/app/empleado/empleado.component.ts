@@ -1,5 +1,6 @@
 import { Component, OnInit, Output  } from '@angular/core';
-
+import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-empleado',
@@ -8,6 +9,8 @@ import { Component, OnInit, Output  } from '@angular/core';
 })
 export class EmpleadoComponent implements OnInit {
   option:number =0;
+  public data:any;
+
 
 
  activarComponente(@Output() opcion:number ){
@@ -15,7 +18,15 @@ export class EmpleadoComponent implements OnInit {
  }
 
 
-  constructor() { 
+  constructor(private _router:Router) { 
+    axios.get("http://localhost:8080/api/empleado/info", {withCredentials: true}).then(resp => {
+      this.data = resp.data;
+      console.log(this.data);
+      
+    }).catch(err => {
+      this._router.navigate(['/empleado-login']);
+    })
+
   }
 
   ngOnInit(): void {
