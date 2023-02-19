@@ -13,13 +13,29 @@
                                 <h1 class="h4 text-gray-900 mb-4">Crear Cuenta</h1>
                             </div>
 
-                            <form class="user" #formCta="ngForm">
+                            <div *ngIf="error!==''" style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Error: {{error}}</p>
+                            </div>
+                            <div *ngIf="success!==''" style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Muy bien: {{success}}</p>
+                            </div>
+                            <form class="user" #formCta="ngForm"  (ngSubmit)="onSubmit(formCta)">
 
 
                                 <div class="form-group">
-                                    <input type="text" name="id" #id="ngModel" [(ngModel)]="cta.id" required
+                                    <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
+                                        class="form-control form-control-user"
+                                    >
+                                        <option value="" selected disabled>Elegir el cliente &dtrif;</option>
+                                        <option *ngFor="let cliente of clientes" [value]="cliente._id" style="width: 200px; height: 100px;">
+                                            <div>
+                                                <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id: {{cliente._id}}</p>
+                                            </div>
+                                        </option>
+                                    </select>
+                                    <!-- <input type="text" name="id" #id="ngModel" [(ngModel)]="cta.id" required
                                         pattern="[0-9]+" class="form-control form-control-user"
-                                        placeholder="Identificación" />
+                                        placeholder="Identificación" /> -->
                                     <span *ngIf="id.touched && !id.valid">
                                         * La identificación es obligatoria
                                     </span>
@@ -29,10 +45,10 @@
 
                                 <div class="form-group">
                                     <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
-                                        class="form-control form-control-user" required pattern="(Ahorros|Corriente)">
+                                        class="form-control form-control-user" required pattern="(ahorros|corriente)">
                                         <option value="">Elige una opción &dtrif; </option>
-                                        <option>Ahorros</option>
-                                        <option>Corriente</option>
+                                        <option value="ahorros">Ahorros</option>
+                                        <option value="corriente">Corriente</option>
                                     </select>
                                     <span *ngIf="tipo.touched && !tipo.valid">
                                         * El tipo es obligatorio

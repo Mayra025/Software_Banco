@@ -14,61 +14,50 @@
                                 <h1 class="h4 text-gray-900 mb-4">Transferencia Interna</h1>
                             </div>
 
+                            <div *ngIf="error!==''" style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Error: {{error}}</p>
+                            </div>
+                            <div *ngIf="success!==''" style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Muy bien: {{success}}</p>
+                            </div>
+                            <form class="user" #formTransfI="ngForm" (ngSubmit)="onSubmit(formTransfI)">
+                                <div class="col-sm-6">
 
-                            <form class="user" #formTransfI="ngForm">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-
-                                        <label for="id">Identificación</label> <br>
-                                        <input type="text" name="id" #id="ngModel" [(ngModel)]="ti.id" required
-                                            pattern="[0-9]+" class="form-control form-control-user"
-                                            placeholder="Identificación" />
-                                        <span *ngIf="id.touched && !id.valid">
-                                            * La identificación es obligatoria
-                                        </span>
-                                        <br>
-                                    </div>
-
-
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="origen">Origen</label> <br>
-                                        <input type="text" name="origen" #origen="ngModel" [(ngModel)]="ti.origen"
-                                            required pattern="[a-zA-Z]+" class="form-control form-control-user"
-                                            placeholder="Origen" />
-                                        <span *ngIf="origen.touched && !origen.valid">
-                                            * Origen es obligatorio
-                                        </span>
-                                        <br>
-                                    </div>
-                                    <div class="col-sm-6">
-
-                                        <label for="destino">Destino</label>
-                                        <br>
-                                        <input type="text" name="destino" #destino="ngModel"
-                                            [(ngModel)]="ti.destino" required pattern="[a-zA-Z]+"
-                                            class="form-control form-control-user" placeholder="Destino" />
-                                        <span *ngIf="destino.touched && !destino.valid">
-                                            * Destino es obligatorio
-                                        </span>
-                                        <br>
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label for="monto">Monto</label>
+                                    <label for="destino">Destino</label>
                                     <br>
-                                    <input type="text" name="monto" #monto="ngModel" [(ngModel)]="ti.monto"
-                                        required pattern="[a-zA-Z]+" class="form-control form-control-user"
-                                        placeholder="Monto" />
-                                    <span *ngIf="monto.touched && !monto.valid">
-                                        * Monto es obligatorio
+                                    
+                                    <!-- <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of otrasCuentas" [value]="option">
+                                          {{option._id}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+
+                                    <input type="text"
+                                        placeholder="Pick one"
+                                        aria-label="String"
+                                        matInput
+                                        [formControl]="myControl"
+                                        [matAutocomplete]="auto">
+ -->
+
+                                    <input type="text" name="destino" #destino="ngModel"
+                                        [(ngModel)]="ti.destino" required 
+                                        class="form-control form-control-user" placeholder="Destino" />
+                                    <span *ngIf="destino.touched && !destino.valid">
+                                        * Destino es obligatorio
                                     </span>
+                                    <br>
 
                                 </div>
+                                
+                                <label for="monto">Monto</label>
+                                <br>
+                                <input type="text" name="monto" #monto="ngModel" [(ngModel)]="ti.monto"
+                                    required  class="form-control form-control-user"
+                                    placeholder="Monto" />
+                                <span *ngIf="monto.touched && !monto.valid">
+                                    * Monto es obligatorio
+                                </span>
 
 
                                 <br>

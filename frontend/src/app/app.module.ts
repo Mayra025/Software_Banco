@@ -11,6 +11,9 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
 import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -21,13 +24,15 @@ import { TransferenciaInternaComponent } from './transferencia-interna/transfere
     ClienteComponent,
     EcrearClienteComponent,
     EcrearCuentaComponent,
-    TransferenciaInternaComponent
+    TransferenciaInternaComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,   //para el modulo 
     AppRoutingModule, //para el modulo de rutas
-    HttpClientModule
+    HttpClientModule, BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

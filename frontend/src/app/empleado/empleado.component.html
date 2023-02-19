@@ -62,6 +62,18 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
+                <div *ngIf="option == 0">
+                    <div>
+                        <div>
+                            <h3>Su información: </h3>
+                            <p>Nombre: {{data.nombre}}</p>
+                            <p>Apellido: {{data.apellido}}</p>
+                            <p>Identificacion: {{data.identificacion}}</p>
+                            <p>Nickname: {{data.usuario.nickname}}</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div *ngIf="option == 1">
                   <app-ecrear-cliente></app-ecrear-cliente>
                               </div>
@@ -77,3 +89,4 @@
         <!-- End of Content Wrapper --> 
     </div>
     <!-- End of Page Wrapper -->
+    

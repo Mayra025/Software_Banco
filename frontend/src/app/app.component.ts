@@ -7,7 +7,5 @@ import { EmpleadoB } from './models/empleado';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
-
-
+  title = 'Banca Web';
 }
