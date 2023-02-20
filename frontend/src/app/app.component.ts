@@ -9,6 +9,3 @@ import { EmpleadoB } from './models/empleado';
 export class AppComponent {
   title = 'frontend';
 }
-export class login{
-  
-}
