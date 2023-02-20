@@ -13,23 +13,30 @@
                                 <h1 class="h4 text-gray-900 mb-4">Crear Cuenta</h1>
                             </div>
 
-                            <div *ngIf="error!==''" style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
-                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Error: {{error}}</p>
+                            <div *ngIf="error!==''"
+                                style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Error: {{error}}</p>
                             </div>
-                            <div *ngIf="success!==''" style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
-                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Muy bien: {{success}}</p>
+                            <div *ngIf="success!==''"
+                                style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Muy bien: {{success}}</p>
                             </div>
-                            <form class="user" #formCta="ngForm"  (ngSubmit)="onSubmit(formCta)">
+                            <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
 
 
                                 <div class="form-group">
                                     <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
-                                        class="form-control form-control-user"
-                                    >
+                                        class="form-control form-control-user">
                                         <option value="" selected disabled>Elegir el cliente &dtrif;</option>
-                                        <option *ngFor="let cliente of clientes" [value]="cliente._id" style="width: 200px; height: 100px;">
+                                        <option *ngFor="let cliente of clientes" [value]="cliente._id"
+                                            style="width: 200px; height: 100px;">
                                             <div>
-                                                <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id: {{cliente._id}}</p>
+                                                <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id: {{cliente._id}}
+                                                </p>
                                             </div>
                                         </option>
                                     </select>

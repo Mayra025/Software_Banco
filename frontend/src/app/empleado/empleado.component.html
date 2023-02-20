@@ -23,7 +23,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
-            <div class="sidebar-brand-text mx-3">Empleado 000 0</div>
+            <div class="sidebar-brand-text mx-3">Empleado </div>
         </a>
 
         <!-- Divider -->
@@ -63,30 +63,42 @@
             <div class="container-fluid">
 
                 <div *ngIf="option == 0">
-                    <div>
-                        <div>
-                            <h3>Su información: </h3>
-                            <p>Nombre: {{data.nombre}}</p>
-                            <p>Apellido: {{data.apellido}}</p>
-                            <p>Identificacion: {{data.identificacion}}</p>
-                            <p>Nickname: {{data.usuario.nickname}}</p>
+
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <div class="p-5">
+                                    <div>
+                                        <div>
+                                            <h3>Su información: </h3>
+                                            <p>Nombre: {{data.nombre}}</p>
+                                            <p>Apellido: {{data.apellido}}</p>
+                                            <p>Identificacion: {{data.identificacion}}</p>
+                                            <p>Nickname: {{data.usuario.nickname}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
                 <div *ngIf="option == 1">
-                  <app-ecrear-cliente></app-ecrear-cliente>
-                              </div>
+                   
+                    <app-ecrear-cliente></app-ecrear-cliente>
+                    
+                </div>
 
                 <div *ngIf="option == 2">
-                    <app-ecrear-cuenta></app-ecrear-cuenta> 
+                    <app-ecrear-cuenta></app-ecrear-cuenta>
                 </div>
 
             </div>
             <!-- End of Main Content -->
         </div>
 
-        <!-- End of Content Wrapper --> 
+        <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-    

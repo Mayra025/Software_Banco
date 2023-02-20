@@ -1,6 +1,6 @@
 <!-- direccion-->
 
-<body class="bg-gradient-primary">  
+<body class="bg-gradient-primary">
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -15,11 +15,17 @@
                                 <h1 class="h4 text-gray-900 mb-4">Crear Cliente</h1>
                             </div>
 
-                            <div *ngIf="error!==''" style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
-                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Error: {{error}}</p>
+                            <div *ngIf="error!==''"
+                                style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Error: {{error}}</p>
                             </div>
-                            <div *ngIf="success!==''" style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
-                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Muy bien: {{success}}</p>
+                            <div *ngIf="success!==''"
+                                style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Muy bien: {{success}}</p>
                             </div>
                             <form class="user" #formCli="ngForm" (ngSubmit)="onSubmit(formCli)">
                                 <div class="form-group row">
@@ -127,6 +133,57 @@
                 </div>
             </div>
         </div>
+
+        <h2>Clientes </h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 18%">Identificacion</th>
+                    <th style="width: 18%">Nombres</th>
+                    <th style="width: 18%">Provincia</th>
+                    <th style="width: 18%">Código postal</th>
+                    <th style="width: 18%">Correo</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!--
+
+                <a routerLink="ecrear-cliente/{{clientes.id}}" class="btn btn-sm btn-primary me-1">Editar</a>
+
+                <button (click)="desactivar(clientes.id)" class="btn btn-sm btn-danger">
+                    Desactivar
+                </button>
+-->
+
+
+                <tr *ngFor="let cliente of clientes">
+                    <!--
+                    <td>{{cliente.id}}</td>
+                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                    <td>{{cliente.provincia}} {{cliente.ciudad}}</td>
+                    <td>{{cliente.codigo}}</td>
+                    <td>{{cliente.email}}</td>-->
+                    <td style="white-space: nowrap">
+
+                        <!--  <a routerLink="ecrear-cliente/{{cliente.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
+                      <button (click)="deleteUser(cliente.id)" class="btn btn-sm btn-danger btn-delete-user"
+                            [disabled]="user.isDeleting">
+                            <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                            <span *ngIf="!user.isDeleting">Delete</span>
+                        </button>
+                        -->
+                    </td>
+                </tr>
+                <tr *ngIf="!clientes">
+                    <td colspan="4" class="text-center">
+                        <!--<span class="spinner-border spinner-border-lg align-center"></span> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
 
     </div>
 </body>

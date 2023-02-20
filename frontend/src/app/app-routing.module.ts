@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'cliente', component: ClientesComponent },
   { path: 'ecrear-cliente', component: EcrearClienteComponent },
   { path: 'ecrear-cuenta', component: EcrearCuentaComponent },
-  { path: 'transferencia-interna', component: TransferenciaInternaComponent }
+  { path: 'transferencia-interna', component: TransferenciaInternaComponent },
 
 ];
 

@@ -17,7 +17,7 @@ export class EmpleadoComponent implements OnInit {
    this.option = opcion;
  }
 
-
+/*
   constructor(private _router:Router) { 
     axios.get("http://localhost:8080/api/empleado/info", {withCredentials: true}).then(resp => {
       this.data = resp.data;
@@ -28,6 +28,8 @@ export class EmpleadoComponent implements OnInit {
     })
 
   }
+  */
+  
 
   ngOnInit(): void {
   }

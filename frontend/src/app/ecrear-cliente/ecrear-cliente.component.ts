@@ -11,29 +11,31 @@ import { Router } from '@angular/router';
 })
 export class EcrearClienteComponent {
   public cli: ClienteB;
-  opcion:number =1;
-  public error:string = "";
-  public success:string = "";
+  opcion: number = 1;
+  public error: string = "";
+  public success: string = "";
+
+  public clientes: any;
 
 
-  constructor(private _router:Router) {
-    this.cli = new ClienteB('', '', '', '', '','','')
+  constructor(private _router: Router) {
+    this.cli = new ClienteB('', '', '', '', '', '', '')
   }
   ngOnInit(): void {
 
   }
-  
+
   onSubmit(formCli: NgForm) {
 
     axios.post("http://localhost:8080/api/empleado/clientes", {
-        apellido: formCli.value.apellido,
-        ciudad: formCli.value.ciudad,
-        codigo_postal: formCli.value.codigo,
-        correo: formCli.value.email,
-        identificacion: formCli.value.id,
-        nombre: formCli.value.nombre,
-        provincia: formCli.value.provincia,
-    },{
+      apellido: formCli.value.apellido,
+      ciudad: formCli.value.ciudad,
+      codigo_postal: formCli.value.codigo,
+      correo: formCli.value.email,
+      identificacion: formCli.value.id,
+      nombre: formCli.value.nombre,
+      provincia: formCli.value.provincia,
+    }, {
       headers: {
         Accept: 'application/json',
       },
@@ -41,10 +43,14 @@ export class EcrearClienteComponent {
     }).then(resp => {
       this.error = "";
       this.success = "Cliente creado"
-      
+
     }).catch(err => {
       this.error = err.response.data;
       this.success = ""
     })
+  }
+
+  desactivar(id: string) {
+
   }
 }
