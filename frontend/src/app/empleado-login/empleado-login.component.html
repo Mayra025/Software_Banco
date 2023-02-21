@@ -41,6 +41,7 @@
                                         [(ngModel)]="empl.rol" required pattern="(Empleado|Cliente)">
                                         <option value="">Elige una opción &dtrif; </option>
                                         <option>Empleado</option>
+                                        
                                         <option>Cliente</option>
                                     </select>
                                     <span *ngIf="rol.touched && !rol.valid">
