@@ -1,5 +1,6 @@
 export class ClienteB {
     constructor(
+        public fila:number=0,
         public id:string,
         public nombre: string,
         public apellido: string,

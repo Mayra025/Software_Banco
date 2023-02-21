@@ -15,11 +15,15 @@ export class EcrearClienteComponent {
   public error: string = "";
   public success: string = "";
 
-  public clientes: any;
+  /*public clientes: any;*/
+
+  public clientes: ClienteB[] = [
+    { fila:1,id: '123456789', nombre: 'M', apellido: 'P', provincia: 'P', ciudad: 'Q', codigo: 'qsd3', email: 'djs@ek' }
+  ];
 
 
   constructor(private _router: Router) {
-    this.cli = new ClienteB('', '', '', '', '', '', '')
+    this.cli = new ClienteB(0,'', '', '', '', '', '', '')
   }
   ngOnInit(): void {
 
@@ -50,7 +54,28 @@ export class EcrearClienteComponent {
     })
   }
 
-  desactivar(id: string) {
 
+  addOrEdit() {
+
+    if (this.cli.fila == 0) {
+      this.cli.fila=this.clientes.length +1;
+      this.clientes.push(this.cli);
+    }
+    this.cli = new ClienteB(0,'', '', '', '', '', '', '')
   }
+
+  editar(c: ClienteB) {
+    this.cli = c;
+  }
+
+
+  desactivar(){
+    if (confirm('estás seguro de desactivarlo?')){
+      this.clientes=this.clientes.filter(x=> x!= this.cli);
+      this.cli = new ClienteB(0,'', '', '', '', '', '', '')
+    }
+   
+  }
+
+
 }

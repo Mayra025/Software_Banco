@@ -1,7 +1,50 @@
-<!-- direccion-->
-
 <body class="bg-gradient-primary">
     <div class="container">
+
+        <h2>Clientes </h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 18%">Identificación</th>
+                    <th style="width: 18%">Nombre y Apellido</th>
+                    <th style="width: 18%">Provincia</th>
+                    <th style="width: 18%">Código postal</th>
+                    <th style="width: 18%">Correo</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td> <span class="badge badge-primary text-black">{{cliente.fila}}</span> {{cliente.id}}</td>
+                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                    <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                    <td>{{cliente.codigo}}</td>
+                    <td>{{cliente.email}}</td>
+
+                    <td style="white-space: nowrap">
+                        <a class="btn btn-secondary" (click)="editar(cliente)">
+                            Editar
+                        </a>
+                    </td>
+
+                    <!--
+                       <a routerLink="ecrear-cliente/{{cliente.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
+                      <button (click)="deleteUser(cliente.id)" class="btn btn-sm btn-danger btn-delete-user"
+                            [disabled]="user.isDeleting">
+                            <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                            <span *ngIf="!user.isDeleting">Delete</span>
+                        </button>
+                    -->
+                </tr>
+                <tr *ngIf="!clientes">
+                    <td colspan="4" class="text-center">
+                        <!--<span class="spinner-border spinner-border-lg align-center"></span> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -121,10 +164,17 @@
 
                                 </div>
                                 <br>
-                                <input type="submit" name="Enviar" [disabled]="!formCli.form.valid"
-                                    class="btn btn-primary btn-user btn-block">
-                                <!-- para desahabilitar miesntras no se llene la info-->
+                                <!--
+                                <button (click)="addOrEdit()" class="btn btn-primary">Guardar</button>
+                                <button *ngIf="cli.fila !== 0" class="btn btn-danger"
+                                    (click)="desactivar()">Desactivar</button>
+                                    -->
 
+                                <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCli.form.valid"
+                                    class="btn btn-primary btn-user btn-block" (click)="addOrEdit()">
+
+                                <input *ngIf="cli.fila !== 0" type="submit" name="Desactivar" value="Desactivar"
+                                    class="btn btn-danger btn-user" (click)="desactivar()">
                             </form>
                             <hr>
 
@@ -134,55 +184,7 @@
             </div>
         </div>
 
-        <h2>Clientes </h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th style="width: 18%">Identificacion</th>
-                    <th style="width: 18%">Nombres</th>
-                    <th style="width: 18%">Provincia</th>
-                    <th style="width: 18%">Código postal</th>
-                    <th style="width: 18%">Correo</th>
-                    <th style="width: 10%"></th>
-                </tr>
-            </thead>
-            <tbody>
 
-                <!--
-
-                <a routerLink="ecrear-cliente/{{clientes.id}}" class="btn btn-sm btn-primary me-1">Editar</a>
-
-                <button (click)="desactivar(clientes.id)" class="btn btn-sm btn-danger">
-                    Desactivar
-                </button>
--->
-
-
-                <tr *ngFor="let cliente of clientes">
-                    <!--
-                    <td>{{cliente.id}}</td>
-                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
-                    <td>{{cliente.provincia}} {{cliente.ciudad}}</td>
-                    <td>{{cliente.codigo}}</td>
-                    <td>{{cliente.email}}</td>-->
-                    <td style="white-space: nowrap">
-
-                        <!--  <a routerLink="ecrear-cliente/{{cliente.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
-                      <button (click)="deleteUser(cliente.id)" class="btn btn-sm btn-danger btn-delete-user"
-                            [disabled]="user.isDeleting">
-                            <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
-                            <span *ngIf="!user.isDeleting">Delete</span>
-                        </button>
-                        -->
-                    </td>
-                </tr>
-                <tr *ngIf="!clientes">
-                    <td colspan="4" class="text-center">
-                        <!--<span class="spinner-border spinner-border-lg align-center"></span> -->
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
 
     </div>

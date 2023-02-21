@@ -17,6 +17,8 @@ const routes: Routes = [
   { path: 'ecrear-cuenta', component: EcrearCuentaComponent },
   { path: 'transferencia-interna', component: TransferenciaInternaComponent },
 
+  { path: 'ecrear-cliente/:id', component: EcrearClienteComponent }
+
 ];
 
 @NgModule({

@@ -6,11 +6,7 @@ export class EmpleadoService {
 
 
     constructor() {
-        this.empleados = [
-
-            new EmpleadoB("Abc", "123"),
-            new EmpleadoB("dfg", "546")
-        ];
+        this.empleados = [ ];
     }
 
     getEmpleados(): Array<EmpleadoB> {
