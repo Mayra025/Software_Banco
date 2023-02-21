@@ -1,6 +1,59 @@
 <body class="bg-gradient-primary">
     <div class="container">
 
+        <h2>Cuentas </h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 30%">Identificación</th>
+                    <th style="width: 30%">Tipo</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cuenta of cuentas">
+                    <td> <span class="badge badge-primary text-black">{{cuenta.fila}}</span> {{cuenta.id}}</td>
+                    <td>{{cuenta.tipo}}</td>
+                    <td style="white-space: nowrap">
+                        <a class="btn btn-secondary" (click)="editar(cuenta)">
+                            Editar
+                        </a>
+                    </td>
+                </tr>
+                <tr *ngIf="!cuentas">
+                    <td colspan="4" class="text-center">
+                        <!--<span class="spinner-border spinner-border-lg align-center"></span> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h2>Inactivas </h2>
+        <table class="table table-height">
+            <thead>
+                <tr>
+                    <th style="width: 30%">Identificación</th>
+                    <th style="width: 30%">Tipo</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cuenta of cuentasD">
+                    <td> <span class="badge badge-primary text-black">{{cuenta.fila}}</span> {{cuenta.id}}</td>
+                    <td>{{cuenta.tipo}}</td>
+
+                    <td style="white-space: nowrap">
+                        <a class="btn btn-success" (click)="activar(cuenta)">
+                            Activar
+                        </a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
@@ -25,14 +78,14 @@
                                     style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                     Muy bien: {{success}}</p>
                             </div>
+
                             <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
-
-
                                 <div class="form-group">
+
                                     <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
                                         class="form-control form-control-user">
                                         <option value="" selected disabled>Elegir el cliente &dtrif;</option>
-                                        <option *ngFor="let cliente of clientes" [value]="cliente._id"
+                                         <option *ngFor="let cliente of clientes" [value]="cliente._id"
                                             style="width: 200px; height: 100px;">
                                             <div>
                                                 <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id: {{cliente._id}}
@@ -40,12 +93,10 @@
                                             </div>
                                         </option>
                                     </select>
-                                    <!-- <input type="text" name="id" #id="ngModel" [(ngModel)]="cta.id" required
-                                        pattern="[0-9]+" class="form-control form-control-user"
-                                        placeholder="Identificación" /> -->
                                     <span *ngIf="id.touched && !id.valid">
                                         * La identificación es obligatoria
                                     </span>
+                                    
                                     <br>
                                 </div>
 
@@ -62,20 +113,14 @@
                                     </span>
                                 </div>
 
-                                <!--
-                                <div class="form-group">
-
-                                    <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo" required
-                                        pattern="[a-zA-Z]+" class="form-control form-control-user" placeholder="Tipo" />
-                                    <span *ngIf="tipo.touched && !tipo.valid">
-                                        * El tipo es obligatorio
-                                    </span>
-                                </div>
-                                -->
+                                <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
 
                                 <br>
-                                <input type="submit" name="Crear" [disabled]="!formCta.form.valid"
-                                    class="btn btn-primary btn-user btn-block">
+                                <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCta.form.valid"
+                                    class="btn btn-primary btn-user btn-block" (click)="addOrEdit()">
+
+                                <input *ngIf="cta.fila !== 0 && cta.estado == true" type="submit" name="Desactivar"
+                                    value="Desactivar" class="btn btn-danger btn-user" (click)="desactivar()">
                             </form>
 
 

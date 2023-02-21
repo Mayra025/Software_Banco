@@ -4,6 +4,7 @@ import { ClienteB } from '../models/cliente';
 import axios from 'axios';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-ecrear-cliente',
   templateUrl: './ecrear-cliente.component.html',
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class EcrearClienteComponent {
   public cli: ClienteB;
+  public clientesD: ClienteB[] = [];
+
   opcion: number = 1;
   public error: string = "";
   public success: string = "";
@@ -18,12 +21,12 @@ export class EcrearClienteComponent {
   /*public clientes: any;*/
 
   public clientes: ClienteB[] = [
-    { fila:1,id: '123456789', nombre: 'M', apellido: 'P', provincia: 'P', ciudad: 'Q', codigo: 'qsd3', email: 'djs@ek' }
+    { fila: 1, id: '1234567890', nombre: 'M', apellido: 'P', provincia: 'P', ciudad: 'Q', codigo: '12343', email: 'djs@ek', estado: true }
   ];
 
 
   constructor(private _router: Router) {
-    this.cli = new ClienteB(0,'', '', '', '', '', '', '')
+    this.cli = new ClienteB(0, '', '', '', '', '', '', '', false)
   }
   ngOnInit(): void {
 
@@ -56,26 +59,46 @@ export class EcrearClienteComponent {
 
 
   addOrEdit() {
-
     if (this.cli.fila == 0) {
-      this.cli.fila=this.clientes.length +1;
+      this.cli.fila = this.clientes.length + 1;
+      this.cli.estado = true;
       this.clientes.push(this.cli);
     }
-    this.cli = new ClienteB(0,'', '', '', '', '', '', '')
+    alert("Cambio exitoso");   ////
+
+    this.cli = new ClienteB(0, '', '', '', '', '', '', '', false)
   }
 
   editar(c: ClienteB) {
     this.cli = c;
+
   }
 
 
-  desactivar(){
-    if (confirm('estás seguro de desactivarlo?')){
-      this.clientes=this.clientes.filter(x=> x!= this.cli);
-      this.cli = new ClienteB(0,'', '', '', '', '', '', '')
+  desactivar() {
+    if (confirm('estás seguro de desactivarlo?')) {
+      this.cli.estado = false;
+      this.cli.fila = this.clientesD.length + 1;
+      this.clientesD.push(this.cli);
+
+      this.clientes = this.clientes.filter(x => x != this.cli);
+      this.cli = new ClienteB(0, '', '', '', '', '', '', '', false)
     }
-   
+
   }
 
+  activar(c: ClienteB) {
+    if (confirm('estás seguro de activarlo?')) {
+      this.cli = c;
+      this.cli.estado = true;
+      this.cli.fila = this.clientes.length + 1;
+      this.clientes.push(this.cli);
 
+
+      this.clientesD = this.clientesD.filter(x => x != this.cli);
+      this.cli = new ClienteB(0, '', '', '', '', '', '', '', false)
+
+    }
+
+  }
 }

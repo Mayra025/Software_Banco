@@ -8,5 +8,6 @@ export class ClienteB {
         public ciudad: string,
         public codigo: string,
         public email: string,
+        public estado:boolean,
     ) { }
 }

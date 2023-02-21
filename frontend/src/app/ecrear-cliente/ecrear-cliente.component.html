@@ -26,20 +26,42 @@
                             Editar
                         </a>
                     </td>
-
-                    <!--
-                       <a routerLink="ecrear-cliente/{{cliente.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
-                      <button (click)="deleteUser(cliente.id)" class="btn btn-sm btn-danger btn-delete-user"
-                            [disabled]="user.isDeleting">
-                            <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
-                            <span *ngIf="!user.isDeleting">Delete</span>
-                        </button>
-                    -->
                 </tr>
                 <tr *ngIf="!clientes">
                     <td colspan="4" class="text-center">
                         <!--<span class="spinner-border spinner-border-lg align-center"></span> -->
                     </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h2>Inactivos </h2>
+        <table class="table table-height">
+            <thead>
+                <tr>
+                    <th style="width: 18%">Identificación</th>
+                    <th style="width: 18%">Nombre y Apellido</th>
+                    <th style="width: 18%">Provincia</th>
+                    <th style="width: 18%">Código postal</th>
+                    <th style="width: 18%">Correo</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientesD">
+                    <td> <span class="badge badge-primary text-black">{{cliente.fila}}</span> {{cliente.id}}</td>
+                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                    <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                    <td>{{cliente.codigo}}</td>
+                    <td>{{cliente.email}}</td>
+
+                    <td style="white-space: nowrap">
+                        <a class="btn btn-success" (click)="activar(cliente)">
+                            Activar
+                        </a>
+                    </td>
+
                 </tr>
             </tbody>
         </table>
@@ -55,7 +77,7 @@
                         <div class="p-5">
 
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Crear Cliente</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Crear/Editar Cliente</h1>
                             </div>
 
                             <div *ngIf="error!==''"
@@ -74,7 +96,6 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
 
-                                        <label for="id">Identificación</label> <br>
                                         <input type="text" name="id" #id="ngModel" [(ngModel)]="cli.id" required
                                             pattern="[0-9]{10,10}" class="form-control form-control-user"
                                             placeholder="Identificación" />
@@ -88,7 +109,6 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="nombre">Nombres</label> <br>
                                         <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="cli.nombre"
                                             required pattern="[a-zA-Z]+" class="form-control form-control-user"
                                             placeholder="Nombres" />
@@ -98,9 +118,6 @@
                                         <br>
                                     </div>
                                     <div class="col-sm-6">
-
-                                        <label for="apellido">Apellidos</label>
-                                        <br>
                                         <input type="text" name="apellido" #apellido="ngModel"
                                             [(ngModel)]="cli.apellido" required pattern="[a-zA-Z]+"
                                             class="form-control form-control-user" placeholder="Apellidos" />
@@ -113,9 +130,6 @@
                                 </div>
 
                                 <div class="form-group">
-
-                                    <label for="provincia">Provincia</label>
-                                    <br>
                                     <input type="text" name="provincia" #provincia="ngModel" [(ngModel)]="cli.provincia"
                                         required pattern="[a-zA-Z]+" class="form-control form-control-user"
                                         placeholder="Provincia" />
@@ -125,10 +139,9 @@
 
                                 </div>
 
-
+                                <br>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="ciudad">Ciudad</label> <br>
                                         <input type="text" name="ciudad" #ciudad="ngModel" [(ngModel)]="cli.ciudad"
                                             required pattern="[a-zA-Z]+" class="form-control form-control-user"
                                             placeholder="Ciudad" />
@@ -138,9 +151,6 @@
                                         <br>
                                     </div>
                                     <div class="col-sm-6">
-
-                                        <label for="codigo">Código Postal</label>
-                                        <br>
                                         <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo"
                                             required pattern="[0-9]+" class="form-control form-control-user"
                                             placeholder="Código Postal" />
@@ -154,8 +164,6 @@
 
 
                                 <div class="form-group">
-                                    <label for="email">Correo</label>
-                                    <br>
                                     <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email" required
                                         class="form-control form-control-user" placeholder="Email" />
                                     <span *ngIf="email.touched && !email.valid">
@@ -164,17 +172,15 @@
 
                                 </div>
                                 <br>
-                                <!--
-                                <button (click)="addOrEdit()" class="btn btn-primary">Guardar</button>
-                                <button *ngIf="cli.fila !== 0" class="btn btn-danger"
-                                    (click)="desactivar()">Desactivar</button>
-                                    -->
 
+                                <span *ngIf="!formCli.form.valid"> Recuerde revisar los campos </span>
+                                <br>
                                 <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCli.form.valid"
                                     class="btn btn-primary btn-user btn-block" (click)="addOrEdit()">
 
-                                <input *ngIf="cli.fila !== 0" type="submit" name="Desactivar" value="Desactivar"
-                                    class="btn btn-danger btn-user" (click)="desactivar()">
+
+                                <input *ngIf="cli.fila !== 0 && cli.estado == true" type="submit" name="Desactivar"
+                                    value="Desactivar" class="btn btn-danger btn-user" (click)="desactivar()">
                             </form>
                             <hr>
 
