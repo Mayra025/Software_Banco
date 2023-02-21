@@ -47,6 +47,12 @@
             <a class="nav-link" (click)=activarComponente(2)>
                 <span>Cuentas</span></a>
         </li>
+
+        <hr class="sidebar-divider my-0">
+        <li class="nav-item">
+            <a class="nav-link" (click)="logout()">
+                <span>Salir</span></a>
+        </li>
     </ul>
 
 
@@ -86,9 +92,9 @@
                 </div>
 
                 <div *ngIf="option == 1">
-                   
+
                     <app-ecrear-cliente></app-ecrear-cliente>
-                    
+
                 </div>
 
                 <div *ngIf="option == 2">
