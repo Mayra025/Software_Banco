@@ -15,12 +15,13 @@
 </form>
 -->
 
+<button (click)="logout()">Salir del Sistema</button>
 
 <!-- Page Wrapper -->
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordion accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">Empleado 000 0</div>
@@ -28,6 +29,24 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
+
+        <ul id="accordion" class="accordion">
+            <li *ngFor="let menu of menus; let i = index" [class.active]="menu.active" >
+              <div class="menu" (click)="toggle(i)">
+                <i [class]="menu.iconClass"></i>
+                {{ menu.name }}
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <ul class="submenu" #submenu [style.height.px]="menu.active ? submenu.scrollHeight : 0">
+                <li *ngFor="let submenu of menu.submenu">
+                  <!-- <a [href]="submenu.url">{{ submenu.name }}</a> -->
+                  <a class="nav-link" (click)=activarComponente(submenu.id)>
+                    <span>{{ submenu.name }}</span></a>
+                  <!-- <button (click)=callbacks(1)>{{ submenu.name }}</button> -->
+                </li>
+              </ul>
+            </li>
+          </ul>
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">

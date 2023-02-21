@@ -239,3 +239,102 @@ a:focus {
   color: #fff;
 
 }
+
+
+
+
+/* jj */
+.accordion {
+  width: 100%;
+  max-width: 360px;
+  margin: auto;
+  background: #fff;
+  border-radius: 4px;
+  list-style: none;
+}
+
+.accordion .menu {
+  position: relative;
+  padding: 15px 15px 15px 45px;
+  color: #4d4d4d;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.accordion li:last-child .menu {
+  border-bottom: 0;
+}
+
+.accordion li i {
+  position: absolute;
+  top: 1.2rem;
+  left: 1rem;
+  color: #595959;
+  transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+  right: 1rem;
+  left: auto;
+}
+
+.accordion li.active i.fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.accordion li.active .menu {
+  color: #b63b4d;
+}
+
+.accordion li.active i {
+  color: #b63b4d;
+}
+
+/* Show submenu */
+.accordion li.active .submenu {
+  /*
+    height: 0 -> height: auto;는 transition이 동작하지 않는다.
+    max-height: 임의의 높이;를 지정하면 transition이 동작하지만 타이밍이 망가진다.
+    max-height: 1000px;과 max-height: 133px;을 비교해 보라!
+    height를 1000px으로 transition할 시간에 실제로는 133px정도만 transition하므로 여는 시간이 닫는 시간보다 빠르다.
+  */
+  /* max-height: 1000px; */
+  /* max-height: 133px; */
+}
+
+.submenu {
+  height: 0;
+  overflow: hidden;
+  background: #444359;
+  font-size: 14px;
+  transition: height 0.4s ease;
+  list-style: none;
+}
+
+.submenu li {
+  border-bottom: 1px solid #4b4a5e;
+}
+
+.accordion li:last-child .submenu {
+  border-radius: 0 0 4px 4px;
+}
+
+.accordion li:last-child .submenu li:last-child {
+  border-bottom: 0;
+}
+
+.submenu a {
+  display: block;
+  text-decoration: none;
+  color: #d9d9d9;
+  padding: 12px;
+  padding-left: 42px;
+  transition: all 0.25s ease-in-out;
+}
+
+.submenu a:hover {
+  background: #b63b4d;
+  color: #fff;
+}

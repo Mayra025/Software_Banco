@@ -14,7 +14,8 @@ import { TransferenciaInternaComponent } from './transferencia-interna/transfere
 import { ClientesComponent } from './clientes/clientes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AccordionComponent } from './ui/menu-acordeon/menu-acordeon.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +26,16 @@ import { MaterialModule } from './material.module';
     EcrearClienteComponent,
     EcrearCuentaComponent,
     TransferenciaInternaComponent,
-    ClientesComponent
+    ClientesComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,   //para el modulo 
     AppRoutingModule, //para el modulo de rutas
     HttpClientModule, BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
