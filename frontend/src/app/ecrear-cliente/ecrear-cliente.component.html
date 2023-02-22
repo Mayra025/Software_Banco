@@ -1,31 +1,33 @@
 <body class="bg-gradient-primary">
     <div class="container">
 
-        <h2>Clientes </h2>
+        <h2 style="font-size: 2rem; margin-top: 10px;">Clientes </h2>
+        <div>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th style="width: 18%">Identificación</th>
-                    <th style="width: 18%">Nombre y Apellido</th>
-                    <th style="width: 18%">Provincia</th>
-                    <th style="width: 18%">Código postal</th>
-                    <th style="width: 18%">Correo</th>
+                    <th style="width: 30%">Identificación</th>
+                    <th style="width: 10%">Nombre y Apellido</th>
+                    <th style="width: 10%">Provincia</th>
+                    <th style="width: 10%">Código postal</th>
+                    <th style="width: 10%">Correo</th>
                     <th style="width: 10%"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let cliente of clientes">
-                    <td> <span class="badge badge-primary text-black">{{cliente.fila}}</span> {{cliente.id}}</td>
-                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
-                    <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
-                    <td>{{cliente.codigo}}</td>
-                    <td>{{cliente.email}}</td>
-
-                    <td style="white-space: nowrap">
-                        <a class="btn btn-secondary" (click)="editar(cliente)">
-                            Editar
-                        </a>
-                    </td>
+                <tr *ngFor="let cliente of clientes;">
+                    <ng-container *ngIf="cliente.activo">
+                        <td> <span class="badge badge-primary text-black"></span> {{cliente._id}}</td>
+                        <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                        <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                        <td>{{cliente.codigo_postal}}</td>
+                        <td>{{cliente.usuario.email}}</td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-secondary" (click)="editar(cliente)">
+                                Editar
+                            </a>
+                        </td>
+                    </ng-container>
                 </tr>
                 <tr *ngIf="!clientes">
                     <td colspan="4" class="text-center">
@@ -34,34 +36,35 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
 
-        <h2>Inactivos </h2>
+        <h2 style="text-align: center;">Inactivos </h2>
         <table class="table table-height">
             <thead>
                 <tr>
-                    <th style="width: 18%">Identificación</th>
-                    <th style="width: 18%">Nombre y Apellido</th>
-                    <th style="width: 18%">Provincia</th>
-                    <th style="width: 18%">Código postal</th>
-                    <th style="width: 18%">Correo</th>
+                    <th style="width: 30%">Identificación</th>
+                    <th style="width: 10%">Nombre y Apellido</th>
+                    <th style="width: 10%">Provincia</th>
+                    <th style="width: 10%">Código postal</th>
+                    <th style="width: 10%">Correo</th>
                     <th style="width: 10%"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let cliente of clientesD">
-                    <td> <span class="badge badge-primary text-black">{{cliente.fila}}</span> {{cliente.id}}</td>
-                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
-                    <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
-                    <td>{{cliente.codigo}}</td>
-                    <td>{{cliente.email}}</td>
-
-                    <td style="white-space: nowrap">
-                        <a class="btn btn-success" (click)="activar(cliente)">
-                            Activar
-                        </a>
-                    </td>
-
+                <tr *ngFor="let cliente of clientes;">
+                    <ng-container *ngIf="!cliente.activo">
+                        <td> <span class="badge badge-primary text-black"></span> {{cliente._id}}</td>
+                        <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                        <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                        <td>{{cliente.codigo_postal}}</td>
+                        <td>{{cliente.usuario.email}}</td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-secondary" (click)="editar(cliente)">
+                                Editar
+                            </a>
+                        </td>
+                    </ng-container>
                 </tr>
             </tbody>
         </table>

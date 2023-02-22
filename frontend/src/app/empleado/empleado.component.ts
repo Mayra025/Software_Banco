@@ -19,13 +19,13 @@ export class EmpleadoComponent implements OnInit {
 
 
   constructor(private _router: Router) {
-    /*axios.get("http://localhost:8080/api/empleado/info", { withCredentials: true }).then(resp => {
+    axios.get("http://localhost:8080/api/empleado/info", { withCredentials: true }).then(resp => {
       this.data = resp.data;
       console.log(this.data);
 
     }).catch(err => {
       this._router.navigate(['/empleado-login']);
-    })*/
+    })
 
   }
 
@@ -37,14 +37,13 @@ export class EmpleadoComponent implements OnInit {
   logout(): void {
     this._router.navigate(['/empleado-login']);
 
-    /*
     axios.post("http://localhost:8080/api/logout", {}, { withCredentials: true }).then(resp => {
       window.location.reload();
     }).catch(err => {
       console.log(err);
 
     })
-*/
+
   }
 
 }

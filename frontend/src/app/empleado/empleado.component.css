@@ -239,3 +239,30 @@ a:focus {
   color: #fff;
 
 }
+
+#accordionSidebar {
+  min-height: 90vh;
+}
+
+#accordionSidebar .nav-link {
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+
+#accordionSidebar .nav-link:hover {
+  background-color: rgb(70, 198, 248);
+}
+
+#accordionSidebar .nav-link span {
+  font-size: 1.1rem;
+}
+
+.information h3{
+  text-align: center;
+  font-size: 2rem;
+
+}
+
+.information p {
+  font-size: 1.1rem;
+}

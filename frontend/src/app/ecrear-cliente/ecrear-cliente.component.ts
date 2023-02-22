@@ -20,13 +20,18 @@ export class EcrearClienteComponent {
 
   /*public clientes: any;*/
 
-  public clientes: ClienteB[] = [
-    { fila: 1, id: '1234567890', nombre: 'M', apellido: 'P', provincia: 'P', ciudad: 'Q', codigo: '12343', email: 'djs@ek', estado: true }
-  ];
-
+  // public clientes: ClienteB[] = [
+  //   { fila: 1, id: '1234567890', nombre: 'M', apellido: 'P', provincia: 'P', ciudad: 'Q', codigo: '12343', email: 'djs@ek', estado: true }
+  // ];
+  public clientes: any
 
   constructor(private _router: Router) {
     this.cli = new ClienteB(0, '', '', '', '', '', '', '', false)
+    axios.get("http://localhost:8080/api/empleado/clientes", {withCredentials: true}).then(resp => {
+      this.clientes = resp.data;      
+    }).catch(err => {
+      this._router.navigate(['/empleado-login']);
+    })
   }
   ngOnInit(): void {
 
@@ -81,7 +86,7 @@ export class EcrearClienteComponent {
       this.cli.fila = this.clientesD.length + 1;
       this.clientesD.push(this.cli);
 
-      this.clientes = this.clientes.filter(x => x != this.cli);
+      // this.clientes = this.clientes.filter(x => x != this.cli);
       this.cli = new ClienteB(0, '', '', '', '', '', '', '', false)
     }
 

@@ -1,24 +1,28 @@
 <body class="bg-gradient-primary">
     <div class="container">
 
-        <h2>Cuentas </h2>
+        <h2 style="font-size: 2rem; margin-top: 10px;">Cuentas </h2>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th style="width: 30%">Identificación</th>
-                    <th style="width: 30%">Tipo</th>
+                    <th style="width: 10%">Tipo</th>
+                    <th style="width: 10%">Saldo</th>
                     <th style="width: 10%"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let cuenta of cuentas">
-                    <td> <span class="badge badge-primary text-black">{{cuenta.fila}}</span> {{cuenta.id}}</td>
-                    <td>{{cuenta.tipo}}</td>
-                    <td style="white-space: nowrap">
-                        <a class="btn btn-secondary" (click)="editar(cuenta)">
-                            Editar
-                        </a>
-                    </td>
+                    <ng-container *ngIf="cuenta.activo">
+                        <td> <span class="badge badge-primary text-black"></span> {{cuenta._id}}</td>
+                        <td>{{cuenta.tipo==="C" ? "Corriente" : "Ahorro"}}</td>
+                        <td>{{cuenta.monto}}$</td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-secondary" (click)="editar(cuenta)">
+                                Editar
+                            </a>
+                        </td>
+                    </ng-container>
                 </tr>
                 <tr *ngIf="!cuentas">
                     <td colspan="4" class="text-center">
@@ -34,21 +38,23 @@
             <thead>
                 <tr>
                     <th style="width: 30%">Identificación</th>
-                    <th style="width: 30%">Tipo</th>
+                    <th style="width: 10%">Tipo</th>
+                    <th style="width: 10%">Saldo</th>
                     <th style="width: 10%"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let cuenta of cuentasD">
-                    <td> <span class="badge badge-primary text-black">{{cuenta.fila}}</span> {{cuenta.id}}</td>
-                    <td>{{cuenta.tipo}}</td>
-
-                    <td style="white-space: nowrap">
-                        <a class="btn btn-success" (click)="activar(cuenta)">
-                            Activar
-                        </a>
-                    </td>
-
+                <tr *ngFor="let cuenta of cuentas">
+                    <ng-container *ngIf="!cuenta.activo">
+                        <td> <span class="badge badge-primary text-black"></span> {{cuenta._id}}</td>
+                        <td>{{cuenta.tipo==="C" ? "Corriente" : "Ahorro"}}</td>
+                        <td>{{cuenta.monto}}$</td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-secondary" (click)="editar(cuenta)">
+                                Editar
+                            </a>
+                        </td>
+                    </ng-container>
                 </tr>
             </tbody>
         </table>
@@ -82,10 +88,23 @@
                             <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
                                 <div class="form-group">
 
-                                    <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
-                                        class="form-control form-control-user">
+                                    <div class="form-group">
+                                        <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
+                                            class="form-control form-control-user" required pattern="(ahorros|corriente)">
+                                            <option value="">Elige una opción &dtrif; </option>
+                                            <option value="ahorros">Ahorros</option>
+                                            <option value="corriente">Corriente</option>
+                                        </select>
+                                        <span *ngIf="tipo.touched && !tipo.valid">
+                                            * El tipo es obligatorio
+                                        </span>
+                                    </div>
+                                    <br>
+                                    <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id" style="width: 60%;"
+                                        class="form-control form-control-user" >
+                                        <!-- (ngModelChange)="onChangeSelect($event)"> -->
                                         <option value="" selected disabled>Elegir el cliente &dtrif;</option>
-                                         <option *ngFor="let cliente of clientes" [value]="cliente._id"
+                                         <option *ngFor="let cliente of clientesNoSeleccionados" [value]="cliente._id"
                                             style="width: 200px; height: 100px;">
                                             <div>
                                                 <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id: {{cliente._id}}
@@ -93,24 +112,18 @@
                                             </div>
                                         </option>
                                     </select>
+
+                                    <!-- <ul style="list-style: none;">
+                                        <li *ngFor="let cli of clientesSeleccionados">
+                                            {{cli}} <button (click)="changeButton($event, cli)" >X</button>
+                                        </li>
+                                    </ul> -->
+                                    
                                     <span *ngIf="id.touched && !id.valid">
                                         * La identificación es obligatoria
                                     </span>
                                     
-                                    <br>
-                                </div>
 
-
-                                <div class="form-group">
-                                    <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
-                                        class="form-control form-control-user" required pattern="(ahorros|corriente)">
-                                        <option value="">Elige una opción &dtrif; </option>
-                                        <option value="ahorros">Ahorros</option>
-                                        <option value="corriente">Corriente</option>
-                                    </select>
-                                    <span *ngIf="tipo.touched && !tipo.valid">
-                                        * El tipo es obligatorio
-                                    </span>
                                 </div>
 
                                 <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>

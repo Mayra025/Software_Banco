@@ -1,3 +1,16 @@
 body {
     background-color: #5dc1b9;
 }
+
+.header {
+    background-color: #4e73df;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1 {
+    color: white;
+    font-weight: bold;
+}

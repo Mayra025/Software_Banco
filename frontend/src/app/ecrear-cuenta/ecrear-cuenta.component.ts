@@ -17,22 +17,43 @@ export class EcrearCuentaComponent implements OnInit {
   public error: string = "";
   public success: string = "";
   public clientes: any;
+  public clientesSeleccionados:string[] = [];
+  public clientesNoSeleccionados:any
 
-  public cuentas: CuentaB[] = [
-    { fila: 1, id: '1234567890', nombre: 'M', apellido: 'P', tipo: 'ahorros', estado: true }
-  ];
+  // public cuentas: CuentaB[] = [
+  //   { fila: 1, id: '1234567890', nombre: 'M', apellido: 'P', tipo: 'ahorros', estado: true }
+  // ];
+
+  public cuentas:any;
 
   constructor(private _router: Router) {
     this.cta = new CuentaB(0, '', '', '', '', false)
-    /*
         axios.get("http://localhost:8080/api/empleado/clientes", {withCredentials: true}).then(resp => {
-          this.clientes = resp.data;      
+          this.clientes = resp.data;     
+          this.clientesNoSeleccionados = this.clientes;
         }).catch(err => {
           this._router.navigate(['/empleado-login']);
-        })*/
+        })
+
+        axios.get("http://localhost:8080/api/empleado/cuentas", {withCredentials: true}).then(resp => {
+          this.cuentas = resp.data                
+        }).catch(err => {
+          this._router.navigate(['/empleado-login']);
+        })
+        
   }
   ngOnInit(): void {
 
+  }
+
+  onChangeSelect(option:any){
+    this.clientesSeleccionados.push(option)
+    this.clientesNoSeleccionados = this.clientes.filter((ele:any) => !this.clientesSeleccionados.includes(ele._id))
+  }
+  
+  changeButton(option:any, id:string){
+    this.clientesSeleccionados = this.clientesSeleccionados.filter(ele => ele != id)
+    this.clientesNoSeleccionados = this.clientes.filter((ele:any) => !this.clientesSeleccionados.includes(ele._id))
   }
 
   onSubmit(formCta: NgForm) {
@@ -70,7 +91,6 @@ export class EcrearCuentaComponent implements OnInit {
 
   editar(c: CuentaB) {
     this.cta = c;
-
   }
 
 
@@ -80,7 +100,7 @@ export class EcrearCuentaComponent implements OnInit {
       this.cta.fila = this.cuentasD.length + 1;
       this.cuentasD.push(this.cta);
 
-      this.cuentas = this.cuentas.filter(x => x != this.cta);
+      // this.cuentas = this.cuentas.filter(x => x != this.cta);
       this.cta = new CuentaB(0, '', '', '', '', false)
     }
 
