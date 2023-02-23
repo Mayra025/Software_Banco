@@ -6,7 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmpleadoComponent } from './empleado/empleado.component';
-import { EmpleadoLoginComponent } from './login/empleado-login.component';
+
+import { LoginComponent } from './login/login.component';
+
 import { ClienteComponent } from './cliente/cliente.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
@@ -23,7 +25,7 @@ import { CuentaComponent } from './cuenta/cuenta.component';
   declarations: [
     AppComponent,
     EmpleadoComponent,
-    EmpleadoLoginComponent,
+    LoginComponent,
     ClienteComponent,
     EcrearClienteComponent,
     EcrearCuentaComponent,

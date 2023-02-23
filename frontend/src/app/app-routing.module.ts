@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmpleadoLoginComponent } from './login/empleado-login.component';
+import { LoginComponent } from './login/login.component';
 import { ClienteComponent } from './cliente/cliente.component'
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
@@ -13,15 +13,15 @@ import { CuentaComponent } from './cuenta/cuenta.component';
 
 const routes: Routes = [
 
-  { path: 'empleado-login', component: EmpleadoLoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'empleado', component: EmpleadoComponent },
   { path: 'cliente', component: ClientesComponent },
   { path: 'ecrear-cliente', component: EcrearClienteComponent },
   { path: 'ecrear-cuenta', component: EcrearCuentaComponent },
   { path: 'transferencia-interna', component: TransferenciaInternaComponent },
   { path: 'cliente', component: ClienteComponent },
-  { path: 'escritorio', component: EscritorioComponent},
-  { path: 'cuenta', component: CuentaComponent}
+  { path: 'escritorio', component: EscritorioComponent },
+  { path: 'cuenta', component: CuentaComponent }
 
 
 ];
