@@ -14,20 +14,21 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" >
+            <a class="nav-link" (click)=activarComponente(0)>
                 <span>Dashboard</span></a>
         </li>
 
-
+        
+        <!--Cuenta-->
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
-            <a class="nav-link" >
+            <a class="nav-link" (click)=activarComponente(1)>
                 <span>Cuenta</span></a>
         </li>
 
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
-            <a class="nav-link">
+            <a class="nav-link" (click)=activarComponente(2)>
                 <span>Transferencias</span></a>
         </li>
     </ul>
@@ -45,12 +46,22 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-               
+                <div *ngIf="option == 0">
+                    <app-escritorio></app-escritorio>
+                </div>
+
+                <div *ngIf="option == 1">
+                    <app-cuenta></app-cuenta>
+                </div>
+
+                <div *ngIf="option == 2">
+                    <app-transferencia-interna></app-transferencia-interna>
+                </div>
 
             </div>
             <!-- End of Main Content -->
         </div>
-        
+
         <!-- End of Content Wrapper -->
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Page Wrapper --> 
