@@ -1,0 +1,62 @@
+<body class="bg-gradient-primary">
+    <div class="container">
+        <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
+
+        <!-- Actualizar Empleado -->
+        <div *ngIf="objR=='empleado'">
+            <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 30%">Identificación</th>
+                        <th style="width: 30%">Nombre</th>
+                        <th style="width: 30%">Apellido</th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let empleado of empleados">
+                        <td> {{empleado.id}}</td>
+                        <td>{{empleado.nombre}} </td>
+                        <td>{{empleado.apellido}}</td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-primary" (click)="editar(empleado)"> Editar </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+        <!-- Actualizar banco -->
+        <div *ngIf="objR=='banco'">
+            <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 45%">Identificación</th>
+                        <th style="width: 45%">Nombre</th>
+                        <th style="width: 10%"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let banco of bancos">
+                        <td> {{banco.id}}</td>
+                        <td>{{banco.nombre}} </td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-primary" (click)="editar(banco)"> Editar </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <app-acrear [objR]="objR"></app-acrear> <!-- review-->
+
+
+
+
+    </div>
+</body>

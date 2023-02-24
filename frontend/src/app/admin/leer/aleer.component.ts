@@ -70,14 +70,5 @@ export class AleerComponent implements OnInit {
         })
     }
 
-    desactivar(empl: any) {
-        if (confirm('estás seguro de desactivarlo?')) {
-            //un empleado se desactiva???
-        }
-    }
 
-    editar(empl: any) {
-        this.usuario = empl;
-        //  this.router.navigateByUrl('/editinvoice/' + empl);
-    }
 }

@@ -8,6 +8,8 @@ import axios from 'axios';
 
 import { Router } from '@angular/router';
 import { CuentaB } from 'src/app/models/cuenta';
+import { Subject } from 'rxjs';
+import { MasterService } from 'src/app/service/master.service';
 
 
 @Component({
@@ -23,21 +25,31 @@ export class AactualizarComponent implements OnInit {
 
     public usuario: Usuario;  //empleado
     public banco: BancoB;
+    public empleados: Usuario[] = [
+        { id: '1234567890', nombre: 'M', apellido: 'P', email: 'djs@ek', rol: '' }
+    ];
+    public bancos: BancoB[] = [
+        { id: '1234567890', nombre: 'M', dominio: 'hdjs' }
+    ];
+
 
     opcion: number = 3;
     public error: string = "";
     public success: string = "";
-
+    dtoptions: DataTables.Settings = {};  //para tabla
+    dtTrigger: Subject<any> = new Subject<any>();
 
     constructor(
         private _router: Router,
-
+        private service: MasterService
 
     ) {
     }
 
     ngOnInit(): void {
-
+        this.dtoptions = {
+            pagingType: 'full_numbers'
+        }
     }
 
     onSubmit(formEmpleado: NgForm) {
@@ -63,5 +75,22 @@ export class AactualizarComponent implements OnInit {
             })
     }
 
+
+    LoadInvoice() {
+        this.service.GetAllInvoice().subscribe(res => {
+            this.dtTrigger.next(null);
+        })
+    }
+
+    desactivar(empl: any) {
+        if (confirm('estás seguro de desactivarlo?')) {
+            //un empleado se desactiva???
+        }
+    }
+
+    editar(empl: any) {
+        this.usuario = empl;
+        //  this.router.navigateByUrl('/editinvoice/' + empl);
+    }
 
 }
