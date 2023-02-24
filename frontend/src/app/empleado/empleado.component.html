@@ -60,12 +60,16 @@
                 data-bs-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <input #cuenta type="hidden" id="cuenta" value="cuenta">
-                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cuenta.value)">
+                    <a class="collapse-item" (click)=activarComponente(11) (click)="getInputValue(cuenta.value)">
                         Agregar </a>
                     <a class="collapse-item" (click)=activarComponente(2)
                         (click)="getInputValue(cuenta.value)">Nómina</a>
                     <a class="collapse-item" (click)=activarComponente(3)
                         (click)="getInputValue(cuenta.value)">Actualizar</a>
+                    <a class="collapse-item" (click)=activarComponente(4)
+                        (click)="getInputValue(cuenta.value)">Activar/Desactivar
+                    </a>
+
                 </div>
             </div>
         </li>
@@ -121,17 +125,24 @@
 
                 <div *ngIf="option == 1">
 
-                    <app-ecrear-cliente></app-ecrear-cliente>
+                    <app-ecrear-cliente [objR]="objR"></app-ecrear-cliente>
+
+                </div>
+                <div *ngIf="option == 11">
+
+                    <app-ecrear-cuenta [objR]="objR"></app-ecrear-cuenta>
 
                 </div>
                 <div *ngIf="option == 2">
+                    <app-eleer [objR]="objR"></app-eleer>
                 </div>
                 <div *ngIf="option == 3">
+                    <app-eactualizar [objR]="objR"></app-eactualizar>
                 </div>
                 <div *ngIf="option == 4">
-                    <!-- 
-                    <app-adesactivar [objR]="objR"></app-adesactivar>
-                    -->
+
+                    <app-edesactivar [objR]="objR"></app-edesactivar>
+
                 </div>
 
 

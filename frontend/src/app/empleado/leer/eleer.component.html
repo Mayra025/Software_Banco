@@ -1,0 +1,54 @@
+<body class="bg-gradient-primary">
+    <div class="container">
+        <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
+
+        <!-- Leer Cliente -->
+        <div *ngIf="objR=='cliente'">
+
+            <table datatable [dtOptions]="dtoptions">
+                <thead>
+                    <tr>
+                        <th style="width: 20%">Identificación</th>
+                        <th style="width: 20%">Nombre y Apellido</th>
+                        <th style="width: 20%">Provincia</th>
+                        <th style="width: 20%">Código postal</th>
+                        <th style="width: 20%">Correo</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes">
+                        <td> {{cliente.id}}</td>
+                        <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                        <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                        <td>{{cliente.codigo}}</td>
+                        <td>{{cliente.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Leer Cuenta -->
+        <div *ngIf="objR=='cuenta'">
+
+            <table datatable [dtOptions]="dtoptions" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">Identificación</th>
+                        <th style="width: 10%">Tipo</th>
+                        <th style="width: 70%">Clientes asociados a esta cuenta</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cuenta of cuentas">
+                        <td>{{cuenta.id}}</td>
+                        <td>{{cuenta.tipo}}</td>
+                        <td>{{cuenta.clis}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+//Empleado crea Cuenta
+import { Component, OnInit, Input } from '@angular/core';
 import { CuentaB } from '../../models/cuenta';
 import axios from 'axios';
 import { Router } from '@angular/router';
@@ -10,20 +11,23 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./ecrear-cuenta.component.css']
 })
 export class EcrearCuentaComponent implements OnInit {
+  title = "Crear";
+  @Input() objR: string;
   public cta: CuentaB;
-  public cuentasD: CuentaB[] = [];
-
-  opcion: number = 2;
-  public error: string = "";
-  public success: string = "";
   public clientes: any;
 
-  public cuentas: CuentaB[] = [
-    { fila: 1, id: '1234567890', nombre: 'M', apellido: 'P', tipo: 'ahorros', estado: true }
-  ];
+  opcion: number = 11;
+  public error: string = "";
+  public success: string = "";
+
+  /*
+    public cuentasD: CuentaB[] = [];
+    public cuentas: CuentaB[] = [
+      { fila: 1, id: '1234567890', nombre: 'M', apellido: 'P', tipo: 'ahorros', estado: true }
+    ];*/
 
   constructor(private _router: Router) {
-    this.cta = new CuentaB(0, '', '', '', '', false)
+    this.cta = new CuentaB(null, '', '', false)
     /*
         axios.get("http://localhost:8080/api/empleado/clientes", {withCredentials: true}).then(resp => {
           this.clientes = resp.data;      
@@ -56,49 +60,50 @@ export class EcrearCuentaComponent implements OnInit {
   }
 
 
-
-  addOrEdit() {
-    if (this.cta.fila == 0) {
-      this.cta.fila = this.cuentas.length + 1;
-      this.cta.estado = true;
-      this.cuentas.push(this.cta);
-    }
-    alert("Cambio exitoso");   ////
-
-    this.cta = new CuentaB(0, '', '', '', '', false)
-  }
-
-  editar(c: CuentaB) {
-    this.cta = c;
-
-  }
-
-
-  desactivar() {
-    if (confirm('estás seguro de desactivarla?')) {
-      this.cta.estado = false;
-      this.cta.fila = this.cuentasD.length + 1;
-      this.cuentasD.push(this.cta);
-
-      this.cuentas = this.cuentas.filter(x => x != this.cta);
+  /*
+    addOrEdit() {
+      if (this.cta.fila == 0) {
+        this.cta.fila = this.cuentas.length + 1;
+        this.cta.estado = true;
+        this.cuentas.push(this.cta);
+      }
+      alert("Cambio exitoso");   ////
+  
       this.cta = new CuentaB(0, '', '', '', '', false)
     }
-
-  }
-
-  activar(c: CuentaB) {
-    if (confirm('estás seguro de activarla?')) {
+  
+    editar(c: CuentaB) {
       this.cta = c;
-      this.cta.estado = true;
-      this.cta.fila = this.cuentas.length + 1;
-      this.cuentas.push(this.cta);
-
-
-      this.cuentasD = this.cuentasD.filter(x => x != this.cta);
-      this.cta = new CuentaB(0, '', '', '', '', false)
-
+  
     }
-
-  }
+  
+  
+    desactivar() {
+      if (confirm('estás seguro de desactivarla?')) {
+        this.cta.estado = false;
+        this.cta.fila = this.cuentasD.length + 1;
+        this.cuentasD.push(this.cta);
+  
+        this.cuentas = this.cuentas.filter(x => x != this.cta);
+        this.cta = new CuentaB(0, '', '', '', '', false)
+      }
+  
+    }
+  
+    activar(c: CuentaB) {
+      if (confirm('estás seguro de activarla?')) {
+        this.cta = c;
+        this.cta.estado = true;
+        this.cta.fila = this.cuentas.length + 1;
+        this.cuentas.push(this.cta);
+  
+  
+        this.cuentasD = this.cuentasD.filter(x => x != this.cta);
+        this.cta = new CuentaB(0, '', '', '', '', false)
+  
+      }
+  
+    }
+    */
 }
 

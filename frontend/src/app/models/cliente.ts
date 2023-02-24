@@ -1,13 +1,12 @@
-export class ClienteB {
+import { Usuario } from "./usuario";
+
+export class ClienteB extends Usuario {
     constructor(
-        public fila:number=0,
-        public id:string,
-        public nombre: string,
-        public apellido: string,
         public provincia: string,
         public ciudad: string,
         public codigo: string,
-        public email: string,
-        public estado:boolean,
-    ) { }
+        public estado: boolean,
+    ) {
+        super('', '', '', '', '');
+    }
 }

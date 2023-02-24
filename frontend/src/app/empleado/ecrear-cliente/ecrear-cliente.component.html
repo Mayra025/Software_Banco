@@ -91,96 +91,95 @@
                                     style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                     Muy bien: {{success}}</p>
                             </div>
-                            <form class="user" #formCli="ngForm" (ngSubmit)="onSubmit(formCli)">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div *ngIf="objR=='cliente'">
 
-                                        <input type="text" name="id" #id="ngModel" [(ngModel)]="cli.id" required
-                                            pattern="[0-9]{10,10}" class="form-control form-control-user"
-                                            placeholder="Identificación" />
-                                        <span *ngIf="id.touched && !id.valid">
-                                            * La identificación es obligatoria
+                                <form class="user" #formCli="ngForm" (ngSubmit)="onSubmit(formCli)">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="cli.id" required
+                                                pattern="[0-9]{10,10}" class="form-control form-control-user"
+                                                placeholder="Identificación" />
+                                            <span *ngIf="id.touched && !id.valid">
+                                                * La identificación es obligatoria
+                                            </span>
+                                            <br>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="cli.nombre"
+                                                required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                                placeholder="Nombres" />
+                                            <span *ngIf="nombre.touched && !nombre.valid">
+                                                * Nombre es obligatorio
+                                            </span>
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="apellido" #apellido="ngModel"
+                                                [(ngModel)]="cli.apellido" required pattern="[a-zA-Z]+"
+                                                class="form-control form-control-user" placeholder="Apellidos" />
+                                            <span *ngIf="apellido.touched && !apellido.valid">
+                                                * Apellido es obligatorio
+                                            </span>
+                                            <br>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="provincia" #provincia="ngModel"
+                                            [(ngModel)]="cli.provincia" required pattern="[a-zA-Z]+"
+                                            class="form-control form-control-user" placeholder="Provincia" />
+                                        <span *ngIf="provincia.touched && !provincia.valid">
+                                            * Provincia es obligatorio
                                         </span>
-                                        <br>
+
+                                    </div>
+
+                                    <br>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="ciudad" #ciudad="ngModel" [(ngModel)]="cli.ciudad"
+                                                required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                                placeholder="Ciudad" />
+                                            <span *ngIf="ciudad.touched && !ciudad.valid">
+                                                * Ciudad es obligatorio
+                                            </span>
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo"
+                                                required pattern="[0-9]+" class="form-control form-control-user"
+                                                placeholder="Código Postal" />
+                                            <span *ngIf="codigo.touched && !codigo.valid">
+                                                * Codigo postal es obligatorio
+                                            </span>
+                                            <br>
+
+                                        </div>
                                     </div>
 
 
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="cli.nombre"
-                                            required pattern="[a-zA-Z]+" class="form-control form-control-user"
-                                            placeholder="Nombres" />
-                                        <span *ngIf="nombre.touched && !nombre.valid">
-                                            * Nombre es obligatorio
+                                    <div class="form-group">
+                                        <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email"
+                                            required class="form-control form-control-user" placeholder="Email" />
+                                        <span *ngIf="email.touched && !email.valid">
+                                            * Correo es obligatorio
                                         </span>
-                                        <br>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="apellido" #apellido="ngModel"
-                                            [(ngModel)]="cli.apellido" required pattern="[a-zA-Z]+"
-                                            class="form-control form-control-user" placeholder="Apellidos" />
-                                        <span *ngIf="apellido.touched && !apellido.valid">
-                                            * Apellido es obligatorio
-                                        </span>
-                                        <br>
 
                                     </div>
-                                </div>
+                                    <br>
 
-                                <div class="form-group">
-                                    <input type="text" name="provincia" #provincia="ngModel" [(ngModel)]="cli.provincia"
-                                        required pattern="[a-zA-Z]+" class="form-control form-control-user"
-                                        placeholder="Provincia" />
-                                    <span *ngIf="provincia.touched && !provincia.valid">
-                                        * Provincia es obligatorio
-                                    </span>
-
-                                </div>
-
-                                <br>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" name="ciudad" #ciudad="ngModel" [(ngModel)]="cli.ciudad"
-                                            required pattern="[a-zA-Z]+" class="form-control form-control-user"
-                                            placeholder="Ciudad" />
-                                        <span *ngIf="ciudad.touched && !ciudad.valid">
-                                            * Ciudad es obligatorio
-                                        </span>
-                                        <br>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo"
-                                            required pattern="[0-9]+" class="form-control form-control-user"
-                                            placeholder="Código Postal" />
-                                        <span *ngIf="codigo.touched && !codigo.valid">
-                                            * Codigo postal es obligatorio
-                                        </span>
-                                        <br>
-
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email" required
-                                        class="form-control form-control-user" placeholder="Email" />
-                                    <span *ngIf="email.touched && !email.valid">
-                                        * Correo es obligatorio
-                                    </span>
-
-                                </div>
-                                <br>
-
-                                <span *ngIf="!formCli.form.valid"> Recuerde revisar los campos </span>
-                                <br>
-                                <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCli.form.valid"
-                                    class="btn btn-primary btn-user btn-block" (click)="addOrEdit()">
-
-
-                                <input *ngIf="cli.fila !== 0 && cli.estado == true" type="submit" name="Desactivar"
-                                    value="Desactivar" class="btn btn-danger btn-user" (click)="desactivar()">
-                            </form>
+                                    <span *ngIf="!formCli.form.valid"> Recuerde revisar los campos </span>
+                                    <br>
+                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCli.form.valid"
+                                        class="btn btn-primary btn-user btn-block">
+                                </form>
+                            </div>
                             <hr>
 
                         </div>

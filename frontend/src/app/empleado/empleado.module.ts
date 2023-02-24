@@ -7,6 +7,9 @@ import { EmpleadoRoutingModule } from './empleado-routing.module';
 import { EmpleadoComponent } from './empleado.component';
 import { EcrearClienteComponent } from './ecrear-cliente/ecrear-cliente.component';
 import { EcrearCuentaComponent } from './ecrear-cuenta/ecrear-cuenta.component';
+import { EleerComponent } from './leer/eleer.component';
+import { EactualizarComponent } from './actualizar/eactualizar.component';
+import { EdesactivarComponent } from './desactivar/edesactivar.component';
 
 import { DataTablesModule } from 'angular-datatables';
 
@@ -14,7 +17,8 @@ import { DataTablesModule } from 'angular-datatables';
     declarations: [
         EmpleadoComponent,
         EcrearClienteComponent,
-        EcrearCuentaComponent
+        EcrearCuentaComponent,
+        EleerComponent, EactualizarComponent, EdesactivarComponent
     ],
 
     imports: [

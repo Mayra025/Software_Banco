@@ -1,7 +1,7 @@
 <body class="bg-gradient-primary">
     <div class="container">
 
-        <h2>Cuentas </h2>
+        <!-- <h2>Cuentas </h2>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -20,11 +20,7 @@
                         </a>
                     </td>
                 </tr>
-                <tr *ngIf="!cuentas">
-                    <td colspan="4" class="text-center">
-                        <!--<span class="spinner-border spinner-border-lg align-center"></span> -->
-                    </td>
-                </tr>
+            
             </tbody>
         </table>
 
@@ -51,12 +47,11 @@
 
                 </tr>
             </tbody>
-        </table>
+        </table> -->
 
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-7">
@@ -79,51 +74,51 @@
                                     Muy bien: {{success}}</p>
                             </div>
 
-                            <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
-                                <div class="form-group">
+                            <div *ngIf="objR=='cuenta'">
+                                <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
+                                    <div class="form-group">
 
-                                    <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
-                                        class="form-control form-control-user">
-                                        <option value="" selected disabled>Elegir el cliente &dtrif;</option>
-                                         <option *ngFor="let cliente of clientes" [value]="cliente._id"
-                                            style="width: 200px; height: 100px;">
-                                            <div>
-                                                <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id: {{cliente._id}}
-                                                </p>
-                                            </div>
-                                        </option>
-                                    </select>
-                                    <span *ngIf="id.touched && !id.valid">
-                                        * La identificación es obligatoria
-                                    </span>
-                                    
+                                        <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
+                                            class="form-control form-control-user">
+                                            <option value="" selected disabled>Elegir el cliente &dtrif;</option>
+                                            <option *ngFor="let cliente of clientes" [value]="cliente._id"
+                                                style="width: 200px; height: 100px;">
+                                                <div>
+                                                    <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id:
+                                                        {{cliente._id}}
+                                                    </p>
+                                                </div>
+                                            </option>
+                                        </select>
+                                        <span *ngIf="id.touched && !id.valid">
+                                            * La identificación es obligatoria
+                                        </span>
+
+                                        <br>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
+                                            class="form-control form-control-user" required
+                                            pattern="(ahorros|corriente)">
+                                            <option value="">Elige una opción &dtrif; </option>
+                                            <option value="ahorros">Ahorros</option>
+                                            <option value="corriente">Corriente</option>
+                                        </select>
+                                        <span *ngIf="tipo.touched && !tipo.valid">
+                                            * El tipo es obligatorio
+                                        </span>
+                                    </div>
+
+                                    <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
+
                                     <br>
-                                </div>
+                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCta.form.valid"
+                                        class="btn btn-primary btn-user btn-block">
+                                </form>
 
-
-                                <div class="form-group">
-                                    <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
-                                        class="form-control form-control-user" required pattern="(ahorros|corriente)">
-                                        <option value="">Elige una opción &dtrif; </option>
-                                        <option value="ahorros">Ahorros</option>
-                                        <option value="corriente">Corriente</option>
-                                    </select>
-                                    <span *ngIf="tipo.touched && !tipo.valid">
-                                        * El tipo es obligatorio
-                                    </span>
-                                </div>
-
-                                <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
-
-                                <br>
-                                <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCta.form.valid"
-                                    class="btn btn-primary btn-user btn-block" (click)="addOrEdit()">
-
-                                <input *ngIf="cta.fila !== 0 && cta.estado == true" type="submit" name="Desactivar"
-                                    value="Desactivar" class="btn btn-danger btn-user" (click)="desactivar()">
-                            </form>
-
-
+                            </div>
                             <hr>
                             <!-- perpectiva usuario
                             <div class="text-center">
