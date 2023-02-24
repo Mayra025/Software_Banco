@@ -14,7 +14,8 @@ import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
-    AdminComponent, AcrearComponent, AleerComponent, AactualizarComponent, AdesactivarComponent
+    AdminComponent,
+    AcrearComponent, AleerComponent, AactualizarComponent, AdesactivarComponent
   ],
 
   imports: [

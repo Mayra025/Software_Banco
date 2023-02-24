@@ -27,7 +27,9 @@
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEmpl"
                 aria-expanded="true" aria-controls="collapseEmpl">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Empleados > </span>
+                <span>Empleados &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i
+                        class="fa fa-fw fa-chevron-down"></i>
+                </span>
             </a>
 
             <div id="collapseEmpl" class="collapse" aria-labelledby="headingEmpl" data-parent="#accordionSidebar">
@@ -52,8 +54,8 @@
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBancos"
                 aria-expanded="true" aria-controls="collapseBancos">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Bancos > </span>
-
+                <span>Bancos </span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <i class="fa fa-chevron-down"></i>
             </a>
             <div id="collapseBancos" class="collapse" aria-labelledby="headingBancos"
                 data-bs-parent="#accordionSidebar">
@@ -84,9 +86,9 @@
                 <h5>Bienvenido</h5>
                 <ul class="navbar-nav ml-auto">
                     <div class="topbar-divider d-none "></div>
-                    <a data-bs-toggle="modal" data-bs-target="#logoutModal"> <i
-                            class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" style="margin: 6px;"></i>
-                        Salir</a>
+                    <button data-bs-toggle="modal" data-bs-target="#logoutModal" (click)="logout()">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" style="margin: 6px;"></i>
+                        Salir</button>
                 </ul>
             </nav>
             <!-- End of Topbar -->

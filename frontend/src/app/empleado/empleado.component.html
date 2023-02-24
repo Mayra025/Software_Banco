@@ -1,64 +1,78 @@
-<button (click)="logout()">Salir del Sistema</button>
-
-<!-- Page Wrapper -->
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordion accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
-            <div class="sidebar-brand-text mx-3">Empleado 0000</div>
+            <div class="sidebar-brand-text mx-3">BM Empleado</div>
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
-
-        <ul id="accordion" class="accordion">
-            <li *ngFor="let menu of menus; let i = index" [class.active]="menu.active">
-                <div class="menu" (click)="toggle(i)">
-                    <i [class]="menu.iconClass"></i>
-                    {{ menu.name }}
-                    <i class="fa fa-chevron-down"></i>
-                </div>
-                <ul class="submenu" #submenu [style.height.px]="menu.active ? submenu.scrollHeight : 0">
-                    <li *ngFor="let submenu of menu.submenu">
-                        <!-- <a [href]="submenu.url">{{ submenu.name }}</a> -->
-                        <a class="nav-link" (click)=activarComponente(submenu.id)>
-                            <span>{{ submenu.name }}</span></a>
-                        <!-- <button (click)=callbacks(1)>{{ submenu.name }}</button> -->
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" (click)=activarComponente(0)>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
 
 
-        <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" (click)=activarComponente(1)>
-                <span>Clientes</span></a>
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCli"
+                aria-expanded="true" aria-controls="collapseCli">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Clientes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i
+                        class="fa fa-fw fa-chevron-down"></i>
+                </span>
+            </a>
+
+            <div id="collapseCli" class="collapse" aria-labelledby="headingCli" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <input #cli id="cli" type="hidden" value="cliente">
+                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cli.value)">Agregar
+                    </a>
+                    <a class="collapse-item" (click)=activarComponente(2) (click)="getInputValue(cli.value)">Nómina</a>
+                    <a class="collapse-item" (click)=activarComponente(3) (click)="getInputValue(cli.value)">Actualizar
+                    </a>
+                    <a class="collapse-item" (click)=activarComponente(4)
+                        (click)="getInputValue(cli.value)">Activar/Desactivar
+                    </a>
+
+                </div>
+            </div>
         </li>
 
-        <hr class="sidebar-divider my-0">
+        <!-- Nav Item - Collapse Menu -->
+        <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link" (click)=activarComponente(2)>
-                <span>Cuentas</span></a>
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCuentas"
+                aria-expanded="true" aria-controls="collapseCuentas">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Cuentas </span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;
+                <i class="fa fa-chevron-down"></i>
+            </a>
+            <div id="collapseCuentas" class="collapse" aria-labelledby="headingCuentas"
+                data-bs-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <input #cuenta type="hidden" id="cuenta" value="cuenta">
+                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cuenta.value)">
+                        Agregar </a>
+                    <a class="collapse-item" (click)=activarComponente(2)
+                        (click)="getInputValue(cuenta.value)">Nómina</a>
+                    <a class="collapse-item" (click)=activarComponente(3)
+                        (click)="getInputValue(cuenta.value)">Actualizar</a>
+                </div>
+            </div>
         </li>
 
-        <hr class="sidebar-divider my-0">
-        <li class="nav-item">
-            <a class="nav-link" (click)="logout()">
-                <span>Salir</span></a>
-        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
     </ul>
-
-
-
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -66,6 +80,18 @@
 
         <!-- Main Content -->
         <div id="content">
+
+            <!-- Topbar- Logout -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <h5>Bienvenido</h5>
+                <ul class="navbar-nav ml-auto">
+                    <div class="topbar-divider d-none "></div>
+                    <button data-bs-toggle="modal" data-bs-target="#logoutModal" (click)="logout()">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" style="margin: 6px;"></i>
+                        Salir</button>
+                </ul>
+            </nav>
+            <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -98,15 +124,24 @@
                     <app-ecrear-cliente></app-ecrear-cliente>
 
                 </div>
-
                 <div *ngIf="option == 2">
-                    <app-ecrear-cuenta></app-ecrear-cuenta>
+                </div>
+                <div *ngIf="option == 3">
+                </div>
+                <div *ngIf="option == 4">
+                    <!-- 
+                    <app-adesactivar [objR]="objR"></app-adesactivar>
+                    -->
                 </div>
 
-            </div>
-            <!-- End of Main Content -->
-        </div>
 
-        <!-- End of Content Wrapper -->
+            </div>
+
+        </div>
+        <!-- End of Main Content -->
+
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->

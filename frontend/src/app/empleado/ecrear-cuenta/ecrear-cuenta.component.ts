@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CuentaB } from '../models/cuenta';
+import { CuentaB } from '../../models/cuenta';
 import axios from 'axios';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';

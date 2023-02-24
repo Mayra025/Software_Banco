@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ClienteB } from '../models/cliente';
+import { ClienteB } from '../../models/cliente';
 import axios from 'axios';
 import { Router } from '@angular/router';
 
