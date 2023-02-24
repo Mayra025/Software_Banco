@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { ClienteComponent } from './cliente/cliente.component'
+import { ClienteComponent } from './cliente/clientee/cliente.component'
 import { EmpleadoComponent } from './empleado/empleado.component';
-import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
-import { ClientesComponent } from './clientes/clientes.component';
-import { EscritorioComponent } from './escritorio/escritorio.component';
+import { TransferenciaInternaComponent } from './cliente/transferencia-interna/transferencia-interna.component';
+import { ClientesComponent } from './cliente/clientes/clientes.component';
+import { EscritorioComponent } from './cliente/escritorio/escritorio.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminModule } from './admin/admin.module';
 

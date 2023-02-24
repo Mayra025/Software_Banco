@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TransferenciaI } from '../models/transferenciaI';
+import { TransferenciaI } from '../../models/transferenciaI';
 import axios from 'axios';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';

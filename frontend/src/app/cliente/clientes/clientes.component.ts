@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
-import { Config, Menu } from '../ui/menu-acordeon/types';
+import { Config, Menu } from '../../ui/menu-acordeon/types';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',

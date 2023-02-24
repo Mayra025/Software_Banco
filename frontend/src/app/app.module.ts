@@ -8,15 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LoginComponent } from './login/login.component';
 
-import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteComponent } from './cliente/clientee/cliente.component';
 
-import { TransferenciaInternaComponent } from './transferencia-interna/transferencia-interna.component';
-import { ClientesComponent } from './clientes/clientes.component';
+import { TransferenciaInternaComponent } from './cliente/transferencia-interna/transferencia-interna.component';
+import { ClientesComponent } from './cliente/clientes/clientes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AccordionComponent } from './ui/menu-acordeon/menu-acordeon.component';
-import { EscritorioComponent } from './escritorio/escritorio.component';
+import { EscritorioComponent } from './cliente/escritorio/escritorio.component';
 
 @NgModule({
   declarations: [
