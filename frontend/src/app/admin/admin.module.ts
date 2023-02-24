@@ -9,6 +9,9 @@ import { AcrearComponent } from './crear/acrear.component';
 import { AleerComponent } from './leer/aleer.component';
 import { AactualizarComponent } from './actualizar/aactualizar.component';
 import { AdesactivarComponent } from './desactivar/adesactivar.component';
+
+import { DataTablesModule } from 'angular-datatables';
+
 @NgModule({
   declarations: [
     AdminComponent, AcrearComponent, AleerComponent, AactualizarComponent, AdesactivarComponent
@@ -18,7 +21,8 @@ import { AdesactivarComponent } from './desactivar/adesactivar.component';
     BrowserModule,
     FormsModule,   //para el modulo 
     AdminRoutingModule, //para el modulo de rutas
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule //para tablas
   ],
   providers: [],
 })
