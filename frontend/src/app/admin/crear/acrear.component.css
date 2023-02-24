@@ -1,0 +1,64 @@
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+
+small {
+    font-size: 80%;
+}
+
+a {
+    color: #4e73df;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: #224abe;
+    text-decoration: underline;
+}
+
+a:not([href]):not([class]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+
+button {
+    border-radius: 0;
+}
+
+
+
+.bg-register-image {
+    background: url("https://cherry-brightspot.s3.amazonaws.com/media/2010/04/28/credito-tarjeta-pago.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+form.user .form-control-user {
+    font-size: 1rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+}
+
+form.user .btn-user {
+    font-size: 1rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+}

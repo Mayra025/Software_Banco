@@ -9,7 +9,10 @@ import { TransferenciaInternaComponent } from './transferencia-interna/transfere
 import { ClientesComponent } from './clientes/clientes.component';
 import { EscritorioComponent } from './escritorio/escritorio.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminModule } from './admin/admin.module';
 
+const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
 
 const routes: Routes = [
 
@@ -21,7 +24,10 @@ const routes: Routes = [
   { path: 'transferencia-interna', component: TransferenciaInternaComponent },
   { path: 'cliente', component: ClienteComponent },
   { path: 'escritorio', component: EscritorioComponent },
-  { path: 'cuenta', component: CuentaComponent }
+  { path: 'cuenta', component: CuentaComponent },
+
+  { path: 'admin', component: AdminComponent },  //
+  { path: 'admin', loadChildren: adminModule }
 
 
 ];

@@ -12,8 +12,11 @@
                                 <h1 class="h4 text-gray-900 mb-4">Bienvenido al Sistema Bancario</h1>
                             </div>
 
-                            <div *ngIf="error!==''" style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
-                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Error: {{error}}</p>
+                            <div *ngIf="error!==''"
+                                style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Error: {{error}}</p>
                             </div>
                             <form class="user" #f="ngForm" (ngSubmit)="onSubmit(f)" id="form1">
                                 <div class="form-group">
@@ -27,8 +30,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" name="password" #password="ngModel" [(ngModel)]="empl.password"
-                                        required class="form-control form-control-user"
+                                    <input type="password" name="password" #password="ngModel"
+                                        [(ngModel)]="empl.password" required class="form-control form-control-user"
                                         placeholder="Contraseña" />
                                     <span *ngIf="password.touched && !password.valid">
                                         * La contraseña es obligatoria
@@ -40,10 +43,11 @@
                                 <br>
                                 <div class="form-group">
                                     <select class="form-control form-control-user" type="text" name="rol" #rol="ngModel"
-                                        [(ngModel)]="empl.rol" required pattern="(empleado|cliente)">
+                                        [(ngModel)]="empl.rol" required pattern="(empleado|cliente|admin)">
                                         <option value="" disabled selected>Elige una opción &dtrif; </option>
                                         <option value="empleado">Empleado</option>
                                         <option value="cliente">Cliente</option>
+                                        <option value="admin">Administrador</option>
                                     </select>
                                     <span *ngIf="rol.touched && !rol.valid">
                                         * El rol es obligatorio
@@ -54,8 +58,8 @@
                                 <br>
 
                                 <input type="submit" name="Ingresar" value="Ingresar" [disabled]="!f.form.valid"
-                                    class="btn btn-primary btn-user btn-block" [routerLink]="'/empleado'">
-                                     <!-- [routerLink]="'/empleado'"> -->
+                                    class="btn btn-primary btn-user btn-block" [routerLink]="'/admin'">
+                                <!-- [routerLink]="'/empleado'"> -->
                             </form>
 
                             <hr>
