@@ -13,17 +13,12 @@ import { Router } from '@angular/router';
 export class EcrearClienteComponent {
   title = "Crear";
   @Input() objR: string;
-
   public cli: ClienteB;
-  public clientesD: ClienteB[] = [];
 
   opcion: number = 1;
   public error: string = "";
   public success: string = "";
-
   public clientes: any;
-
-
 
 
   constructor(private _router: Router) {
@@ -36,13 +31,13 @@ export class EcrearClienteComponent {
   onSubmit(formCli: NgForm) {
 
     axios.post("http://localhost:8080/api/empleado/clientes", {
+      nombre: formCli.value.nombre,
       apellido: formCli.value.apellido,
+      provincia: formCli.value.provincia,
       ciudad: formCli.value.ciudad,
       codigo_postal: formCli.value.codigo,
-      correo: formCli.value.email,
       identificacion: formCli.value.id,
-      nombre: formCli.value.nombre,
-      provincia: formCli.value.provincia,
+      correo: formCli.value.email
     }, {
       headers: {
         Accept: 'application/json',

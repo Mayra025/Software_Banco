@@ -1,4 +1,4 @@
-//Admin crea: Banco y Empleado
+//Admin lee: Banco y Empleado
 
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -20,14 +20,9 @@ export class AleerComponent implements OnInit {
     title = "Leer";
     @Input() objR: string;
 
-    //empleados: any;
-    empl: any;
-    public empleados: Usuario[] = [
-        { id: '1234567890', nombre: 'M', apellido: 'P', email: 'djs@ek', rol: '' }
-    ];
-    public bancos: BancoB[] = [
-        { id: '1234567890', nombre: 'M', dominio: 'hdjs' }
-    ];
+    empleados: any;
+    bancos: any;
+
 
     public usuario: Usuario;  //empleado
     public banco: BancoB;
@@ -45,6 +40,17 @@ export class AleerComponent implements OnInit {
         private _router: Router,
         private service: MasterService
     ) {
+        axios.get("http://localhost:8080/api/administrador/empleados", { withCredentials: true }).then(resp => {
+            this.empleados = resp.data;
+        }).catch(err => {
+            this._router.navigate(['/login']);
+        })
+
+        axios.get("http://localhost:8080/api/administrador/bancos", { withCredentials: true }).then(resp => {
+            this.bancos = resp.data;
+        }).catch(err => {
+            this._router.navigate(['/login']);
+        })
     }
 
     ngOnInit(): void {

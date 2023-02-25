@@ -39,27 +39,52 @@ export class AcrearComponent {
 
   }
 
-  onSubmit(formEmpleado: NgForm) {
+  onSubmit(form: NgForm) {
+    if (this.objR == 'empleado') {
+      axios.post("http://localhost:8080/api/administrador/empleados", {
+        nombre: form.value.nombre,
+        apellido: form.value.apellido,
+        identificacion: form.value.id,
+        email: form.value.email
+      },
+        {
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true
+        }).then(resp => {
+          this.error = "";
+          this.success = "Empleado creado"
 
-    axios.post("http://localhost:8080/api/administrador/empleados", {
-      nombre: formEmpleado.value.nombre,
-      apellido: formEmpleado.value.apellido,
-      identificacion: formEmpleado.value.id,
-      email: formEmpleado.value.email
-    },
-      {
-        headers: {
-          Accept: 'application/json',
-        },
-        withCredentials: true
-      }).then(resp => {
-        this.error = "";
-        this.success = "Empleado creado"
+        }).catch(err => {
+          this.error = err.response.data;
+          this.success = ""
+        })
+      this.usuario = new Usuario('', '', '', '', '');
 
-      }).catch(err => {
-        this.error = err.response.data;
-        this.success = ""
-      })
+    } else {
+      axios.post("http://localhost:8080/api/administrador/bancos", {
+        id: form.value.id,
+        nombre: form.value.nombre,
+        dominio: form.value.dominio
+      },
+        {
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true
+        }).then(resp => {
+          this.error = "";
+          this.success = "Banco creado"
+
+        }).catch(err => {
+          this.error = err.response.data;
+          this.success = ""
+        })
+      this.banco = new BancoB('', '', '');
+
+    }
+
   }
 
 

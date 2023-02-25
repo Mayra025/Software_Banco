@@ -25,12 +25,8 @@ export class AactualizarComponent implements OnInit {
 
     public usuario: Usuario;  //empleado
     public banco: BancoB;
-    public empleados: Usuario[] = [
-        { id: '1234567890', nombre: 'M', apellido: 'P', email: 'djs@ek', rol: '' }
-    ];
-    public bancos: BancoB[] = [
-        { id: '1234567890', nombre: 'M', dominio: 'hdjs' }
-    ];
+    empleados: any;
+    bancos: any;
 
 
     opcion: number = 3;
@@ -44,6 +40,21 @@ export class AactualizarComponent implements OnInit {
         private service: MasterService
 
     ) {
+        this.usuario = new Usuario('', '', '', '', '');
+        this.banco = new BancoB('', '', '');
+
+
+        axios.get("http://localhost:8080/api/administrador/empleados", { withCredentials: true }).then(resp => {
+            this.empleados = resp.data;
+        }).catch(err => {
+            this._router.navigate(['/login']);
+        })
+
+        axios.get("http://localhost:8080/api/administrador/bancos", { withCredentials: true }).then(resp => {
+            this.bancos = resp.data;
+        }).catch(err => {
+            this._router.navigate(['/login']);
+        })
     }
 
     ngOnInit(): void {
@@ -52,27 +63,51 @@ export class AactualizarComponent implements OnInit {
         }
     }
 
-    onSubmit(formEmpleado: NgForm) {
+    onSubmit(form: NgForm) {
+        if (this.objR == 'empleado') {
 
-        axios.post("http://localhost:8080/api/administrador/empleados", {
-            nombre: formEmpleado.value.nombre,
-            apellido: formEmpleado.value.apellido,
-            identificacion: formEmpleado.value.id,
-            email: formEmpleado.value.email
-        },
-            {
-                headers: {
-                    Accept: 'application/json',
-                },
-                withCredentials: true
-            }).then(resp => {
-                this.error = "";
-                this.success = "Empleado creado"
+            axios.put("http://localhost:8080/api/administrador/empleados/" + form.value.id, {
+                nombre: form.value.nombre,
+                apellido: form.value.apellido,
+                email: form.value.email
+            },
+                {
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                    withCredentials: true
+                }).then(resp => {
+                    this.error = "";
+                    this.success = "Empleado actualizado"
 
-            }).catch(err => {
-                this.error = err.response.data;
-                this.success = ""
-            })
+                }).catch(err => {
+                    this.error = err.response.data;
+                    this.success = ""
+                })
+            this.usuario = new Usuario('', '', '', '', '');
+
+        } else {
+
+            axios.put("http://localhost:8080/api/administrador/bancos/" + form.value.id, {
+                nombre: form.value.nombre,
+                dominio: form.value.dominio
+            },
+                {
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                    withCredentials: true
+                }).then(resp => {
+                    this.error = "";
+                    this.success = "Banco actualizado"
+
+                }).catch(err => {
+                    this.error = err.response.data;
+                    this.success = ""
+                })
+            this.banco = new BancoB('', '', '');
+        }
+
     }
 
 
@@ -82,15 +117,24 @@ export class AactualizarComponent implements OnInit {
         })
     }
 
-    desactivar(empl: any) {
+    desactivar(form: NgForm) {
         if (confirm('estás seguro de desactivarlo?')) {
-            //un empleado se desactiva???
-        }
-    }
+        
+                axios.delete("http://localhost:8080/api/administrador/bancos/" + form.value.id, {
 
-    editar(empl: any) {
-        this.usuario = empl;
-        //  this.router.navigateByUrl('/editinvoice/' + empl);
+                })
+                this.banco = new BancoB('', '', '');
+
+            } 
+        }
+    
+
+    editar(obj: any) {
+        if (this.objR == 'empleado') {
+            this.usuario = obj;
+        } else {
+            this.banco = obj;
+        }
     }
 
 }

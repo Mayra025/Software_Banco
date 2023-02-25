@@ -5,6 +5,7 @@ export class CuentaB {
         public clis: ClienteB[],
         public id: string,
         public tipo: string,
+        public monto: number,
         public estado: boolean,
     ) {
     }

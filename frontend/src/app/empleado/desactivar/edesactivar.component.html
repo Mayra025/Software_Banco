@@ -1,10 +1,10 @@
 <body class="bg-gradient-primary">
     <div class="container">
-        <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
+        <h1 class="h4 text-gray-900 mb-4">{{objR}}</h1>
 
         <!-- Desactivar Cliente -->
         <div *ngIf="objR=='cliente'">
-            <table datatable [dtOptions]="dtoptions" class="table table-hover">
+            <table datatable [dtOptions]="dtoptions" class="table">
                 <thead>
                     <tr>
                         <th style="width: 18%">Identificación</th>
@@ -37,16 +37,14 @@
         </div>
 
 
-        <!-- Actualizar Cuenta -->
+        <!-- Desactivar Cuenta -->
         <div *ngIf="objR=='cuenta'">
-            <table datatable [dtOptions]="dtoptions" class="table table-bordered">
+            <table datatable [dtOptions]="dtoptions" class="table">
                 <thead>
                     <tr>
-
                         <th style="width: 10%">Identificación</th>
                         <th style="width: 10%">Tipo</th>
                         <th style="width: 70%">Clientes asociados a esta cuenta</th>
-
                         <th style="width: 10%"></th>
 
                     </tr>

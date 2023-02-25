@@ -18,11 +18,12 @@ import { CuentaB } from 'src/app/models/cuenta';
 export class AdesactivarComponent implements OnInit {
     title = "Desactivar";
     @Input() objR: string;
-    public cta: CuentaB;
+    bancos: any;
+
+    dtoptions: DataTables.Settings = {};  //para tabla
 
 
-    public usuario: Usuario;  //empleado
-    public banco: BancoB;
+
 
     opcion: number = 4;
     public error: string = "";
@@ -36,32 +37,23 @@ export class AdesactivarComponent implements OnInit {
     ) {
     }
 
+
     ngOnInit(): void {
-
+        this.dtoptions = {
+            pagingType: 'full_numbers'
+            /*,
+            searching: true,
+            //  paging:false
+            lengthChange: false,
+            language: {
+                searchPlaceholder: 'Escribir Nombre'
+            }
+*/
+        };
     }
-
-    onSubmit(formEmpleado: NgForm) {
-
-        axios.post("http://localhost:8080/api/administrador/empleados", {
-            nombre: formEmpleado.value.nombre,
-            apellido: formEmpleado.value.apellido,
-            identificacion: formEmpleado.value.id,
-            email: formEmpleado.value.email
-        },
-            {
-                headers: {
-                    Accept: 'application/json',
-                },
-                withCredentials: true
-            }).then(resp => {
-                this.error = "";
-                this.success = "Empleado creado"
-
-            }).catch(err => {
-                this.error = err.response.data;
-                this.success = ""
-            })
+    activar(form: NgForm) {
+        if (confirm('estás seguro de desactivarlo?')) {
+        }
     }
-
 
 }

@@ -34,9 +34,6 @@ export class AdminComponent {
     this.objR = inputValue;
   }
 
-
-
-
   constructor(private _router: Router) {
 
 

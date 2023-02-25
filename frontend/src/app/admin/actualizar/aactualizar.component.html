@@ -4,7 +4,7 @@
 
         <!-- Actualizar Empleado -->
         <div *ngIf="objR=='empleado'">
-            <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered table-hover">
+            <table datatable [dtOptions]="dtoptions" class="table">
                 <thead>
                     <tr>
                         <th style="width: 30%">Identificación</th>
@@ -24,14 +24,85 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
+                                </div>
+
+                                <div *ngIf="error!==''"
+                                    style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                    <p
+                                        style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                        Error: {{error}}</p>
+                                </div>
+                                <div *ngIf="success!==''"
+                                    style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                    <p
+                                        style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                        Muy bien: {{success}}</p>
+                                </div>
 
 
+                                <form class="user" #formEmpleado="ngForm" (ngSubmit)="onSubmit(formEmpleado)">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="usuario.id" required
+                                                pattern="[0-9]{10,10}" class="form-control form-control-user"
+                                                disabled />
+
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="nombre" #nombre="ngModel"
+                                                [(ngModel)]="usuario.nombre" required pattern="[a-zA-Z]+"
+                                                class="form-control form-control-user" placeholder="Nombres" />
+                                            <span *ngIf="nombre.touched && !nombre.valid">
+                                                * Nombre es obligatorio
+                                            </span>
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="apellido" #apellido="ngModel"
+                                                [(ngModel)]="usuario.apellido" required pattern="[a-zA-Z]+"
+                                                class="form-control form-control-user" placeholder="Apellidos" />
+                                            <span *ngIf="apellido.touched && !apellido.valid">
+                                                * Apellido es obligatorio
+                                            </span>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="email" #email="ngModel" [(ngModel)]="usuario.email"
+                                            required class="form-control form-control-user" placeholder="Correo" />
+                                        <span *ngIf="email.touched && !email.valid">
+                                            * Correo es obligatorio
+                                        </span>
+                                    </div>
+                                    <br>
+                                    <span *ngIf="!formEmpleado.form.valid"> Recuerde revisar los campos </span>
+                                    <br>
+                                    <input type="submit" name="Guardar" value="Guardar"
+                                        [disabled]="!formEmpleado.form.valid"
+                                        class="btn btn-primary btn-user btn-block">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
 
         <!-- Actualizar banco -->
         <div *ngIf="objR=='banco'">
-            <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered">
+            <table datatable [dtOptions]="dtoptions" class="table ">
                 <thead>
                     <tr>
                         <th style="width: 45%">Identificación</th>
@@ -46,17 +117,75 @@
                         <td>{{banco.nombre}} </td>
                         <td style="white-space: nowrap">
                             <a class="btn btn-primary" (click)="editar(banco)"> Editar </a>
+                            <a class="btn btn-danger" (click)="desactivar(banco)">
+                                Desactivar
+                            </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
+                                </div>
+
+                                <div *ngIf="error!==''"
+                                    style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                    <p
+                                        style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                        Error: {{error}}</p>
+                                </div>
+                                <div *ngIf="success!==''"
+                                    style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                    <p
+                                        style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                        Muy bien: {{success}}</p>
+                                </div>
+                                <form class="user" #formBanco="ngForm" (ngSubmit)="onSubmit(formBanco)">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="banco.id" required
+                                                class="form-control form-control-user" disabled/>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="nombre" #nombre="ngModel"
+                                                [(ngModel)]="banco.nombre" required
+                                                class="form-control form-control-user" placeholder="Nombre" />
+                                            <span *ngIf="nombre.touched && !nombre.valid">
+                                                * Nombre es obligatorio
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="dominio" #dominio="ngModel"
+                                                [(ngModel)]="banco.dominio" required
+                                                class="form-control form-control-user" placeholder="Dominio" />
+                                            <span *ngIf="dominio.touched && !dominio.valid">
+                                                * Dominio es obligatorio
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <span *ngIf="!formBanco.form.valid"> Recuerde revisar los campos </span>
+                                    <br>
+                                    <input type="submit" name="Guardar" value="Guardar"
+                                        [disabled]="!formBanco.form.valid" class="btn btn-primary btn-user btn-block">
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        <app-acrear [objR]="objR"></app-acrear> <!-- review-->
-
-
-
-
     </div>
 </body>

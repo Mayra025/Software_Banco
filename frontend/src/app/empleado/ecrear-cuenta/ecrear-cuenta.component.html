@@ -79,7 +79,7 @@
                                     <div class="form-group">
 
                                         <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
-                                            class="form-control form-control-user">
+                                            class="form-control form-control-user" required>
                                             <option value="" selected disabled>Elegir el cliente &dtrif;</option>
                                             <option *ngFor="let cliente of clientes" [value]="cliente._id"
                                                 style="width: 200px; height: 100px;">
@@ -91,7 +91,7 @@
                                             </option>
                                         </select>
                                         <span *ngIf="id.touched && !id.valid">
-                                            * La identificación es obligatoria
+                                            * Este campo es obligatorio
                                         </span>
 
                                         <br>
@@ -111,8 +111,15 @@
                                         </span>
                                     </div>
 
-                                    <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
+                                    <div class="form-group">
+                                        <input type="number" name="monto" #monto="ngModel" [(ngModel)]="cta.monto"
+                                            required class="form-control form-control-user" placeholder="Valor" />
+                                        <span *ngIf="monto.touched && !monto.valid">
+                                            * Defina un valor
+                                        </span>
+                                    </div>
 
+                                    <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
                                     <br>
                                     <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCta.form.valid"
                                         class="btn btn-primary btn-user btn-block">

@@ -37,8 +37,10 @@ export class LoginComponent implements OnInit {
       this.error = "";
       if (formEl.value.rol === "cliente") {
         this._router.navigate(['/cliente']);
-      } else {
+      } else if (formEl.value.rol === "empleado") {
         this._router.navigate(['/empleado']);
+      } else {
+        this._router.navigate(['/admin']);
       }
     }).catch(err => {
       this.error = err.response.data;

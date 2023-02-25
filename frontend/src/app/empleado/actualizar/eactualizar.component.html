@@ -4,7 +4,7 @@
 
         <!-- Actualizar Cliente -->
         <div *ngIf="objR=='cliente'">
-            <table class="table table-hover">
+            <table datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
                         <th style="width: 18%">Identificación</th>
@@ -17,22 +17,22 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let cliente of clientes">
-                        <td> <span class="badge badge-primary text-black">{{cliente.fila}}</span> {{cliente.id}}</td>
+                        <td>{{cliente.id}}</td>
                         <td>{{cliente.nombre}} {{cliente.apellido}}</td>
                         <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
                         <td>{{cliente.codigo}}</td>
                         <td>{{cliente.email}}</td>
 
                         <td style="white-space: nowrap">
-                            <a class="btn btn-secondary" (click)="editar(cliente)">
+                            <a class="btn btn-primary" (click)="editar(cliente)">
                                 Editar
+                            </a>
+                            <a class="btn btn-danger" (click)="desactivar(cliente)">
+                                Desactivar
                             </a>
                         </td>
                     </tr>
-                    <tr *ngIf="!clientes">
-                        <td colspan="4" class="text-center">
-                        </td>
-                    </tr>
+
                 </tbody>
             </table>
 
@@ -46,7 +46,7 @@
                             <div class="p-5">
 
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Editar Cliente</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Cliente</h1>
                                 </div>
 
                                 <div *ngIf="error!==''"
@@ -61,120 +61,106 @@
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                         Muy bien: {{success}}</p>
                                 </div>
-                                <div *ngIf="objR=='cliente'">
 
-                                    <form class="user" #formCli="ngForm" (ngSubmit)="onSubmit(formCli)">
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <form class="user" #formCli="ngForm" (ngSubmit)="onSubmit(formCli)">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
 
-                                                <input type="text" name="id" #id="ngModel" [(ngModel)]="cli.id" required
-                                                    pattern="[0-9]{10,10}" class="form-control form-control-user"
-                                                    placeholder="Identificación" />
-                                                <span *ngIf="id.touched && !id.valid">
-                                                    * La identificación es obligatoria
-                                                </span>
-                                                <br>
-                                            </div>
-
-
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="cli.id" required
+                                                pattern="[0-9]{10,10}" class="form-control form-control-user"
+                                                placeholder="Identificación" disabled />
+                                            <br>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" name="nombre" #nombre="ngModel"
-                                                    [(ngModel)]="cli.nombre" required pattern="[a-zA-Z]+"
-                                                    class="form-control form-control-user" placeholder="Nombres" />
-                                                <span *ngIf="nombre.touched && !nombre.valid">
-                                                    * Nombre es obligatorio
-                                                </span>
-                                                <br>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="apellido" #apellido="ngModel"
-                                                    [(ngModel)]="cli.apellido" required pattern="[a-zA-Z]+"
-                                                    class="form-control form-control-user" placeholder="Apellidos" />
-                                                <span *ngIf="apellido.touched && !apellido.valid">
-                                                    * Apellido es obligatorio
-                                                </span>
-                                                <br>
+                                    </div>
 
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="text" name="provincia" #provincia="ngModel"
-                                                [(ngModel)]="cli.provincia" required pattern="[a-zA-Z]+"
-                                                class="form-control form-control-user" placeholder="Provincia" />
-                                            <span *ngIf="provincia.touched && !provincia.valid">
-                                                * Provincia es obligatorio
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="cli.nombre"
+                                                required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                                placeholder="Nombres" />
+                                            <span *ngIf="nombre.touched && !nombre.valid">
+                                                * Nombre es obligatorio
                                             </span>
-
+                                            <br>
                                         </div>
-
-                                        <br>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" name="ciudad" #ciudad="ngModel"
-                                                    [(ngModel)]="cli.ciudad" required pattern="[a-zA-Z]+"
-                                                    class="form-control form-control-user" placeholder="Ciudad" />
-                                                <span *ngIf="ciudad.touched && !ciudad.valid">
-                                                    * Ciudad es obligatorio
-                                                </span>
-                                                <br>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="codigo" #codigo="ngModel"
-                                                    [(ngModel)]="cli.codigo" required pattern="[0-9]+"
-                                                    class="form-control form-control-user"
-                                                    placeholder="Código Postal" />
-                                                <span *ngIf="codigo.touched && !codigo.valid">
-                                                    * Codigo postal es obligatorio
-                                                </span>
-                                                <br>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email"
-                                                required class="form-control form-control-user" placeholder="Email" />
-                                            <span *ngIf="email.touched && !email.valid">
-                                                * Correo es obligatorio
+                                        <div class="col-sm-6">
+                                            <input type="text" name="apellido" #apellido="ngModel"
+                                                [(ngModel)]="cli.apellido" required pattern="[a-zA-Z]+"
+                                                class="form-control form-control-user" placeholder="Apellidos" />
+                                            <span *ngIf="apellido.touched && !apellido.valid">
+                                                * Apellido es obligatorio
                                             </span>
+                                            <br>
 
                                         </div>
-                                        <br>
+                                    </div>
 
-                                        <span *ngIf="!formCli.form.valid"> Recuerde revisar los campos </span>
-                                        <br>
-                                        <input type="submit" name="Guardar" value="Guardar"
-                                            [disabled]="!formCli.form.valid" class="btn btn-primary btn-user btn-block">
-                                    </form>
-                                </div>
-                                <hr>
+                                    <div class="form-group">
+                                        <input type="text" name="provincia" #provincia="ngModel"
+                                            [(ngModel)]="cli.provincia" required pattern="[a-zA-Z]+"
+                                            class="form-control form-control-user" placeholder="Provincia" />
+                                        <span *ngIf="provincia.touched && !provincia.valid">
+                                            * Provincia es obligatorio
+                                        </span>
 
+                                    </div>
+
+                                    <br>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="ciudad" #ciudad="ngModel" [(ngModel)]="cli.ciudad"
+                                                required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                                placeholder="Ciudad" />
+                                            <span *ngIf="ciudad.touched && !ciudad.valid">
+                                                * Ciudad es obligatorio
+                                            </span>
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo"
+                                                required pattern="[0-9]{6,6}" class="form-control form-control-user"
+                                                placeholder="Código Postal" />
+                                            <span *ngIf="codigo.touched && !codigo.valid">
+                                                * Codigo postal es obligatorio, de 6 dígitos
+                                            </span>
+                                            <br>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email"
+                                            required class="form-control form-control-user" placeholder="Email" />
+                                        <span *ngIf="email.touched && !email.valid">
+                                            * Correo es obligatorio
+                                        </span>
+
+                                    </div>
+                                    <br>
+
+                                    <span *ngIf="!formCli.form.valid"> Recuerde revisar los campos </span>
+                                    <br>
+                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCli.form.valid"
+                                        class="btn btn-primary btn-user btn-block">
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
 
 
         <!-- Actualizar Cuenta -->
         <div *ngIf="objR=='cuenta'">
-            <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered">
+            <table datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
-
                         <th style="width: 10%">Identificación</th>
                         <th style="width: 10%">Tipo</th>
                         <th style="width: 70%">Clientes asociados a esta cuenta</th>
-
                         <th style="width: 10%"></th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -186,9 +172,11 @@
                             <a class="btn btn-secondary" (click)="editar(cuenta)">
                                 Editar
                             </a>
+                            <a class="btn btn-danger" (click)="desactivar(cuenta)">
+                                Desactivar
+                            </a>
                         </td>
                     </tr>
-
                 </tbody>
             </table>
 
@@ -199,11 +187,9 @@
                         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
-
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Crear Cuenta</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Cuenta</h1>
                                 </div>
-
                                 <div *ngIf="error!==''"
                                     style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
                                     <p
@@ -217,64 +203,57 @@
                                         Muy bien: {{success}}</p>
                                 </div>
 
-                                <div *ngIf="objR=='cuenta'">
-                                    <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
-                                        <div class="form-group">
+                                <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
+                                    <div class="form-group">
 
-                                            <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
-                                                class="form-control form-control-user">
-                                                <option value="" selected disabled>Elegir el cliente &dtrif;</option>
-                                                <option *ngFor="let cliente of clientes" [value]="cliente._id"
-                                                    style="width: 200px; height: 100px;">
-                                                    <div>
-                                                        <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id:
-                                                            {{cliente._id}}
-                                                        </p>
-                                                    </div>
-                                                </option>
-                                            </select>
-                                            <span *ngIf="id.touched && !id.valid">
-                                                * La identificación es obligatoria
-                                            </span>
-
-                                            <br>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
-                                                class="form-control form-control-user" required
-                                                pattern="(ahorros|corriente)">
-                                                <option value="">Elige una opción &dtrif; </option>
-                                                <option value="ahorros">Ahorros</option>
-                                                <option value="corriente">Corriente</option>
-                                            </select>
-                                            <span *ngIf="tipo.touched && !tipo.valid">
-                                                * El tipo es obligatorio
-                                            </span>
-                                        </div>
-
-                                        <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
+                                        <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
+                                            class="form-control form-control-user" required>
+                                            <option value="" selected disabled>Elegir el cliente &dtrif;</option>
+                                            <option *ngFor="let cliente of clientes" [value]="cliente._id"
+                                                style="width: 200px; height: 100px;">
+                                                <div>
+                                                    <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id:
+                                                        {{cliente._id}}
+                                                    </p>
+                                                </div>
+                                            </option>
+                                        </select>
+                                        <span *ngIf="id.touched && !id.valid">
+                                            * Escoja alguno
+                                        </span>
 
                                         <br>
-                                        <input type="submit" name="Guardar" value="Guardar"
-                                            [disabled]="!formCta.form.valid" class="btn btn-primary btn-user btn-block">
-                                    </form>
+                                    </div>
 
-                                </div>
-                                <hr>
 
+                                    <div class="form-group">
+                                        <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo" required
+                                            class="form-control form-control-user" disabled />
+                                        <span *ngIf="tipo.touched && !tipo.valid">
+                                            * El tipo es obligatorio
+                                        </span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="number" name="monto" #monto="ngModel" [(ngModel)]="cta.monto"
+                                            required class="form-control form-control-user" />
+                                        <span *ngIf="monto.touched && !monto.valid">
+                                            * Defina un valor
+                                        </span>
+                                    </div>
+
+                                    <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
+
+                                    <br>
+                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCta.form.valid"
+                                        class="btn btn-primary btn-user btn-block">
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
     </div>
 </body>
