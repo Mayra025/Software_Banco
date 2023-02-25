@@ -20,12 +20,12 @@ export class AdminComponent {
 
 
       this._router.navigate(['/login']);
-      /*axios.post("http://localhost:8080/api/logout", {}, { withCredentials: true }).then(resp => {
+      axios.post("http://localhost:8080/api/logout", {}, { withCredentials: true }).then(resp => {
         window.location.reload();
       }).catch(err => {
         console.log(err);
-  
-      })*/
+
+      })
     }
   }
 

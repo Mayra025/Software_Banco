@@ -33,11 +33,11 @@ export class EmpleadoComponent {
   }
 
   constructor(private _router: Router) {
-    /*axios.get("http://localhost:8080/api/empleado/info", { withCredentials: true }).then(resp => {
+    axios.get("http://localhost:8080/api/empleado/info", { withCredentials: true }).then(resp => {
       this.data = resp.data;
     }).catch(err => {
       this._router.navigate(['/login']);
-    })*/
+    })
 
   }
 
