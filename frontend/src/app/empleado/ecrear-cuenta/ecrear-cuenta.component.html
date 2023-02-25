@@ -109,11 +109,13 @@
                                         <span *ngIf="tipo.touched && !tipo.valid">
                                             * El tipo es obligatorio
                                         </span>
+                                        <br>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="number" name="monto" #monto="ngModel" [(ngModel)]="cta.monto"
-                                            required class="form-control form-control-user" placeholder="Valor" />
+                                        <input type="number" step="any" name="monto" #monto="ngModel"
+                                            [(ngModel)]="cta.monto" required class="form-control form-control-user"
+                                            placeholder="Valor" />
                                         <span *ngIf="monto.touched && !monto.valid">
                                             * Defina un valor
                                         </span>

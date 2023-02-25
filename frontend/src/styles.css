@@ -14,3 +14,9 @@ body {
     margin: 0;
 }
 */
+
+.bg-register-image {
+    background: url("https://cherry-brightspot.s3.amazonaws.com/media/2010/04/28/credito-tarjeta-pago.jpg");
+    background-position: center;
+    background-size: cover;
+}

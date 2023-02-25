@@ -1,8 +1,8 @@
 <body class="bg-gradient-primary">
     <div class="container">
-        <h1 class="h4 text-gray-900 mb-4">{{objR}}</h1>
         <!-- Desactivar Banco -->
-        <div *ngIf="objR=='cuenta'">
+        <div *ngIf="objR=='banco'">
+            <h1 class="h4 text-gray-900 mb-4">Bancos desactivados</h1>
             <table datatable [dtOptions]="dtoptions" class="table">
                 <thead>
                     <tr>

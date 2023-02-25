@@ -1,9 +1,10 @@
 <body class="bg-gradient-primary">
     <div class="container">
-        <h1 class="h4 text-gray-900 mb-4">{{objR}}</h1>
 
         <!-- Desactivar Cliente -->
         <div *ngIf="objR=='cliente'">
+            <h1 class="h4 text-gray-900 mb-4">Clientes inactivos</h1>
+
             <table datatable [dtOptions]="dtoptions" class="table">
                 <thead>
                     <tr>
@@ -39,6 +40,8 @@
 
         <!-- Desactivar Cuenta -->
         <div *ngIf="objR=='cuenta'">
+            <h1 class="h4 text-gray-900 mb-4">Cuentas inactivas</h1>
+
             <table datatable [dtOptions]="dtoptions" class="table">
                 <thead>
                     <tr>

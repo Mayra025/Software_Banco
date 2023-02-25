@@ -1,9 +1,10 @@
 <body class="bg-gradient-primary">
     <div class="container">
-        <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
 
         <!-- Actualizar Cliente -->
         <div *ngIf="objR=='cliente'">
+            <h1 class="h4 text-gray-900 mb-4">Clientes</h1>
+
             <table datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
@@ -46,7 +47,7 @@
                             <div class="p-5">
 
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Cliente</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
                                 </div>
 
                                 <div *ngIf="error!==''"
@@ -154,6 +155,8 @@
 
         <!-- Actualizar Cuenta -->
         <div *ngIf="objR=='cuenta'">
+            <h1 class="h4 text-gray-900 mb-4">Cuentas</h1>
+
             <table datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
@@ -188,7 +191,7 @@
                         <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Cuenta</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
                                 </div>
                                 <div *ngIf="error!==''"
                                     style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
@@ -232,12 +235,13 @@
                                         <span *ngIf="tipo.touched && !tipo.valid">
                                             * El tipo es obligatorio
                                         </span>
+                                        <br>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <input type="number" name="monto" #monto="ngModel" [(ngModel)]="cta.monto"
-                                            required class="form-control form-control-user" />
+                                        <input type="number" step="any" name="monto" #monto="ngModel"
+                                            [(ngModel)]="cta.monto" required class="form-control form-control-user" />
                                         <span *ngIf="monto.touched && !monto.valid">
                                             * Defina un valor
                                         </span>

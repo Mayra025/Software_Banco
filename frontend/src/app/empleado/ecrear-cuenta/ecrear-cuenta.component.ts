@@ -28,12 +28,12 @@ export class EcrearCuentaComponent implements OnInit {
 
   constructor(private _router: Router) {
     this.cta = new CuentaB(null, '', '', 0, false)
-
-    axios.get("http://localhost:8080/api/empleado/clientes", { withCredentials: true }).then(resp => {
-      this.clientes = resp.data;
-    }).catch(err => {
-      this._router.navigate(['/login']);
-    })
+    /*
+        axios.get("http://localhost:8080/api/empleado/clientes", { withCredentials: true }).then(resp => {
+          this.clientes = resp.data;
+        }).catch(err => {
+          this._router.navigate(['/login']);
+        })*/
   }
 
   ngOnInit(): void {
@@ -41,23 +41,24 @@ export class EcrearCuentaComponent implements OnInit {
   }
 
   onSubmit(formCta: NgForm) {
-
-    axios.post("http://localhost:8080/api/empleado/cuentas", {
-      clientes: formCta.value.id,
-      tipo: formCta.value.tipo
-    }, {
-      headers: {
-        Accept: 'application/json',
-      },
-      withCredentials: true
-    }).then(resp => {
-      this.error = "";
-      this.success = "Cuenta creada"
-
-    }).catch(err => {
-      this.error = err.response.data;
-      this.success = ""
-    })
+    /*
+        axios.post("http://localhost:8080/api/empleado/cuentas", {
+          clientes: formCta.value.id,
+          tipo: formCta.value.tipo
+        }, {
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true
+        }).then(resp => {
+          this.error = "";
+          this.success = "Cuenta creada"
+    
+        }).catch(err => {
+          this.error = err.response.data;
+          this.success = ""
+        })
+        */
   }
 
 

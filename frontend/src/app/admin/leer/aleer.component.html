@@ -1,9 +1,9 @@
 <body class="bg-gradient-primary">
     <div class="container">
-        <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
 
         <!-- Leer Empleado -->
         <div *ngIf="objR=='empleado'">
+            <h1 class="h4 text-gray-900 mb-4">Empleados</h1>
 
             <table datatable [dtOptions]="dtoptions" class="table ">
                 <thead>
@@ -28,6 +28,7 @@
         </div>
         <!-- Leer banco -->
         <div *ngIf="objR=='banco'">
+            <h1 class="h4 text-gray-900 mb-4">Bancos</h1>
 
             <table datatable [dtOptions]="dtoptions" class="table ">
                 <thead>

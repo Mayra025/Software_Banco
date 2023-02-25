@@ -40,6 +40,7 @@ export class AleerComponent implements OnInit {
         private _router: Router,
         private service: MasterService
     ) {
+        /*
         axios.get("http://localhost:8080/api/administrador/empleados", { withCredentials: true }).then(resp => {
             this.empleados = resp.data;
         }).catch(err => {
@@ -51,6 +52,7 @@ export class AleerComponent implements OnInit {
         }).catch(err => {
             this._router.navigate(['/login']);
         })
+        */
     }
 
     ngOnInit(): void {

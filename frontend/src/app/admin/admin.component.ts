@@ -16,13 +16,17 @@ export class AdminComponent {
 
 
   logout(): void {
-    this._router.navigate(['/login']);
-    /*axios.post("http://localhost:8080/api/logout", {}, { withCredentials: true }).then(resp => {
-      window.location.reload();
-    }).catch(err => {
-      console.log(err);
+    if (confirm('Estás seguro que deseas salir?')) {
 
-    })*/
+
+      this._router.navigate(['/login']);
+      /*axios.post("http://localhost:8080/api/logout", {}, { withCredentials: true }).then(resp => {
+        window.location.reload();
+      }).catch(err => {
+        console.log(err);
+  
+      })*/
+    }
   }
 
   activarComponente(@Output() opcion: number) {

@@ -7,6 +7,9 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
+            <div class="sidebar-brand-icon">
+                <i class="fa fa-solid fa-user"></i>
+            </div>
             <div class="sidebar-brand-text mx-3">BM Admin </div>
         </a>
 
@@ -84,10 +87,14 @@
 
             <!-- Topbar- Logout -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                <h5>Bienvenido</h5>
+                <h4 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-left: 25px;"> <i>
+                        Bienvenid@</i>
+                </h4>
+
                 <ul class="navbar-nav ml-auto">
                     <div class="topbar-divider d-none "></div>
-                    <button data-bs-toggle="modal" data-bs-target="#logoutModal" (click)="logout()">
+                    <button class="btn btn-gradient-primary" data-bs-toggle="modal" data-bs-target="#logoutModal"
+                        (click)="logout()">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" style="margin: 6px;"></i>
                         Salir</button>
                 </ul>
@@ -105,7 +112,7 @@
                                 <div class="p-5">
                                     <div>
                                         <div>
-                                            <h3>Su información: </h3>
+                                            <h5>Su información: </h5>
                                             <p>Nombre: {{data.nombre}}</p>
                                             <p>Apellido: {{data.apellido}}</p>
                                             <p>Identificacion: {{data.identificacion}}</p>
@@ -145,24 +152,3 @@
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">Selecciona "Salir" si deseas finalizar sesión.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" (click)="logout()">Salir</a>
-            </div>
-        </div>
-    </div>
-</div>
-
--->
