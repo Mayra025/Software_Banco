@@ -3,12 +3,14 @@ import { NgForm } from '@angular/forms';
 import { ClienteB } from '../../models/cliente';
 import axios from 'axios';
 import { Router } from '@angular/router';
+import { EmpleadoService } from '../service/empleado.service';
 
 
 @Component({
   selector: 'app-ecrear-cliente',
   templateUrl: './ecrear-cliente.component.html',
-  styleUrls: ['./ecrear-cliente.component.css']
+  styleUrls: ['./ecrear-cliente.component.css'],
+  providers: [EmpleadoService]
 })
 export class EcrearClienteComponent {
   title = "Crear";
@@ -21,7 +23,7 @@ export class EcrearClienteComponent {
   public clientes: any;
 
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _EmpleadoService:EmpleadoService) {
     this.cli = new ClienteB('', '', '', false)
   }
   ngOnInit(): void {
@@ -29,8 +31,7 @@ export class EcrearClienteComponent {
   }
 
   onSubmit(formCli: NgForm) {
-
-    axios.post("http://localhost:8080/api/empleado/clientes", {
+    this._EmpleadoService.addCliente({
       nombre: formCli.value.nombre,
       apellido: formCli.value.apellido,
       provincia: formCli.value.provincia,
@@ -38,19 +39,14 @@ export class EcrearClienteComponent {
       codigo_postal: formCli.value.codigo,
       identificacion: formCli.value.id,
       correo: formCli.value.email
-    }, {
-      headers: {
-        Accept: 'application/json',
-      },
-      withCredentials: true
-    }).then(resp => {
+    }).subscribe(resp=>{
       this.error = "";
       this.success = "Cliente creado"
-
-    }).catch(err => {
-      this.error = err.response.data;
+    }, err=>{
+      this.error = err.error.message;
       this.success = ""
     })
+
   }
 
   /*

@@ -1,5 +1,6 @@
 <body class="bg-gradient-primary">
     <div class="container">
+        
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <div class="row">
@@ -28,7 +29,7 @@
                                 <form class="user" #formEmpleado="ngForm" (ngSubmit)="onSubmit(formEmpleado)">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="usuario.id" required
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="usuario._id" required
                                                 pattern="[0-9]{10,10}" class="form-control form-control-user"
                                                 placeholder="Identificación" />
                                             <span *ngIf="id.touched && !id.valid">
@@ -79,8 +80,8 @@
                                 <form class="user" #formBanco="ngForm" (ngSubmit)="onSubmit(formBanco)">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="banco.id" required
-                                                pattern="[0-9]+" class="form-control form-control-user"
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="banco._id" required
+                                                class="form-control form-control-user"
                                                 placeholder="Identificación" />
                                             <span *ngIf="id.touched && !id.valid">
                                                 * La identificación es obligatoria
@@ -88,6 +89,7 @@
                                             <br>
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <input type="text" name="nombre" #nombre="ngModel"
@@ -103,6 +105,46 @@
                                                 class="form-control form-control-user" placeholder="Dominio" />
                                             <span *ngIf="dominio.touched && !dominio.valid">
                                                 * Dominio es obligatorio
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="usuario" #usuario="ngModel"
+                                                [(ngModel)]="banco.usuario" required
+                                                class="form-control form-control-user" placeholder="Usuario" />
+                                            <span *ngIf="usuario.touched && !usuario.valid">
+                                                * Usuario es obligatorio
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="password" #password="ngModel"
+                                                [(ngModel)]="banco.password" required
+                                                class="form-control form-control-user" placeholder="Contraseña" />
+                                            <span *ngIf="password.touched && !password.valid">
+                                                * Contraseña es obligatorio
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0 ">
+                                            <input type="text" name="prueba" #prueba="ngModel"
+                                                [(ngModel)]="banco.prueba" required
+                                                class="form-control form-control-user" placeholder="Dirección de prueba" />
+                                            <span *ngIf="prueba.touched && !prueba.valid">
+                                                * Dirección de prueba es obligatorio
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="transferir" #transferir="ngModel"
+                                                [(ngModel)]="banco.transferir" required
+                                                class="form-control form-control-user" placeholder="Dirección de transferencia" />
+                                            <span *ngIf="transferir.touched && !transferir.valid">
+                                                * Dirección de transferencia es obligatorio
                                             </span>
                                         </div>
                                     </div>

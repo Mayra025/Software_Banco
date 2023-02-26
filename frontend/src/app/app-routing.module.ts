@@ -16,6 +16,7 @@ const empleadoModule = () => import('./empleado/empleado.module').then(x => x.Em
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
+  
   { path: 'empleado', component: EmpleadoComponent },
   { path: 'empleado', loadChildren: empleadoModule },
 
@@ -25,9 +26,9 @@ const routes: Routes = [
   { path: 'escritorio', component: EscritorioComponent },
 
   { path: 'admin', component: AdminComponent },  //
-  { path: 'admin', loadChildren: adminModule }
-
-
+  { path: 'admin', loadChildren: adminModule },
+  
+  { path: '**', component: LoginComponent },
 
 ];
 

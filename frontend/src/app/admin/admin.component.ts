@@ -2,32 +2,45 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
 import axios from 'axios';
+import { MasterService } from '../service/login.service';
+import { AdminService } from './service/admin.service';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  providers: [MasterService, AdminService]
 })
 export class AdminComponent {
   objR: string;
   option: number = 0;
   public data: any;
 
+  constructor(
+    private _router: Router, 
+    private _MasterService:MasterService,
+    private _AdminService:AdminService,
+    ) {
+    this._AdminService.getInfo().subscribe(resp=>{
+      this.data = resp.data;
+    },err=>{
+      this._router.navigate(['/login']);
+    })
 
+  }
 
   logout(): void {
-    if (confirm('Estás seguro que deseas salir?')) {
-
-
-      this._router.navigate(['/login']);
-      axios.post("http://localhost:8080/api/logout", {}, { withCredentials: true }).then(resp => {
-        window.location.reload();
-      }).catch(err => {
-        console.log(err);
-
-      })
+    if (confirm('¿Estás seguro que deseas salir?')) {
+      this._MasterService.logout().subscribe(
+        resp => {
+          this._router.navigate(['/login']);
+        }, err => {
+          console.log(err);
+        })
     }
   }
+
+  
 
   activarComponente(@Output() opcion: number) {
     this.option = opcion;
@@ -38,10 +51,7 @@ export class AdminComponent {
     this.objR = inputValue;
   }
 
-  constructor(private _router: Router) {
 
-
-  }
 }
 
 

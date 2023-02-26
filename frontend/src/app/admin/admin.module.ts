@@ -23,7 +23,7 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,   //para el modulo 
     AdminRoutingModule, //para el modulo de rutas
     HttpClientModule,
-    DataTablesModule //para tablas
+    DataTablesModule,//para tablas
   ],
   providers: [],
 })

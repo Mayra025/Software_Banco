@@ -8,22 +8,21 @@ import axios from 'axios';
 
 import { Router } from '@angular/router';
 import { CuentaB } from 'src/app/models/cuenta';
+import { AdminService } from '../service/admin.service';
 
 
 @Component({
     selector: 'app-adesactivar',
-    templateUrl: './adesactivar.component.html'
+    templateUrl: './adesactivar.component.html',
+    providers: [AdminService]
 })
 
 export class AdesactivarComponent implements OnInit {
     title = "Desactivar";
     @Input() objR: string;
-    bancos: any;
+    empleados: any;
 
     dtoptions: DataTables.Settings = {};  //para tabla
-
-
-
 
     opcion: number = 4;
     public error: string = "";
@@ -32,9 +31,14 @@ export class AdesactivarComponent implements OnInit {
 
     constructor(
         private _router: Router,
-
-
+        private _AdminService: AdminService
     ) {
+        this._AdminService.getEmpleados().subscribe(resp=>{
+            this.empleados = resp.data;
+            this.empleados = this.empleados.filter((ele:any) => ele.activo===false)           
+        }, err=>{
+            this._router.navigate(['/login']);
+        })
     }
 
 
@@ -51,8 +55,16 @@ export class AdesactivarComponent implements OnInit {
 */
         };
     }
-    activar(form: NgForm) {
-        if (confirm('estás seguro de desactivarlo?')) {
+    activar(id:string) {
+        if (confirm('¿Estás seguro de querer activar?')) {
+            if (this.objR == 'empleado') {
+                this._AdminService.deleteEmpleado(id).subscribe(resp=>{
+                    alert("Cliente activado")
+                    this.error = ""
+                },err=>{
+                    this.error = err.error.message
+                })
+            }
         }
     }
 

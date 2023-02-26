@@ -5,7 +5,7 @@
         <div *ngIf="objR=='cliente'">
             <h1 class="h4 text-gray-900 mb-4">Clientes</h1>
 
-            <table datatable [dtOptions]="dtoptions" class="table table-hover">
+            <table *ngIf="!updateState" datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
                         <th style="width: 18%">Identificación</th>
@@ -18,17 +18,17 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let cliente of clientes">
-                        <td>{{cliente.id}}</td>
+                        <td>{{cliente._id}}</td>
                         <td>{{cliente.nombre}} {{cliente.apellido}}</td>
                         <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
-                        <td>{{cliente.codigo}}</td>
-                        <td>{{cliente.email}}</td>
+                        <td>{{cliente.codigo_postal}}</td>
+                        <td>{{cliente.usuario.email}}</td>
 
                         <td style="white-space: nowrap">
                             <a class="btn btn-primary" (click)="editar(cliente)">
                                 Editar
                             </a>
-                            <a class="btn btn-danger" (click)="desactivar(cliente)">
+                            <a class="btn btn-danger" (click)="desactivar(cliente._id)">
                                 Desactivar
                             </a>
                         </td>
@@ -38,13 +38,14 @@
             </table>
 
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div *ngIf="updateState" class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
+                                <button (click)="actualizarState()">← Regresar</button>
 
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
@@ -67,9 +68,9 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
 
-                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="cli.id" required
-                                                pattern="[0-9]{10,10}" class="form-control form-control-user"
-                                                placeholder="Identificación" disabled />
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="cli._id" required
+                                                class="form-control form-control-user"
+                                                placeholder="Identificación" readonly />
                                             <br>
                                         </div>
                                     </div>
@@ -118,7 +119,7 @@
                                             <br>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo"
+                                            <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo_postal"
                                                 required pattern="[0-9]{6,6}" class="form-control form-control-user"
                                                 placeholder="Código Postal" />
                                             <span *ngIf="codigo.touched && !codigo.valid">
@@ -131,7 +132,7 @@
 
 
                                     <div class="form-group">
-                                        <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email"
+                                        <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.usuario.email"
                                             required class="form-control form-control-user" placeholder="Email" />
                                         <span *ngIf="email.touched && !email.valid">
                                             * Correo es obligatorio
@@ -157,25 +158,27 @@
         <div *ngIf="objR=='cuenta'">
             <h1 class="h4 text-gray-900 mb-4">Cuentas</h1>
 
-            <table datatable [dtOptions]="dtoptions" class="table table-hover">
+            <table *ngIf="!updateState" datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
                         <th style="width: 10%">Identificación</th>
+                        <th style="width: 10%">Saldo</th>
                         <th style="width: 10%">Tipo</th>
-                        <th style="width: 70%">Clientes asociados a esta cuenta</th>
+                        <th style="width: 60%">Clientes asociados a esta cuenta</th>
                         <th style="width: 10%"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let cuenta of cuentas">
-                        <td>{{cuenta.id}}</td>
-                        <td>{{cuenta.tipo}}</td>
-                        <td>{{cuenta.clis}}</td>
+                        <td>{{cuenta._id}}</td>
+                        <td>{{cuenta.monto}}$</td>
+                        <td>{{cuenta.tipo === "C" ? "Corriente" : "Ahorro"}}</td>
+                        <td>{{cuenta.clientes}}</td>
                         <td style="white-space: nowrap">
                             <a class="btn btn-secondary" (click)="editar(cuenta)">
                                 Editar
                             </a>
-                            <a class="btn btn-danger" (click)="desactivar(cuenta)">
+                            <a class="btn btn-danger" (click)="desactivar(cuenta._id)">
                                 Desactivar
                             </a>
                         </td>
@@ -184,12 +187,13 @@
             </table>
 
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div *ngIf="updateState" class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
                         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
+                                <button (click)="actualizarState()">← Regresar</button>
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
                                 </div>
@@ -209,21 +213,15 @@
                                 <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
                                     <div class="form-group">
 
-                                        <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
-                                            class="form-control form-control-user" required>
-                                            <option value="" selected disabled>Elegir el cliente &dtrif;</option>
-                                            <option *ngFor="let cliente of clientes" [value]="cliente._id"
-                                                style="width: 200px; height: 100px;">
-                                                <div>
-                                                    <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id:
-                                                        {{cliente._id}}
-                                                    </p>
-                                                </div>
-                                            </option>
-                                        </select>
-                                        <span *ngIf="id.touched && !id.valid">
-                                            * Escoja alguno
-                                        </span>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+    
+                                                <input type="text" name="id" #id="ngModel" [(ngModel)]="cta._id" required
+                                                    class="form-control form-control-user"
+                                                    placeholder="Id de la cuenta" readonly />
+                                                <br>
+                                            </div>
+                                        </div>
 
                                         <br>
                                     </div>
@@ -231,7 +229,7 @@
 
                                     <div class="form-group">
                                         <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo" required
-                                            class="form-control form-control-user" disabled />
+                                            class="form-control form-control-user" readonly />
                                         <span *ngIf="tipo.touched && !tipo.valid">
                                             * El tipo es obligatorio
                                         </span>

@@ -4,11 +4,13 @@ import { CuentaB } from '../../models/cuenta';
 import axios from 'axios';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { EmpleadoService } from '../service/empleado.service';
 
 @Component({
   selector: 'app-ecrear-cuenta',
   templateUrl: './ecrear-cuenta.component.html',
-  styleUrls: ['./ecrear-cuenta.component.css']
+  styleUrls: ['./ecrear-cuenta.component.css'],
+  providers: [EmpleadoService]
 })
 export class EcrearCuentaComponent implements OnInit {
   title = "Crear";
@@ -21,12 +23,12 @@ export class EcrearCuentaComponent implements OnInit {
   public success: string = "";
 
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _EmpleadoService: EmpleadoService) {
     this.cta = new CuentaB(null, '', '', 0, false)
 
-    axios.get("http://localhost:8080/api/empleado/clientes", { withCredentials: true }).then(resp => {
+    this._EmpleadoService.getClientes().subscribe(resp=>{
       this.clientes = resp.data;
-    }).catch(err => {
+    },err => {
       this._router.navigate(['/login']);
     })
   }
@@ -37,20 +39,14 @@ export class EcrearCuentaComponent implements OnInit {
 
   onSubmit(formCta: NgForm) {
 
-    axios.post("http://localhost:8080/api/empleado/cuentas", {
+    this._EmpleadoService.addCuenta({
       clientes: formCta.value.id,
       tipo: formCta.value.tipo
-    }, {
-      headers: {
-        Accept: 'application/json',
-      },
-      withCredentials: true
-    }).then(resp => {
+    }).subscribe(resp=>{
       this.error = "";
       this.success = "Cuenta creada"
-
-    }).catch(err => {
-      this.error = err.response.data;
+    }, err=>{
+      this.error = err.error.message;
       this.success = ""
     })
 

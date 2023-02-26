@@ -3,12 +3,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import axios from 'axios';
 import { Subject } from 'rxjs';
-import { MasterService } from 'src/app/service/master.service';
 import { Router } from '@angular/router';
+import { EmpleadoService } from '../service/empleado.service';
+import { MasterService } from '../../service/login.service';
 
 @Component({
     selector: 'app-eleer',
-    templateUrl: './eleer.component.html'
+    templateUrl: './eleer.component.html',
+    providers: [MasterService, EmpleadoService]
 })
 
 export class EleerComponent implements OnInit {
@@ -29,17 +31,18 @@ export class EleerComponent implements OnInit {
 
     constructor(
         private _router: Router,
-        private service: MasterService
+        private service: MasterService,
+        private _EmpleadoService: EmpleadoService
     ) {
-        axios.get("http://localhost:8080/api/empleado/clientes", { withCredentials: true }).then(resp => {
+        this._EmpleadoService.getClientes().subscribe(resp => {
             this.clientes = resp.data;
-        }).catch(err => {
+        }, err => {
             this._router.navigate(['/login']);
         })
 
-        axios.get("http://localhost:8080/api/empleado/cuentas", { withCredentials: true }).then(resp => {
+        this._EmpleadoService.getCuentas().subscribe(resp => {
             this.cuentas = resp.data;
-        }).catch(err => {
+        }, err => {
             this._router.navigate(['/login']);
         })
     }

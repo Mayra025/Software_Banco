@@ -6,14 +6,16 @@ import { Usuario } from 'src/app/models/usuario';
 import { BancoB } from 'src/app/models/banco';
 import axios from 'axios';
 import { Subject } from 'rxjs';
-import { MasterService } from 'src/app/service/master.service';
+import { MasterService } from 'src/app/service/login.service';
 
 
 import { Router } from '@angular/router';
+import { AdminService } from '../service/admin.service';
 
 @Component({
     selector: 'app-aleer',
-    templateUrl: './aleer.component.html'
+    templateUrl: './aleer.component.html',
+    providers: [MasterService, AdminService]
 })
 
 export class AleerComponent implements OnInit {
@@ -38,20 +40,21 @@ export class AleerComponent implements OnInit {
 
     constructor(
         private _router: Router,
-        private service: MasterService
+        private service: MasterService,
+        private _AdminService:AdminService
     ) {
-
-        axios.get("http://localhost:8080/api/administrador/empleados", { withCredentials: true }).then(resp => {
+        this._AdminService.getEmpleados().subscribe(resp=>{
             this.empleados = resp.data;
-        }).catch(err => {
+        },err =>{
             this._router.navigate(['/login']);
         })
 
-        axios.get("http://localhost:8080/api/administrador/bancos", { withCredentials: true }).then(resp => {
+        this._AdminService.getBancos().subscribe(resp=>{
             this.bancos = resp.data;
-        }).catch(err => {
+        },err =>{
             this._router.navigate(['/login']);
         })
+
 
     }
 

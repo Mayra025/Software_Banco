@@ -17,8 +17,6 @@ import { TransferenciaInternaComponent } from './cliente/transferencia-interna/t
 import { ClientesComponent } from './cliente/clientes/clientes.component';
 import { EscritorioComponent } from './cliente/escritorio/escritorio.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

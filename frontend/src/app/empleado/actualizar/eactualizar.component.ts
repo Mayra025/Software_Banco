@@ -6,14 +6,16 @@ import axios from 'axios';
 
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { MasterService } from 'src/app/service/master.service';
+import { MasterService } from 'src/app/service/login.service';
 import { ClienteB } from 'src/app/models/cliente';
 import { CuentaB } from 'src/app/models/cuenta';
+import { EmpleadoService } from '../service/empleado.service';
 
 
 @Component({
     selector: 'app-eactualizar',
-    templateUrl: './eactualizar.component.html'
+    templateUrl: './eactualizar.component.html',
+    providers: [MasterService, EmpleadoService]
 })
 
 export class EactualizarComponent implements OnInit {
@@ -22,9 +24,10 @@ export class EactualizarComponent implements OnInit {
 
     public clientes: any;
     public cuentas: any;
+    public updateState:boolean = false
 
-    public cli: ClienteB;
-    public cta: CuentaB;
+    public cli: any;
+    public cta: any;
 
 
     opcion: number = 3;
@@ -35,21 +38,20 @@ export class EactualizarComponent implements OnInit {
 
     constructor(
         private _router: Router,
-        private service: MasterService
-
+        private service: MasterService,
+        private _EmpleadoService:EmpleadoService
     ) {
-        this.cli = new ClienteB('', '', '', false);
-        this.cta = new CuentaB(null, '', '', 0, false);
-
-        axios.get("http://localhost:8080/api/empleado/clientes", { withCredentials: true }).then(resp => {
+        this._EmpleadoService.getClientes().subscribe(resp=>{
             this.clientes = resp.data;
-        }).catch(err => {
+            this.clientes = this.clientes.filter((ele:any) => ele.activo===true)           
+        }, err=>{
             this._router.navigate(['/login']);
         })
 
-        axios.get("http://localhost:8080/api/empleado/cuentas", { withCredentials: true }).then(resp => {
+        this._EmpleadoService.getCuentas().subscribe(resp=>{
             this.cuentas = resp.data;
-        }).catch(err => {
+            this.cuentas = this.cuentas.filter((ele:any) => ele.activo===true)
+        }, err=>{
             this._router.navigate(['/login']);
         })
     }
@@ -60,53 +62,44 @@ export class EactualizarComponent implements OnInit {
         }
     }
 
-    onSubmit(form: NgForm) {
+    onSubmit(form: NgForm) {        
         if (this.objR == 'cliente') {
-            axios.put("http://localhost:8080/api/empleado/clientes/" + form.value.id, {
+            this._EmpleadoService.updateCliente({
                 nombre: form.value.nombre,
                 apellido: form.value.apellido,
                 provincia: form.value.provincia,
                 ciudad: form.value.ciudad,
                 codigo_postal: form.value.codigo,
                 correo: form.value.email
-            },
-                {
-                    headers: {
-                        Accept: 'application/json',
-                    },
-                    withCredentials: true
-                }).then(resp => {
-                    this.error = "";
-                    this.success = "Cliente actualizado"
-
-                }).catch(err => {
-                    this.error = err.response.data;
-                    this.success = ""
-                })
-            this.cli = new ClienteB('', '', '', false);
+            }, form.value.id).subscribe(resp=>{
+                this.error = "";
+                this.success = "Cliente actualizado"
+                this.actualizarState()
+            },err=>{
+                this.error = err.response.data;
+                this.success = ""
+            })
+            this.cli = null;
 
         } else {
-            //agregar clientes y agregar monto
-            axios.put("http://localhost:8080/api/empleado/cuentas/" + form.value.id, {
-                clientes: form.value.id,
+            this._EmpleadoService.updateCuenta({
                 monto: form.value.monto
-            },
-                {
-                    headers: {
-                        Accept: 'application/json',
-                    },
-                    withCredentials: true
-                }).then(resp => {
-                    this.error = "";
-                    this.success = "Cuenta actualizada"
+            }, form.value.id).subscribe(resp=>{
+                this.error = "";
+                this.success = "Cuenta actualizada"
+                this.actualizarState()
+            },err=>{
+                this.error = err.response.data;
+                this.success = ""
+            })
 
-                }).catch(err => {
-                    this.error = err.response.data;
-                    this.success = ""
-                })
-            this.cta = new CuentaB(null, '', '', 0, false);
+            this.cta = null;
         }
+        
+    }
 
+    actualizarState(){
+        this.updateState = !this.updateState;
     }
 
     editar(obj: any) {
@@ -114,22 +107,29 @@ export class EactualizarComponent implements OnInit {
             this.cli = obj;
         } else {
             this.cta = obj;
+            this.cta.tipo = this.cta.tipo==='C' ? 'Corriente' : 'Ahorro'
         }
+        this.actualizarState()
     }
 
-    desactivar(form: NgForm) {
-        if (confirm('estás seguro de desactivarlo?')) {
+    desactivar(id:string) {
+        if (confirm('¿Estás seguro de desactivarlo?')) {
             if (this.objR == 'cliente') {
-                axios.delete("http://localhost:8080/api/empleado/clientes/" + form.value.id, {
-
+                this._EmpleadoService.deleteCliente(id).subscribe(resp=>{
+                    alert("Cliente desactivado")
+                    this.error = ""
+                },err=>{
+                    this.error = err.error.message
                 })
-                this.cli = new ClienteB('', '', '', false);
-
+                this.cli = null;
             } else {
-                axios.delete("http://localhost:8080/api/empleado/cuentas/" + form.value.id, {
-
+                this._EmpleadoService.deleteCuenta(id).subscribe(resp=>{
+                    alert("Cuenta desactivada")
+                    this.error = ""
+                },err=>{
+                    this.error = err.error.message
                 })
-                this.cta = new CuentaB(null, '', '', 0, false);
+                this.cta = null;
             }
         }
     }
