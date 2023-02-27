@@ -46,7 +46,7 @@
                         <td>{{cuenta._id}}</td>
                         <td>{{cuenta.monto}}$</td>
                         <td>{{cuenta.tipo === "C" ? "Corriente" : "Ahorro"}}</td>
-                        <td>{{cuenta.clientes}}</td>
+                        <td>{{cuenta.clientes.join(", ")}}</td>
                     </tr>
                 </tbody>
             </table>

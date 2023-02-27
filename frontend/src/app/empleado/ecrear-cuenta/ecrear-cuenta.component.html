@@ -26,45 +26,55 @@
 
                             <div *ngIf="objR=='cuenta'">
                                 <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
-                                    <div class="form-group">
-
-                                        <select name="id" id="" #id="ngModel" [(ngModel)]="cta.id"
-                                            class="form-control form-control-user" required>
-                                            <option value="" selected disabled>Elegir el cliente &dtrif;</option>
-                                            <option *ngFor="let cliente of clientes" [value]="cliente._id"
-                                                style="width: 200px; height: 100px;">
-                                                <div>
-                                                    <p><b>{{cliente.nombre}} {{cliente.apellido}}</b>, id:
-                                                        {{cliente._id}}
-                                                    </p>
-                                                </div>
-                                            </option>
-                                        </select>
-                                        <span *ngIf="id.touched && !id.valid">
-                                            * Este campo es obligatorio
-                                        </span>
-
-                                        <br>
-                                    </div>
-
-
+                                    
                                     <div class="form-group">
                                         <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
                                             class="form-control form-control-user" required
                                             pattern="(ahorros|corriente)">
                                             <option value="">Elige una opción &dtrif; </option>
-                                            <option value="ahorros">Ahorros</option>
+                                            <option value="ahorro">Ahorros</option>
                                             <option value="corriente">Corriente</option>
                                         </select>
                                         <span *ngIf="tipo.touched && !tipo.valid">
                                             * El tipo es obligatorio
                                         </span>
                                         <br>
+                                    </div>  
+                                    
+                                    <div class="form-group">
+
+                                        <select (change)="onChange($event)" name="id" id="selectd" #id="ngModel" [(ngModel)]="cta.id"
+                                            class="form-control form-control-user" required>
+                                            <option id="optionss" value="" selected disabled>Elegir el cliente &dtrif;</option>
+                                            <option value="none">Si desea puede agregar a uno más &dtrif;</option>
+                                            <option *ngFor="let cliente of clientesFilter" [value]="cliente._id"
+                                                style="width: 200px; height: 100px;">
+                                                <b>{{cliente.nombre}} {{cliente.apellido}}</b>, id:{{cliente._id}}
+                                            </option>
+                                        </select>
+                                        <span *ngIf="(id.touched && !id.valid) || selectedCli.length===0">
+                                            * Este campo es obligatorio
+                                        </span>
+
+                                        <br>
+                                        <div *ngIf="selectedCli.length>0">
+                                            <h4>Clientes seleccionados</h4>
+                                            <ul class="list-group">
+                                                <li *ngFor="let cli of selectedCli"
+                                                    class="list-group-item" 
+                                                    style="width: 400px;"
+                                                >{{cli}} <button type="button" class="btn btn-dark" (click)="handleclick(cli)">X</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <br>
                                     </div>
+
 
                                     <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
                                     <br>
-                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCta.form.valid"
+                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!tipo.valid && selectedCli.length===0"
                                         class="btn btn-primary btn-user btn-block">
                                 </form>
 
