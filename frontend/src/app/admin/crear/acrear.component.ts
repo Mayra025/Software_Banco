@@ -33,10 +33,10 @@ export class AcrearComponent {
   ) {
     this.usuario = new Usuario("",'', '', '', '', '');
     this.banco = new BancoB('', '', '', "", "", "", "");
+    
   }
-
+  
   ngOnInit(): void {
-
   }
 
   onSubmit(form: NgForm) {

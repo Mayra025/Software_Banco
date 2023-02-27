@@ -1,3 +1,5 @@
+<!--Dashboard-->
+<!-- Page Wrapper -->
 <div id="wrapper">
 
     <!-- Sidebar -->
@@ -8,7 +10,7 @@
             <div class="sidebar-brand-icon">
                 <i class="fa fa-solid fa-user"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">BM Empleado</div>
+            <div class="sidebar-brand-text mx-3">BM Admin </div>
         </a>
 
         <!-- Divider -->
@@ -25,57 +27,26 @@
         <hr class="sidebar-divider">
         <!-- Nav Item - Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCli"
-                aria-expanded="true" aria-controls="collapseCli">
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEmpl"
+                aria-expanded="true" aria-controls="collapseEmpl">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Clientes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i
+                <span>Mis Cuentas &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i
                         class="fa fa-fw fa-chevron-down"></i>
                 </span>
             </a>
 
-            <div id="collapseCli" class="collapse" aria-labelledby="headingCli" data-parent="#accordionSidebar">
+            <div id="collapseEmpl" class="collapse" aria-labelledby="headingEmpl" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <input #cli id="cli" type="hidden" value="cliente">
-                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cli.value)">Agregar
-                    </a>
-                    <a class="collapse-item" (click)=activarComponente(2) (click)="getInputValue(cli.value)">Nómina</a>
-                    <a class="collapse-item" (click)=activarComponente(3) (click)="getInputValue(cli.value)">Actualizar
-                    </a>
-                    <a class="collapse-item" (click)=activarComponente(4)
-                        (click)="getInputValue(cli.value)">Desactivados
+                    <input #cuenta id="cuenta" type="hidden" value="cuenta">
+                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cuenta.value)">Mi Cuenta</a>
+                    <a class="collapse-item" (click)=activarComponente(2) (click)="getInputValue(cuenta.value)">Transferir al mismo banco</a>
+                    <a class="collapse-item" (click)=activarComponente(3) (click)="getInputValue(cuenta.value)">Transferir a otro banco
                     </a>
 
                 </div>
             </div>
         </li>
 
-        <!-- Nav Item - Collapse Menu -->
-        <hr class="sidebar-divider">
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCuentas"
-                aria-expanded="true" aria-controls="collapseCuentas">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Cuentas </span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp;
-                <i class="fa fa-chevron-down"></i>
-            </a>
-            <div id="collapseCuentas" class="collapse" aria-labelledby="headingCuentas"
-                data-bs-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <input #cuenta type="hidden" id="cuenta" value="cuenta">
-                    <a class="collapse-item" (click)=activarComponente(11) (click)="getInputValue(cuenta.value)">
-                        Agregar </a>
-                    <a class="collapse-item" (click)=activarComponente(2)
-                        (click)="getInputValue(cuenta.value)">Nómina</a>
-                    <a class="collapse-item" (click)=activarComponente(3)
-                        (click)="getInputValue(cuenta.value)">Actualizar</a>
-                    <a class="collapse-item" (click)=activarComponente(4)
-                        (click)="getInputValue(cuenta.value)">Desactivados
-                    </a>
-
-                </div>
-            </div>
-        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -93,6 +64,7 @@
                 <h4 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-left: 25px;"> <i>
                         Bienvenid@</i>
                 </h4>
+
                 <ul class="navbar-nav ml-auto">
                     <div class="topbar-divider d-none "></div>
                     <button class="btn btn-gradient-primary" data-bs-toggle="modal" data-bs-target="#logoutModal"
@@ -114,10 +86,11 @@
                                 <div class="p-5">
                                     <div>
                                         <div *ngIf="data">
-                                            <h5>Su información: </h5>
+                                            <h3>Su información: </h3>
                                             <p>Nombre: {{data.nombre}}</p>
                                             <p>Apellido: {{data.apellido}}</p>
                                             <p>Identificacion: {{data.identificacion}}</p>
+                                            <p>Email: {{data.usuario.email}}</p>
                                             <p>Nickname: {{data.usuario.nickname}}</p>
                                         </div>
                                     </div>
@@ -127,24 +100,40 @@
                         </div>
 
                     </div>
-                </div>
 
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <div class="p-5">
+                                    <div>
+                                        <div>
+                                            <h3 style="text-align: center;">Todas sus cuentas: </h3>
+                                            <div class="tarjetas">
+                                                <div *ngFor="let cuenta of cuentas">
+                                                    <button class="tarjetaBoton" (click)="getCuenta($event, cuenta)">
+                                                        <app-tarjeta [data]="cuenta" [showClientes]=false></app-tarjeta>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                
                 <div *ngIf="option == 1">
-
-                    <app-ecrear-cliente [objR]="objR"></app-ecrear-cliente>
-
-                </div>
-                <div *ngIf="option == 11">
-                    <app-ecrear-cuenta [objR]="objR"></app-ecrear-cuenta>
+                    <app-cleer [objR]="objR" [cuenta]="cuenta1"  [recuperarCuenta]=recuperarCuenta [a]="ab" (setCuenta)="setCuentaExt($event)"  (activarComponente)="activarComponente($event)"></app-cleer>
                 </div>
                 <div *ngIf="option == 2">
-                    <app-eleer [objR]="objR"></app-eleer>
+                    <app-transferencia-interna [objR]="objR" [cuenta]="cuenta1" (activarComponente)="activarComponente($event)"></app-transferencia-interna>
                 </div>
                 <div *ngIf="option == 3">
-                    <app-eactualizar [objR]="objR"></app-eactualizar>
-                </div>
-                <div *ngIf="option == 4">
-                    <app-edesactivar [objR]="objR"></app-edesactivar>
+                    <app-transferencia-externa [objR]="objR" [cuenta]="cuenta1" (activarComponente)="activarComponente($event)" ></app-transferencia-externa>
                 </div>
 
 
