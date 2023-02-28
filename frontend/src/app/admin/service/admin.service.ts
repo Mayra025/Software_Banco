@@ -14,6 +14,10 @@ export class AdminService {
         this._headers = new HttpHeaders().set('Content-Type','application/json');
     }
 
+    testConnection(direction:string):Observable<any>{
+        return this._http.get(direction);
+    }
+
     getInfo():Observable<any>{
         return this._http.get(this.url+'info', {headers:this._headers, withCredentials: true});
     }

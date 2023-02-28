@@ -132,16 +132,44 @@ export class AactualizarComponent implements OnInit {
         }
     }
 
-    // desactivar(form: NgForm) {
-    //     if (confirm('estás seguro de desactivarlo?')) {
+    handleConnection($event, bancos?:BancoB){
+        $event.preventDefault()
+        $event.target.innerHTML = "Conectando..."
+        if (!bancos) {
+            this._AdminService.testConnection(this.banco.dominio+this.banco.prueba).subscribe(resp=>{
+                $event.target.innerHTML = "Conectado"
+                $event.target.style.background = "#28a745";
+                setTimeout(() => {
+                  $event.target.innerHTML = "Probar conexión"
+                  $event.target.style.background = "#6c757d"
+                }, 2000);
+              }, err=>{
+                $event.target.innerHTML = "No hay conexión"
+                $event.target.style.background = "#dc3545";
+                setTimeout(() => {
+                  $event.target.innerHTML = "Probar conexión"
+                  $event.target.style.background = "#6c757d"
+                }, 2000);
+              })
+        } else {
+            this._AdminService.testConnection(bancos.dominio+bancos.prueba).subscribe(resp=>{
+                $event.target.innerHTML = "Conectado"
+                $event.target.style.background = "#28a745";
+                setTimeout(() => {
+                  $event.target.innerHTML = "Probar conexión"
+                  $event.target.style.background = "#6c757d"
+                }, 2000);
+              }, err=>{
+                $event.target.innerHTML = "No hay conexión"
+                $event.target.style.background = "#dc3545";
+                setTimeout(() => {
+                  $event.target.innerHTML = "Probar conexión"
+                  $event.target.style.background = "#6c757d"
+                }, 2000);
+              })
+        }
 
-    //         axios.delete("http://localhost:8080/api/administrador/bancos/" + form.value.id, {
-
-    //         })
-    //         this.banco = new BancoB('', '', '', "", "", "", "");
-
-    //     }
-    // }
+      }
 
     actualizarState(){
         this.updateState = !this.updateState;

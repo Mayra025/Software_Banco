@@ -31,13 +31,14 @@
             <table datatable [dtOptions]="dtoptions" class="table ">
                 <thead>
                     <tr>
-                        <th style="width: 14%">Id</th>
-                        <th style="width: 14%">Nombre</th>
-                        <th style="width: 14%">Usuario</th>
-                        <th style="width: 14%">Contraseña</th>
-                        <th style="width: 14%">Dominio</th>
-                        <th style="width: 14%">Dir Prueba</th>
-                        <th style="width: 14%">Dir Transferir</th>
+                        <th style="width: 11%">Id</th>
+                        <th style="width: 11%">Nombre</th>
+                        <th style="width: 11%">Usuario</th>
+                        <th style="width: 11%">Contraseña</th>
+                        <th style="width: 11%">Dominio</th>
+                        <th style="width: 11%">Dir Prueba</th>
+                        <th style="width: 11%">Dir Transferir</th>
+                        <th style="width: 20%"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,9 @@
                         <td>{{banco.dominio}}</td>
                         <td>{{banco.prueba}}</td>
                         <td>{{banco.transferir}}</td>
+                        <td>
+                            <button (click)="handleConnection($event, banco)" type="button" class="btn btn-secondary" style="border-radius: 10px;">Probar Conexión</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -127,6 +127,29 @@
                         </div>
 
                     </div>
+
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <div class="p-5">
+                                    <div>
+                                        <div *ngIf="resumen" class="resumen">
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/cliente.png" alt="cliente">
+                                                <h5>Clientes Registrados: <br> <span>{{resumen.clientes}}</span></h5>
+                                            </div>
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/cuenta-bancaria.png" alt="cuenta-bancaria">
+                                                <h5>Total de cuentas: <br> <span>{{resumen.cuentas}}</span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
                 <div *ngIf="option == 1">

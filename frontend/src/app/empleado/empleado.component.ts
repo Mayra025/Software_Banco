@@ -15,6 +15,7 @@ export class EmpleadoComponent {
   objR: string;
   option: number = 0;
   public data: any;
+  public resumen:any
 
   activarComponente(@Output() opcion: number) {
     this.option = opcion;
@@ -32,6 +33,7 @@ export class EmpleadoComponent {
     
     this._EmpleadoService.getInfo().subscribe(resp=>{
       this.data = resp.data;
+      this.resumen = resp.resumen;
     },err=>{
       this._router.navigate(['/login']);
     })

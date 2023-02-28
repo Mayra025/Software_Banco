@@ -75,6 +75,28 @@ export class AleerComponent implements OnInit {
 
     }
 
+    handleConnection($event, bancos:BancoB){
+        $event.preventDefault()
+        $event.target.innerHTML = "Conectando..."
+
+        this._AdminService.testConnection(bancos.dominio+bancos.prueba).subscribe(resp=>{
+            $event.target.innerHTML = "Conectado"
+            $event.target.style.background = "#28a745";
+            setTimeout(() => {
+                $event.target.innerHTML = "Probar conexión"
+                $event.target.style.background = "#6c757d"
+            }, 2000);
+            }, err=>{
+            $event.target.innerHTML = "No hay conexión"
+            $event.target.style.background = "#dc3545";
+            setTimeout(() => {
+                $event.target.innerHTML = "Probar conexión"
+                $event.target.style.background = "#6c757d"
+            }, 2000);
+        })
+
+      }
+
     LoadInvoice() {
         this.service.GetAllInvoice().subscribe(res => {
             this.dtTrigger.next(null);

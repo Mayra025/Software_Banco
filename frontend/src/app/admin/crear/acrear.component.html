@@ -149,6 +149,12 @@
                                         </div>
                                     </div>
                                     <br>
+                                    <div *ngIf="prueba.valid && dominio.valid" class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0 ">
+                                            <button (click)="handleConnection($event)" type="button" class="btn btn-secondary" style="padding: 10px 20px; margin-left: 30px; border-radius: 10px;">Probar Conexión</button>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <span *ngIf="!formBanco.form.valid"> Recuerde revisar los campos </span>
                                     <br>
                                     <input type="submit" name="Guardar" value="Guardar"
