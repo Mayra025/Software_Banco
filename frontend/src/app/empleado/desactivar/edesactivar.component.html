@@ -1,0 +1,75 @@
+<body class="bg-gradient-primary">
+    <div class="container">
+
+        <!-- Desactivar Cliente -->
+        <div *ngIf="objR=='cliente'">
+            <h1 class="h4 text-gray-900 mb-4">Clientes inactivos</h1>
+
+            <table datatable [dtOptions]="dtoptions" class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 18%">Identificación</th>
+                        <th style="width: 18%">Nombre y Apellido</th>
+                        <th style="width: 18%">Provincia</th>
+                        <th style="width: 18%">Código postal</th>
+                        <th style="width: 18%">Correo</th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes">
+                        <td> {{cliente._id}}</td>
+                        <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                        <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                        <td>{{cliente.codigo_postal}}</td>
+                        <td>{{cliente.usuario.email}}</td>
+
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-success" (click)="activar(cliente._id)">
+                                Activar
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+        <!-- Desactivar Cuenta -->
+        <div *ngIf="objR=='cuenta'">
+            <h1 class="h4 text-gray-900 mb-4">Cuentas inactivas</h1>
+
+            <table datatable [dtOptions]="dtoptions" class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">Identificación</th>
+                        <th style="width: 10%">Saldo</th>
+                        <th style="width: 10%">Tipo</th>
+                        <th style="width: 60%">Clientes asociados a esta cuenta</th>
+                        <th style="width: 10%"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cuenta of cuentas">
+                        <td>{{cuenta._id}}</td>
+                        <td>{{cuenta.monto}}$</td>
+                        <td>{{cuenta.tipo === "C" ? "Corriente" : "Ahorro"}}</td>
+                        <td>{{cuenta.clientes.join(", ")}}</td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-success" (click)="activar(cuenta._id)">
+                                Activar
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</body>

@@ -1,7 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
 body {
-    background-color: blue;
-    color: blue;
+    background: linear-gradient(to right, #6492e6, #28f6bf) !important;
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100vh;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+    padding: 0;
+    margin: 0;
+}
+*/
+
+.bg-register-image {
+    background: url("https://cherry-brightspot.s3.amazonaws.com/media/2010/04/28/credito-tarjeta-pago.jpg");
+    background-position: center;
+    background-size: cover;
+}

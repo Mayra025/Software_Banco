@@ -7,3 +7,11 @@ metafora,acuerdos
 test - velocidad del equipo
 retrospectva
 resultados
+
+
+
+npm uninstall @schematics/angular
+npm  uninstall ngx-bootstrap
+npm install @schematics/angular@9.1.0
+ng add ngx-bootstrap
+ng add angular-datatables     --default

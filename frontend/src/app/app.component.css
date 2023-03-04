@@ -1,3 +1,17 @@
-body {
-    background-color: #5dc1b9;
+.header {
+    background-color: transparent;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1{
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: bold;
+    color: white;
+    font-size: 2rem;
 }

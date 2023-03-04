@@ -1,0 +1,98 @@
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Crear Cuenta</h1>
+                            </div>
+
+                            <div *ngIf="error!==''"
+                                style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Error: {{error}}</p>
+                            </div>
+                            <div *ngIf="success!==''"
+                                style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Muy bien: {{success}}</p>
+                            </div>
+
+                            <div *ngIf="objR=='cuenta'">
+                                <form class="user" #formCta="ngForm" (ngSubmit)="onSubmit(formCta)">
+                                    
+                                    <div class="form-group">
+                                        <select type="text" name="tipo" #tipo="ngModel" [(ngModel)]="cta.tipo"
+                                            class="form-control form-control-user" required
+                                            pattern="(ahorros|corriente)">
+                                            <option value="">Elige una opción &dtrif; </option>
+                                            <option value="ahorro">Ahorros</option>
+                                            <option value="corriente">Corriente</option>
+                                        </select>
+                                        <span *ngIf="tipo.touched && !tipo.valid">
+                                            * El tipo es obligatorio
+                                        </span>
+                                        <br>
+                                    </div>  
+                                    
+                                    <div class="form-group">
+
+                                        <select (change)="onChange($event)" name="id" id="selectd" #id="ngModel" [(ngModel)]="cta.id"
+                                            class="form-control form-control-user" required>
+                                            <option id="optionss" value="" selected disabled>Elegir el cliente &dtrif;</option>
+                                            <option value="none">Si desea puede agregar a uno más &dtrif;</option>
+                                            <option *ngFor="let cliente of clientesFilter" [value]="cliente._id"
+                                                style="width: 200px; height: 100px;">
+                                                <b>{{cliente.nombre}} {{cliente.apellido}}</b>, id:{{cliente._id}}
+                                            </option>
+                                        </select>
+                                        <span *ngIf="(id.touched && !id.valid) || selectedCli.length===0">
+                                            * Este campo es obligatorio
+                                        </span>
+
+                                        <br>
+                                        <div *ngIf="selectedCli.length>0">
+                                            <h4>Clientes seleccionados</h4>
+                                            <ul class="list-group">
+                                                <li *ngFor="let cli of selectedCli"
+                                                    class="list-group-item" 
+                                                    style="width: 400px;"
+                                                >{{cli}} <button type="button" class="btn btn-dark" (click)="handleclick(cli)">X</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <br>
+                                    </div>
+
+
+                                    <span *ngIf="!formCta.form.valid"> Recuerde revisar los campos </span>
+                                    <br>
+                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!tipo.valid && selectedCli.length===0"
+                                        class="btn btn-primary btn-user btn-block">
+                                </form>
+
+                            </div>
+                            <hr>
+                            <!-- perpectiva usuario
+                            <div class="text-center">
+                                <a class="small">Olvidaste tú contraseña?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small">¿Ya tienes una cuenta? ¡Ingresa!</a>
+                            </div>
+-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>

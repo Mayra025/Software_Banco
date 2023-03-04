@@ -1,39 +1,56 @@
-
-<button (click)="logout()">Salir del Sistema</button>
-
+<!--Dashboard-->
 <!-- Page Wrapper -->
 <div id="wrapper">
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center">
-            <div class="sidebar-brand-text mx-3">Hola, {{data.nombre}} {{data.apellido}}</div>
+            <div class="sidebar-brand-icon">
+                <i class="fa fa-solid fa-user"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">BM Admin </div>
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
-
-        <!-- Nav Item - Dashboard
+        <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" >
+            <a class="nav-link" (click)=activarComponente(0)>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
 
 
-        <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" >
-                <span>Cuenta</span></a>
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEmpl"
+                aria-expanded="true" aria-controls="collapseEmpl">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Mis Cuentas &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i
+                        class="fa fa-fw fa-chevron-down"></i>
+                </span>
+            </a>
+
+            <div id="collapseEmpl" class="collapse" aria-labelledby="headingEmpl" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <input #cuenta id="cuenta" type="hidden" value="cuenta">
+                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cuenta.value)">Mi Cuenta</a>
+                    <a class="collapse-item" (click)=activarComponente(2) (click)="getInputValue(cuenta.value)">Transferir al mismo banco</a>
+                    <a class="collapse-item" (click)=activarComponente(3) (click)="getInputValue(cuenta.value)">Transferir a otro banco
+                    </a>
+
+                </div>
+            </div>
         </li>
 
-        <hr class="sidebar-divider my-0">
-        <li class="nav-item">
-            <a class="nav-link">
-                <span>Transferencias</span></a>
-        </li> -->
-    </ul>
 
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+    </ul>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -42,106 +59,91 @@
         <!-- Main Content -->
         <div id="content">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                
-                <div>
-                    <h3>Su información: </h3>
-                    <p>Nombre: {{data.nombre}}</p>
-                    <p>Apellido: {{data.apellido}}</p>
-                    <p>Ciudad: {{data.ciudad}}</p>
-                    <p>Codigo postal: {{data.codigo_postal}}</p>
-                    <p>Identificacion: {{data.identificacion}}</p>
-                    <p>Provincia: {{data.provincia}}</p>
-                    <p>Nickname: {{data.usuario.nickname}}</p>
-                </div>
-               
+            <!-- Topbar- Logout -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <h4 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-left: 25px;"> <i>
+                        Bienvenid@</i>
+                </h4>
 
-            </div>
-            <!-- End of Main Content -->
-        </div>
-        
-        <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
+                <ul class="navbar-nav ml-auto">
+                    <div class="topbar-divider d-none "></div>
+                    <button class="btn btn-gradient-primary" data-bs-toggle="modal" data-bs-target="#logoutModal"
+                        (click)="logout()">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" style="margin: 6px;"></i>
+                        Salir</button>
+                </ul>
+            </nav>
+            <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                
-                <h3>Seleccione una Cuenta</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <button *ngFor="let cuenta of cuentas" style="text-decoration: none; border: none;" (click)="showCuenta(cuenta._id)">
-                        <div style="background-color: antiquewhite; width: 380px; padding: 10px; border-radius: 10px">
-                                <p style="color: gray;">id: {{cuenta._id}}</p>
-                                <p style="color: black;">Tipo de cuenta: {{cuenta.tipo === "A" ? "Ahorro" : "Corriente"}}</p>
-                                <p style="color: black;">Actualmente tiene: <b>{{cuenta.monto}} {{cuenta.moneda}}</b></p>
+
+                <div *ngIf="option == 0">
+
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <div class="p-5">
+                                    <div>
+                                        <div *ngIf="data">
+                                            <h3>Su información: </h3>
+                                            <p>Nombre: {{data.nombre}}</p>
+                                            <p>Apellido: {{data.apellido}}</p>
+                                            <p>Identificacion: {{data.identificacion}}</p>
+                                            <p>Email: {{data.usuario.email}}</p>
+                                            <p>Nickname: {{data.usuario.nickname}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                    </button>
 
-                </div>
-
-            </div>
-            <!-- End of Main Content -->
-        </div>
-        
-        <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                
-                <div *ngIf="cuentaid">
-                    <h3>Información de la cuenta</h3>
-                    <div>
-                        <div style="background-color: antiquewhite; width: 380px; padding: 10px; border-radius: 10px">
-                            <p style="color: gray;">id: {{cuentaid._id}}</p>
-                            <p style="color: black;">Tipo de cuenta: {{cuentaid.tipo === "A" ? "Ahorro" : "Corriente"}}</p>
-                            <p style="color: black;">Actualmente tiene: <b>{{cuentaid.monto}} {{cuentaid.moneda}}</b></p>
-                            <p>Clientes que participan en la cuenta: </p>
-                            <p *ngFor="let clientes of cuentaid.clientes">- {{clientes}}</p>
-                    </div>
                     </div>
 
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <div class="p-5">
+                                    <div>
+                                        <div>
+                                            <h3 style="text-align: center;">Todas sus cuentas: </h3>
+                                            <div class="tarjetas">
+                                                <div *ngFor="let cuenta of cuentas">
+                                                    <button class="tarjetaBoton" (click)="getCuenta($event, cuenta)">
+                                                        <app-tarjeta [data]="cuenta" [showClientes]=false></app-tarjeta>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-
-            </div>
-            <!-- End of Main Content -->
-        </div>
-        
-        <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
                 
-                <div *ngIf="cuentaid">
-                    <app-transferencia-interna [id]="cuentaid._id"></app-transferencia-interna>
+                
+                <div *ngIf="option == 1">
+                    <app-cleer [objR]="objR" [cuenta]="cuenta1"  [recuperarCuenta]=recuperarCuenta [a]="ab" (setCuenta)="setCuentaExt($event)"  (activarComponente)="activarComponente($event)"></app-cleer>
+                </div>
+                <div *ngIf="option == 2">
+                    <app-transferencia-interna [objR]="objR" [cuenta]="cuenta1" (activarComponente)="activarComponente($event)"></app-transferencia-interna>
+                </div>
+                <div *ngIf="option == 3">
+                    <app-transferencia-externa [objR]="objR" [cuenta]="cuenta1" (activarComponente)="activarComponente($event)" ></app-transferencia-externa>
                 </div>
 
+
             </div>
-            <!-- End of Main Content -->
+
         </div>
-        
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->

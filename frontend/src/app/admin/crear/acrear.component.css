@@ -1,0 +1,89 @@
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+
+small {
+    font-size: 80%;
+}
+
+a {
+    color: #4e73df;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: #224abe;
+    text-decoration: underline;
+}
+
+a:not([href]):not([class]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+
+button {
+    border-radius: 0;
+}
+
+
+
+.bg-register-image {
+    background: url("https://cherry-brightspot.s3.amazonaws.com/media/2010/04/28/credito-tarjeta-pago.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+form.user .form-control-user {
+    font-size: 1rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+}
+
+form.user .btn-user {
+    font-size: 1rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+}
+
+
+.example-button {
+    margin-top: 16px;
+  }
+  
+  .example-tooltip-uppercase {
+    text-transform: uppercase;
+  }
+
+
+.tooltip { position: relative; }
+
+.tooltip::before {
+content: "\2003" attr(class); /* print em-space with class text */
+text-indent: -3.9em; /* add negative text offset to hide class name */
+display: inline-block;
+position: absolute; bottom: 50%;
+background: #000; color: #FFF; padding: 5px; border-radius: 5px;
+opacity:0; transition:0.3s; overflow:hidden;
+max-width: 50%; /* avoids very long sentences */
+pointer-events: none; /* prevents tooltip from firing on pseudo hover */
+}
+
+.tooltip:hover::before { opacity:1; bottom: 100%; }

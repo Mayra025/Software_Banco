@@ -1,35 +1,53 @@
-import { Component, OnInit, Output  } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
+import { MasterService } from '../service/login.service';
+import { Config, Menu } from '../ui/menu-acordeon/types';
+import { EmpleadoService } from './service/empleado.service';
 
 @Component({
   selector: 'app-empleado',
   templateUrl: './empleado.component.html',
-  styleUrls: ['./empleado.component.css']
+  styleUrls: ['./empleado.component.css'], 
+  providers: [MasterService, EmpleadoService]
 })
-export class EmpleadoComponent implements OnInit {
-  option:number =0;
-  public data:any;
+export class EmpleadoComponent {
+  objR: string;
+  option: number = 0;
+  public data: any;
+  public resumen:any
 
-
-
- activarComponente(@Output() opcion:number ){
-   this.option = opcion;
- }
-
-
-  constructor(private _router:Router) { 
-    axios.get("http://localhost:8080/api/empleado/info", {withCredentials: true}).then(resp => {
-      this.data = resp.data;
-      console.log(this.data);
-      
-    }).catch(err => {
-      this._router.navigate(['/empleado-login']);
-    })
-
+  activarComponente(@Output() opcion: number) {
+    this.option = opcion;
   }
 
-  ngOnInit(): void {
+  getInputValue(inputValue: string) {
+    this.objR = inputValue;
+  }
+
+  constructor(
+    private _router: Router,
+    private _MasterService: MasterService,
+    private _EmpleadoService:EmpleadoService
+  ) {
+    
+    this._EmpleadoService.getInfo().subscribe(resp=>{
+      this.data = resp.data;
+      this.resumen = resp.resumen;
+    },err=>{
+      this._router.navigate(['/login']);
+    })
+  }
+
+  logout(): void {
+    if (confirm('¿Estás seguro que deseas salir?')) {
+      this._MasterService.logout().subscribe(
+      resp => {
+        this._router.navigate(['/login']);
+      }, err => {
+        console.log(err);
+      }
+    )}
   }
 
 }

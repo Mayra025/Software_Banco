@@ -1,0 +1,36 @@
+<body class="bg-gradient-primary">
+    <div class="container">
+        <!-- Desactivar Empleado -->
+        <div *ngIf="objR=='empleado'">
+            <h1 class="h4 text-gray-900 mb-4">Empleados desactivados</h1>
+            <table datatable [dtOptions]="dtoptions" class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 22%">Identificación</th>
+                        <th style="width: 22%">Nombre</th>
+                        <th style="width: 22%">Apellido</th>
+                        <th style="width: 22%">Correo</th>
+                        <th style="width: 10%"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let empleado of empleados">
+                        <td>{{empleado._id}}</td>
+                        <td>{{empleado.nombre}} </td>
+                        <td>{{empleado.apellido}}</td>
+                        <td>{{empleado.usuario.email}}</td>
+                        <td style="white-space: nowrap">
+                            <a class="btn btn-danger" (click)="activar(empleado._id)">
+                                Activar
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</body>

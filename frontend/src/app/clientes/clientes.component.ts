@@ -1,53 +1,72 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import axios from 'axios';
+import { MasterService } from '../service/login.service';
+import { ClienteService } from './services/cliente.services';
+
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  styleUrls: ['./clientes.component.css'],
+  providers: [MasterService, ClienteService],
 })
-export class ClientesComponent implements OnInit {
-  public data:any;
-  public cuentas:any
-  public cuentaid:any
+export class ClientesComponent {
+  public cuenta1:any = null
+  objR: string;
+  option: number = 0;
+  public data: any;
+  public cuentas:any;
+  public ab:string = "1"
 
   constructor(
-    private _router:Router
-  ){
-    axios.get("http://localhost:8080/api/cliente/info", {withCredentials: true}).then(resp => {
+    private _router: Router, 
+    private _MasterService:MasterService,
+    private _ClienteService:ClienteService,
+    ) {
+    this._ClienteService.getInfo().subscribe(resp=>{
       this.data = resp.data;
-    }).catch(err => {
-      this._router.navigate(['/empleado-login']);
+    },err=>{
+      this._router.navigate(['/login']);
     })
 
-    axios.get("http://localhost:8080/api/cliente/cuentas", {withCredentials: true}).then(resp => {
+    this._ClienteService.getMisCuentas().subscribe(resp=>{
       this.cuentas = resp.data;
-      console.log(this.cuentas);
-    }).catch(err => {
-      this._router.navigate(['/empleado-login']);
+    },err=>{
+      this._router.navigate(['/login']);
     })
+
   }
 
-  showCuenta(id:string):void {
-    axios.get("http://localhost:8080/api/cliente/cuentas/"+id, {withCredentials: true}).then(resp => {
-      this.cuentaid = resp.data;
-      console.log(this.cuentaid);
-      
-    }).catch(err => {
-      this._router.navigate(['/empleado-login']);
-    })
+  setCuentaExt(cuenta:any){
+    this.cuenta1 = cuenta;
   }
 
-  logout():void {
-    axios.post("http://localhost:8080/api/logout", {}, {withCredentials: true}).then(resp => {
-      window.location.reload();
-    }).catch(err => {
-      console.log(err);
-      
-    })
+  getCuenta($event, cuenta:any){
+    this.cuenta1 = cuenta    
+    this.activarComponente(1)
   }
 
-  ngOnInit(): void {
+  recuperarCuenta(){
+    return this.cuenta1;
+  }
+
+  logout(): void {
+    if (confirm('¿Estás seguro que deseas salir?')) {
+      this._MasterService.logout().subscribe(
+        resp => {
+          this._router.navigate(['/login']);
+        }, err => {
+          console.log(err);
+        })
+    }
+  }
+
+  activarComponente(@Output() opcion: number) {
+    this.option = opcion;
+
+  }
+
+  getInputValue(inputValue: string) {
+    this.objR = inputValue;
   }
 
 }

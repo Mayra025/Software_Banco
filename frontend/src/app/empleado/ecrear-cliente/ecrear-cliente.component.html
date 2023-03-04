@@ -1,0 +1,190 @@
+<body class="bg-gradient-primary">
+    <div class="container">
+        <!-- 
+        <h2>Clientes </h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 18%">Identificación</th>
+                    <th style="width: 18%">Nombre y Apellido</th>
+                    <th style="width: 18%">Provincia</th>
+                    <th style="width: 18%">Código postal</th>
+                    <th style="width: 18%">Correo</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td> <span class="badge badge-primary text-black">{{cliente.fila}}</span> {{cliente.id}}</td>
+                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                    <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                    <td>{{cliente.codigo}}</td>
+                    <td>{{cliente.email}}</td>
+
+                    <td style="white-space: nowrap">
+                        <a class="btn btn-secondary" (click)="editar(cliente)">
+                            Editar
+                        </a>
+                    </td>
+                </tr>
+                <tr *ngIf="!clientes">
+                    <td colspan="4" class="text-center">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h2>Inactivos </h2>
+        <table class="table table-height">
+            <thead>
+                <tr>
+                    <th style="width: 18%">Identificación</th>
+                    <th style="width: 18%">Nombre y Apellido</th>
+                    <th style="width: 18%">Provincia</th>
+                    <th style="width: 18%">Código postal</th>
+                    <th style="width: 18%">Correo</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientesD">
+                    <td> <span class="badge badge-primary text-black">{{cliente.fila}}</span> {{cliente.id}}</td>
+                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                    <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
+                    <td>{{cliente.codigo}}</td>
+                    <td>{{cliente.email}}</td>
+
+                    <td style="white-space: nowrap">
+                        <a class="btn btn-success" (click)="activar(cliente)">
+                            Activar
+                        </a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+-->
+
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">{{title}} Cliente</h1>
+                            </div>
+
+                            <div *ngIf="error!==''"
+                                style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Error: {{error}}</p>
+                            </div>
+                            <div *ngIf="success!==''"
+                                style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                <p
+                                    style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
+                                    Muy bien: {{success}}</p>
+                            </div>
+                            <div *ngIf="objR=='cliente'">
+
+                                <form class="user" #formCli="ngForm" (ngSubmit)="onSubmit(formCli)">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="cli._id" required
+                                                pattern="[0-9]{10,10}" class="form-control form-control-user"
+                                                placeholder="Identificación" />
+                                            <span *ngIf="id.touched && !id.valid">
+                                                * La identificación es obligatoria, de 10 dígitos
+                                            </span>
+                                            <br>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="cli.nombre"
+                                                required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                                placeholder="Nombres" />
+                                            <span *ngIf="nombre.touched && !nombre.valid">
+                                                * Nombre es obligatorio
+                                            </span>
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="apellido" #apellido="ngModel"
+                                                [(ngModel)]="cli.apellido" required pattern="[a-zA-Z]+"
+                                                class="form-control form-control-user" placeholder="Apellidos" />
+                                            <span *ngIf="apellido.touched && !apellido.valid">
+                                                * Apellido es obligatorio
+                                            </span>
+                                            <br>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="provincia" #provincia="ngModel"
+                                            [(ngModel)]="cli.provincia" required pattern="[a-zA-Z]+"
+                                            class="form-control form-control-user" placeholder="Provincia" />
+                                        <span *ngIf="provincia.touched && !provincia.valid">
+                                            * Provincia es obligatorio
+                                        </span>
+
+                                    </div>
+
+                                    <br>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" name="ciudad" #ciudad="ngModel" [(ngModel)]="cli.ciudad"
+                                                required pattern="[a-zA-Z]+" class="form-control form-control-user"
+                                                placeholder="Ciudad" />
+                                            <span *ngIf="ciudad.touched && !ciudad.valid">
+                                                * Ciudad es obligatorio
+                                            </span>
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="cli.codigo"
+                                                required pattern="[0-9]{6,6}" class="form-control form-control-user"
+                                                placeholder="Código Postal" />
+                                            <span *ngIf="codigo.touched && !codigo.valid">
+                                                * Codigo postal es obligatorio, de 6 dígitos
+                                            </span>
+                                            <br>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email"
+                                            required class="form-control form-control-user" placeholder="Email" />
+                                        <span *ngIf="email.touched && !email.valid">
+                                            * Correo es obligatorio
+                                        </span>
+
+                                    </div>
+                                    <br>
+
+                                    <span *ngIf="!formCli.form.valid"> Recuerde revisar los campos </span>
+                                    <br>
+                                    <input type="submit" name="Guardar" value="Guardar" [disabled]="!formCli.form.valid"
+                                        class="btn btn-primary btn-user btn-block">
+                                </form>
+                            </div>
+                            <hr>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

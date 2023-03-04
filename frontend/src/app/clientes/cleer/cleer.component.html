@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="p-5">
+                <div>
+                    <div *ngIf="cuenta">
+                        <button type="button" class="btn btn-secondary" (click)="deleteCuenta()">← Escoger otra cuenta</button>
+                        <hr>
+                        <h3>Información de su cuenta: </h3>
+                        <p>ID de la cuenta: {{cuenta._id}}</p>
+                        <p>Tipo: {{cuenta.tipo === "C" ? "Corriente" : "Ahorro"}}</p>
+                        <p>Saldo: {{cuenta.monto}} $</p>
+                        <p>Moneda: {{cuenta.moneda}}</p>
+                        <p>Clientes</p>
+                        <ul>
+                            <li *ngFor="let cliente of cuenta.clientes">
+                                {{cliente.nombre}} {{cliente.apellido}} - {{cliente._id}}
+                            </li>
+                        </ul>
+
+                        <button  type="button" class="btn btn-primary" (click)="setOption(2)">Transferir a cuenta del mismo banco</button>
+                        <br><br>
+                        <button  type="button" class="btn btn-primary" (click)="setOption(3)">Transferir a cuenta de otro banco</button>
+                    </div>
+                    <div *ngIf="!cuenta">
+                        <h3 style="text-align: center;">Todas sus cuentas: </h3>
+                        <div class="tarjetas">
+                            <div *ngFor="let cta of cuentas">
+                                <button class="tarjetaBoton" (click)="getCuenta($event, cta)">
+                                    <app-tarjeta [data]="cta" [showClientes]=false></app-tarjeta>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
