@@ -23,12 +23,9 @@ import { EscritorioComponent } from './cliente/escritorio/escritorio.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    ClienteComponent,
-    TransferenciaInternaComponent,
-    ClientesComponent,
+
     AccordionComponent,
-    ClienteComponent,
-    EscritorioComponent
+
   ],
 
   imports: [
