@@ -45,8 +45,8 @@
                                     <select class="form-control form-control-user" type="text" name="rol" #rol="ngModel"
                                         [(ngModel)]="empl.rol" required pattern="(empleado|cliente|administrador)">
                                         <option value="" disabled selected>Elige una opción &dtrif; </option>
-                                        <option value="empleado">Empleado</option>
                                         <option value="cliente">Cliente</option>
+                                        <option value="empleado">Empleado</option>
                                         <option value="administrador">Administrador</option>
                                     </select>
                                     <span *ngIf="rol.touched && !rol.valid">

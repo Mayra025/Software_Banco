@@ -1,0 +1,13 @@
+<div class="tarjeta">
+    <p class="identi"><b>ID de la Cuenta:</b><br> {{data._id}} <button class="boton" (click)="portapapeles($event, data._id)">Copiar</button></p>
+    <div class="saldo-tipo">
+        <p class="saldo"><b>Saldo:</b> {{data.monto}}$</p>
+        <p class="tipo"><b>Tipo:</b> {{data.tipo === "C" ? "Corriente" : "Ahorro"}}</p>
+    </div>
+    <div class="clientes" *ngIf="showClientes">
+        <p><b>Dueños de la cuenta:</b></p>
+        <ul>
+            <li *ngFor="let cliente of data.clientes">{{cliente.nombre}} {{cliente.apellido}} - {{cliente._id}}</li>
+        </ul>
+    </div>
+</div>

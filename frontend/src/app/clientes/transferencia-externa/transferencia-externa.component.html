@@ -20,26 +20,17 @@
                             <div *ngIf="success!==''" style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
                                 <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Muy bien: {{success}}</p>
                             </div>
+                            <div *ngIf="!cuenta" style="background-color: rgb(255, 202, 44); display: flex; align-items: center;">
+                                <p style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">Cuidado: no ha seleccionado una cuenta todavía 
+                                    <button  type="button" class="btn btn-warning" (click)="setOption(1)">Seleccionar Cuenta</button></p>
+                            </div>
+
                             <form class="user" #formTransfI="ngForm" (ngSubmit)="onSubmit(formTransfI)">
                                 <div class="col-sm-6">
 
                                     <label for="destino">Destino</label>
                                     <br>
                                     
-                                    <!-- <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let option of otrasCuentas" [value]="option">
-                                          {{option._id}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-
-                                    <input type="text"
-                                        placeholder="Pick one"
-                                        aria-label="String"
-                                        matInput
-                                        [formControl]="myControl"
-                                        [matAutocomplete]="auto">
- -->
-
                                     <input type="text" name="destino" #destino="ngModel"
                                         [(ngModel)]="ti.destino" required 
                                         class="form-control form-control-user" placeholder="Destino" />
@@ -58,8 +49,30 @@
                                 <span *ngIf="monto.touched && !monto.valid">
                                     * Monto es obligatorio
                                 </span>
+                                <br>
 
-
+                                <label for="banco">A qué banco desea transferir</label>
+                                <br>
+                                <!-- <input type="text" name="banco" #banco="ngModel" [(ngModel)]="ti.banco"
+                                    required  class="form-control form-control-user"
+                                    placeholder="Banco" />
+                                <span *ngIf="banco.touched && !banco.valid">
+                                    * Banco es obligatorio
+                                </span> -->
+                                <select type="text" name="banco" #banco="ngModel" [(ngModel)]="ti.banco"
+                                    class="form-control form-control-user" required>
+                                    <option value="" selected disabled>Elegir el banco &dtrif;</option>
+                                    <option *ngFor="let banco of bancos" [value]="banco._id"
+                                        style="width: 200px; height: 100px;">
+                                        <div>
+                                            <p>{{banco.nombre}}</p>
+                                        </div>
+                                    </option>
+                                </select>
+                                <span *ngIf="banco.touched && !banco.valid">
+                                    * Escoja un banco
+                                </span>
+                                <br>
                                 <br>
                                 <input type="submit" name="Enviar" [disabled]="!formTransfI.form.valid"
                                     class="btn btn-primary btn-user btn-block">

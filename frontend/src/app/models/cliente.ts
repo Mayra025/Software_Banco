@@ -7,6 +7,6 @@ export class ClienteB extends Usuario {
         public codigo: string,
         public estado: boolean,
     ) {
-        super('', '', '', '', '');
+        super('', '', '', '', '', "");
     }
 }

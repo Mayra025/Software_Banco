@@ -43,7 +43,9 @@
                     <a class="collapse-item" (click)=activarComponente(2) (click)="getInputValue(empl.value)">Nómina</a>
                     <a class="collapse-item" (click)=activarComponente(3) (click)="getInputValue(empl.value)">Actualizar
                     </a>
-
+                    <a class="collapse-item" (click)=activarComponente(4)
+                        (click)="getInputValue(empl.value)">Desactivados
+                    </a>
 
                 </div>
             </div>
@@ -67,9 +69,9 @@
                     <a class="collapse-item" (click)=activarComponente(2) (click)="getInputValue(bank.value)">Nómina</a>
                     <a class="collapse-item" (click)=activarComponente(3)
                         (click)="getInputValue(bank.value)">Actualizar</a>
-                    <a class="collapse-item" (click)=activarComponente(4)
+                    <!-- <a class="collapse-item" (click)=activarComponente(4)
                         (click)="getInputValue(bank.value)">Desactivados
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </li>
@@ -111,13 +113,44 @@
                             <div class="card-body p-0">
                                 <div class="p-5">
                                     <div>
-                                        <div>
+                                        <div *ngIf="data">
                                             <h5>Su información: </h5>
                                             <p>Nombre: {{data.nombre}}</p>
                                             <p>Apellido: {{data.apellido}}</p>
                                             <p>Identificacion: {{data.identificacion}}</p>
-                                            <p>Email: {{data.email}}</p>
+                                            <p>Email: {{data.usuario.email}}</p>
                                             <p>Nickname: {{data.usuario.nickname}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <div class="p-5">
+                                    <div>
+                                        <div *ngIf="resumen" class="resumen">
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/cliente.png" alt="cliente">
+                                                <h5>Clientes Registrados: <br> <span>{{resumen.clientes}}</span></h5>
+                                            </div>
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/empleado.png" alt="empleado">
+                                                <h5>Empleados del banco: <br> <span>{{resumen.empleados}}</span></h5>
+                                            </div>
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/cuenta-bancaria.png" alt="cuenta-bancaria">
+                                                <h5>Total de cuentas: <br> <span>{{resumen.cuentas}}</span></h5>
+                                            </div>
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/banco.png" alt="banco">
+                                                <h5>Bancos externos Registrados: <br> <span>{{resumen.bancos}}</span></h5>
+                                            </div>
                                         </div>
                                     </div>
 

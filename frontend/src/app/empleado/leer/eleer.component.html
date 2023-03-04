@@ -18,11 +18,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let cliente of clientes">
-                        <td> {{cliente.id}}</td>
+                        <td> {{cliente._id}}</td>
                         <td>{{cliente.nombre}} {{cliente.apellido}}</td>
                         <td>{{cliente.provincia}}, {{cliente.ciudad}}</td>
-                        <td>{{cliente.codigo}}</td>
-                        <td>{{cliente.email}}</td>
+                        <td>{{cliente.codigo_postal}}</td>
+                        <td>{{cliente.usuario.email}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -34,17 +34,19 @@
             <table datatable [dtOptions]="dtoptions">
                 <thead>
                     <tr>
-                        <th style="width: 10%">Identificación</th>
+                        <th style="width: 20%">Identificación</th>
+                        <th style="width: 10%">Saldo</th>
                         <th style="width: 10%">Tipo</th>
-                        <th style="width: 70%">Clientes asociados a esta cuenta</th>
+                        <th style="width: 60%">Clientes asociados a esta cuenta</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let cuenta of cuentas">
-                        <td>{{cuenta.id}}</td>
-                        <td>{{cuenta.tipo}}</td>
-                        <td>{{cuenta.clis}}</td>
+                        <td>{{cuenta._id}}</td>
+                        <td>{{cuenta.monto}}$</td>
+                        <td>{{cuenta.tipo === "C" ? "Corriente" : "Ahorro"}}</td>
+                        <td>{{cuenta.clientes.join(", ")}}</td>
                     </tr>
                 </tbody>
             </table>

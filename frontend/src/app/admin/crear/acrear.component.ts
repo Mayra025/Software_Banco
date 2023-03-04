@@ -7,13 +7,14 @@ import { BancoB } from 'src/app/models/banco';
 import axios from 'axios';
 
 import { Router } from '@angular/router';
-
+import { AdminService } from '../service/admin.service';
 
 
 @Component({
   selector: 'app-acrear',
   templateUrl: './acrear.component.html',
-  styleUrls: ['./acrear.component.css']
+  styleUrls: ['./acrear.component.css'],
+  providers: [AdminService]
 })
 
 export class AcrearComponent {
@@ -28,63 +29,68 @@ export class AcrearComponent {
 
   constructor(
     private _router: Router,
-
-
+    private _AdminService:AdminService
   ) {
-    this.usuario = new Usuario('', '', '', '', '');
-    this.banco = new BancoB('', '', '');
+    this.usuario = new Usuario("",'', '', '', '', '');
+    this.banco = new BancoB('', '', '', "", "", "", "");
+    
   }
-
+  
   ngOnInit(): void {
-
   }
 
   onSubmit(form: NgForm) {
     if (this.objR == 'empleado') {
-      axios.post("http://localhost:8080/api/administrador/empleados", {
+      this._AdminService.addEmpleado({
         nombre: form.value.nombre,
         apellido: form.value.apellido,
         identificacion: form.value.id,
-        email: form.value.email
-      },
-        {
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true
-        }).then(resp => {
-          this.error = "";
-          this.success = "Empleado creado"
-
-        }).catch(err => {
-          this.error = err.response.data;
-          this.success = ""
-        })
-      this.usuario = new Usuario('', '', '', '', '');
-
+        correo: form.value.email
+      }).subscribe(resp=>{
+        this.error = "";
+        this.success = "Empleado creado"
+        this.usuario = new Usuario('', '', '', '', '', "");
+      }, err=>{
+        this.error = err.error.message;
+        this.success = ""
+      })
     } else {
-      axios.post("http://localhost:8080/api/administrador/bancos", {
+      this._AdminService.addBanco({
         id: form.value.id,
         nombre: form.value.nombre,
-        dominio: form.value.dominio
-      },
-        {
-          headers: {
-            Accept: 'application/json',
-          },
-          withCredentials: true
-        }).then(resp => {
-          this.error = "";
-          this.success = "Banco creado"
-
-        }).catch(err => {
-          this.error = err.response.data;
-          this.success = ""
-        })
-      this.banco = new BancoB('', '', '');
-
+        dominio: form.value.dominio,
+        usuario: form.value.usuario,
+        password: form.value.password,
+        prueba: form.value.prueba,
+        transferir: form.value.transferir,
+      }).subscribe(resp=>{
+        this.error = "";
+        this.success = "Banco creado"
+        this.banco = new BancoB('', '', '', "", "", "", "");
+      }, err=>{
+        this.error = err.error.message;
+        this.success = ""
+      })
     }
-
   }
 
+  handleConnection($event){
+    $event.preventDefault()
+    $event.target.innerHTML = "Conectando..."
+    this._AdminService.testConnection(this.banco.dominio+this.banco.prueba).subscribe(resp=>{
+      $event.target.innerHTML = "Conectado"
+      $event.target.style.background = "#28a745";
+      setTimeout(() => {
+        $event.target.innerHTML = "Probar conexión"
+        $event.target.style.background = "#6c757d"
+      }, 2000);
+    }, err=>{
+      $event.target.innerHTML = "No hay conexión"
+      $event.target.style.background = "#dc3545";
+      setTimeout(() => {
+        $event.target.innerHTML = "Probar conexión"
+        $event.target.style.background = "#6c757d"
+      }, 2000);
+    })
+  }
 }

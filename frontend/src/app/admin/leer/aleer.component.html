@@ -8,20 +8,18 @@
             <table datatable [dtOptions]="dtoptions" class="table ">
                 <thead>
                     <tr>
-                        <th style="width: 18%">Identificación</th>
-                        <th style="width: 18%">Nombre</th>
-                        <th style="width: 18%">Apellido</th>
-                        <th style="width: 18%">Correo</th>
-                        <th style="width: 18%">Nickname</th>
+                        <th style="width: 25%">Identificación</th>
+                        <th style="width: 25%">Nombre</th>
+                        <th style="width: 25%">Apellido</th>
+                        <th style="width: 25%">Correo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let empleado of empleados">
-                        <td> {{empleado.id}}</td>
+                        <td>{{empleado._id}}</td>
                         <td>{{empleado.nombre}} </td>
                         <td>{{empleado.apellido}}</td>
-                        <td>{{empleado.email}}</td>
-                        <!--<td>{{empleado.usuario}}</td>-->
+                        <td>{{empleado.usuario.email}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -33,17 +31,28 @@
             <table datatable [dtOptions]="dtoptions" class="table ">
                 <thead>
                     <tr>
-                        <th style="width: 33%">Identificación</th>
-                        <th style="width: 33%">Nombre</th>
-                        <th style="width: 33%">Dominio</th>
+                        <th style="width: 11%">Id</th>
+                        <th style="width: 11%">Nombre</th>
+                        <th style="width: 11%">Usuario</th>
+                        <th style="width: 11%">Contraseña</th>
+                        <th style="width: 11%">Dominio</th>
+                        <th style="width: 11%">Dir Prueba</th>
+                        <th style="width: 11%">Dir Transferir</th>
+                        <th style="width: 20%"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let banco of bancos">
-                        <td> {{banco.id}}</td>
+                        <td> {{banco._id}}</td>
                         <td>{{banco.nombre}} </td>
+                        <td>{{banco.usuario}} </td>
+                        <td>{{banco.password}} </td>
                         <td>{{banco.dominio}}</td>
-
+                        <td>{{banco.prueba}}</td>
+                        <td>{{banco.transferir}}</td>
+                        <td>
+                            <button (click)="handleConnection($event, banco)" type="button" class="btn btn-secondary" style="border-radius: 10px;">Probar Conexión</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

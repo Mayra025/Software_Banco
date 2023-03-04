@@ -6,11 +6,13 @@ import { NgForm } from '@angular/forms';
 import axios from 'axios';
 
 import { Router } from '@angular/router';
+import { EmpleadoService } from '../service/empleado.service';
 
 
 @Component({
     selector: 'app-edesactivar',
-    templateUrl: './edesactivar.component.html'
+    templateUrl: './edesactivar.component.html',
+    providers: [EmpleadoService]
 })
 
 export class EdesactivarComponent implements OnInit {
@@ -28,9 +30,21 @@ export class EdesactivarComponent implements OnInit {
 
     constructor(
         private _router: Router,
-
-
+        private _EmpleadoService:EmpleadoService
     ) {
+        this._EmpleadoService.getClientes().subscribe(resp=>{
+            this.clientes = resp.data;
+            this.clientes = this.clientes.filter((ele:any) => ele.activo===false)
+        }, err=>{
+            this._router.navigate(['/login']);
+        })
+
+        this._EmpleadoService.getCuentas().subscribe(resp=>{
+            this.cuentas = resp.data;
+            this.cuentas = this.cuentas.filter((ele:any) => ele.activo===false)
+        }, err=>{
+            this._router.navigate(['/login']);
+        })
     }
 
     ngOnInit(): void {
@@ -47,8 +61,24 @@ export class EdesactivarComponent implements OnInit {
         };
     }
 
-    activar(form: NgForm) {
-        if (confirm('estás seguro de desactivarlo?')) {
+    activar(id:string) {
+        if (confirm('¿Estás seguro de querer activar?')) {
+            if (this.objR == 'cliente') {
+                this._EmpleadoService.deleteCliente(id).subscribe(resp=>{
+                    alert("Cliente activado")
+                    this.error = ""
+                },err=>{
+                    this.error = err.error.message
+                })
+            } else {
+                this._EmpleadoService.deleteCuenta(id).subscribe(resp=>{
+                    alert("Cuenta activada")
+                    this.error = ""
+                },err=>{
+                    this.error = err.error.message
+                })
+            }
+            // this._EmpleadoService.
         }
     }
 

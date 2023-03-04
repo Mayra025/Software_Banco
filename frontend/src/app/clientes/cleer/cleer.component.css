@@ -1,0 +1,16 @@
+.tarjetaBoton {
+    border: none;
+    transition: all 0.2s ease-in-out;
+    background-color: transparent;
+}
+
+.tarjetaBoton:hover {
+    transform: scale(1.05);
+}
+
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}

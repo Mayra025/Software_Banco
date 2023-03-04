@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EscritorioComponent } from './escritorio.component';
+import { CleerComponent } from './cleer.component';
 
-describe('EscritorioComponent', () => {
-  let component: EscritorioComponent;
-  let fixture: ComponentFixture<EscritorioComponent>;
+describe('CleerComponent', () => {
+  let component: CleerComponent;
+  let fixture: ComponentFixture<CleerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EscritorioComponent ]
+      declarations: [ CleerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EscritorioComponent);
+    fixture = TestBed.createComponent(CleerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

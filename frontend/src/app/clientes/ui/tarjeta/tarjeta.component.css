@@ -1,0 +1,34 @@
+.tarjeta {
+    width: 350px;
+    background: linear-gradient(to right bottom, #88aeeb, #86f2d7, #739de0);
+    padding: 20px;
+    border-radius: 10px;
+    color: gray;
+}
+
+.tarjeta b {
+    font-size: 1.2rem;
+}
+
+.tarjeta .saldo-tipo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.boton {
+    background-color: gray;
+    color: white;
+    border: none;
+}
+
+.boton:hover {
+    opacity: 0.75;
+}
+
+.boton-select {
+    background-color: rgb(26, 204, 26);
+}
+/* 
+.tarjeta .clientes{
+
+} */

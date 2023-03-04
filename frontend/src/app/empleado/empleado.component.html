@@ -113,12 +113,35 @@
                             <div class="card-body p-0">
                                 <div class="p-5">
                                     <div>
-                                        <div>
+                                        <div *ngIf="data">
                                             <h5>Su información: </h5>
                                             <p>Nombre: {{data.nombre}}</p>
                                             <p>Apellido: {{data.apellido}}</p>
                                             <p>Identificacion: {{data.identificacion}}</p>
                                             <p>Nickname: {{data.usuario.nickname}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <div class="p-5">
+                                    <div>
+                                        <div *ngIf="resumen" class="resumen">
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/cliente.png" alt="cliente">
+                                                <h5>Clientes Registrados: <br> <span>{{resumen.clientes}}</span></h5>
+                                            </div>
+                                            <div class="resum">
+                                                <img src="../../assets/imgs/cuenta-bancaria.png" alt="cuenta-bancaria">
+                                                <h5>Total de cuentas: <br> <span>{{resumen.cuentas}}</span></h5>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -135,9 +158,7 @@
 
                 </div>
                 <div *ngIf="option == 11">
-
                     <app-ecrear-cuenta [objR]="objR"></app-ecrear-cuenta>
-
                 </div>
                 <div *ngIf="option == 2">
                     <app-eleer [objR]="objR"></app-eleer>
@@ -146,9 +167,7 @@
                     <app-eactualizar [objR]="objR"></app-eactualizar>
                 </div>
                 <div *ngIf="option == 4">
-
                     <app-edesactivar [objR]="objR"></app-edesactivar>
-
                 </div>
 
 

@@ -12,20 +12,11 @@ import { AccordionComponent } from './ui/menu-acordeon/menu-acordeon.component';
 
 import { LoginComponent } from './login/login.component';
 
-import { ClienteComponent } from './cliente/clientee/cliente.component';
-import { TransferenciaInternaComponent } from './cliente/transferencia-interna/transferencia-interna.component';
-import { ClientesComponent } from './cliente/clientes/clientes.component';
-import { EscritorioComponent } from './cliente/escritorio/escritorio.component';
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-
     AccordionComponent,
-
   ],
 
   imports: [
