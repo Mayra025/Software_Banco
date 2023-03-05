@@ -21,9 +21,10 @@ import { LoginComponent } from './login/login.component';
 
   imports: [
     BrowserModule,
-    FormsModule,   //para el modulo 
-    AppRoutingModule, //para el modulo de rutas
-    HttpClientModule, BrowserAnimationsModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule, 
+    BrowserAnimationsModule,
     MaterialModule,
     MatSlideToggleModule
   ],

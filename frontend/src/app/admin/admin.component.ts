@@ -1,7 +1,5 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgModel } from '@angular/forms';
-import axios from 'axios';
 import { MasterService } from '../service/login.service';
 import { AdminService } from './service/admin.service';
 
@@ -44,8 +42,6 @@ export class AdminComponent {
     }
   }
 
-  
-
   activarComponente(@Output() opcion: number) {
     this.option = opcion;
 
@@ -54,7 +50,6 @@ export class AdminComponent {
   getInputValue(inputValue: string) {
     this.objR = inputValue;
   }
-
 
 }
 
