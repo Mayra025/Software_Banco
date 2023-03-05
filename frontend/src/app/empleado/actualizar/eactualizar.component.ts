@@ -58,7 +58,15 @@ export class EactualizarComponent implements OnInit {
 
     ngOnInit(): void {
         this.dtoptions = {
-            pagingType: 'full_numbers'
+            pagingType: 'full_numbers',
+            searching: false,
+            paging: false,
+            ordering: false,
+            info: false,
+            language: {
+                emptyTable: "",
+                zeroRecords: "",
+            },
         }
     }
 
@@ -74,12 +82,12 @@ export class EactualizarComponent implements OnInit {
             }, form.value.id).subscribe(resp=>{
                 this.error = "";
                 this.success = "Cliente actualizado"
-                this.actualizarState()
+               // this.actualizarState()
             },err=>{
                 this.error = err.response.data;
                 this.success = ""
             })
-            this.cli = null;
+        
 
         } else {
             this._EmpleadoService.updateCuenta({
@@ -87,19 +95,20 @@ export class EactualizarComponent implements OnInit {
             }, form.value.id).subscribe(resp=>{
                 this.error = "";
                 this.success = "Cuenta actualizada"
-                this.actualizarState()
+             //   this.actualizarState()
             },err=>{
                 this.error = err.response.data;
                 this.success = ""
             })
 
-            this.cta = null;
         }
         
     }
 
     actualizarState(){
         this.updateState = !this.updateState;
+        this.success = "";
+        this.error = "";
     }
 
     editar(obj: any) {
@@ -122,6 +131,8 @@ export class EactualizarComponent implements OnInit {
                     this.error = err.error.message
                 })
                 this.cli = null;
+                window.location.reload();
+
             } else {
                 this._EmpleadoService.deleteCuenta(id).subscribe(resp=>{
                     alert("Cuenta desactivada")
@@ -130,6 +141,8 @@ export class EactualizarComponent implements OnInit {
                     this.error = err.error.message
                 })
                 this.cta = null;
+                window.location.reload();
+
             }
         }
     }

@@ -4,13 +4,13 @@
         <div *ngIf="objR=='empleado'">
             <h1 class="h4 text-gray-900 mb-4">Empleados</h1>
 
-            <table  *ngIf="!updateState" datatable [dtOptions]="dtoptions" class="table">
+            <table *ngIf="!updateState" datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
-                        <th style="width: 22%">Identificación</th>
-                        <th style="width: 22%">Nombre</th>
-                        <th style="width: 22%">Apellido</th>
-                        <th style="width: 22%">Correo</th>
+                        <th style="width: 30%">Identificación</th>
+                        <th style="width: 20%">Nombre</th>
+                        <th style="width: 20%">Apellido</th>
+                        <th style="width: 20%">Correo</th>
                         <th style="width: 10%"></th>
                     </tr>
                 </thead>
@@ -31,38 +31,43 @@
                     </tr>
                 </tbody>
             </table>
-            <div  *ngIf="updateState" class="card o-hidden border-0 shadow-lg my-5">
+            <div *ngIf="updateState" class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
                         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
-                                <button (click)="actualizarState()" type="button" class="btn btn-secondary">← Regresar</button>
+                                <button (click)="actualizarState()" type="button" class="btn btn-secondary">←
+                                    Regresar</button>
 
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
                                 </div>
 
                                 <div *ngIf="error!==''"
-                                    style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(233, 32, 32); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
-                                        Error: {{error}}</p>
+                                        Error: Algo salió mal
+                                        <!-- {{error}} -->
+                                    </p>
                                 </div>
                                 <div *ngIf="success!==''"
-                                    style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(5, 148, 0); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
-                                        Muy bien: {{success}}</p>
+                                        Muy bien: Empleado actualizado
+                                        <!-- {{success}} -->
+
+                                    </p>
                                 </div>
 
 
                                 <form class="user" #formEmpleado="ngForm" (ngSubmit)="onSubmit(formEmpleado)">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="usuario._id" required
-                                                class="form-control form-control-user"
-                                                readonly />
+                                            <input type="text" name="id" #id="ngModel" [(ngModel)]="usuario._id"
+                                                required class="form-control form-control-user" readonly />
 
                                             <br>
                                         </div>
@@ -88,10 +93,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="email" #email="ngModel" [(ngModel)]="usuario.usuario.email"
-                                            required class="form-control form-control-user" placeholder="Correo" />
+                                        <input type="text" name="email" #email="ngModel"
+                                            [(ngModel)]="usuario.usuario.email" required
+                                            pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$" class="form-control form-control-user"
+                                            placeholder="Correo" />
                                         <span *ngIf="email.touched && !email.valid">
-                                            * Correo es obligatorio
+                                            * Correo es obligatorio, de formato válido
                                         </span>
                                     </div>
                                     <br>
@@ -113,10 +120,10 @@
         <div *ngIf="objR=='banco'">
             <h1 class="h4 text-gray-900 mb-4">Bancos</h1>
 
-            <table *ngIf="!updateState"  datatable [dtOptions]="dtoptions" class="table ">
+            <table *ngIf="!updateState" datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
-                        <th style="width: 14%">Id</th>
+                        <th style="width: 14%">ID</th>
                         <th style="width: 14%">Nombre</th>
                         <th style="width: 14%">Usuario</th>
                         <th style="width: 14%">Contraseña</th>
@@ -141,32 +148,34 @@
                             <a class="btn btn-danger" (click)="desactivar(banco._id)">
                                 Eliminar
                             </a>
-                            <button (click)="handleConnection($event, banco)" type="button" class="btn btn-secondary" style="border-radius: 10px;">Probar Conexión</button>
+                            <button (click)="handleConnection($event, banco)" type="button" class="btn btn-secondary"
+                                style="border-radius: 10px;">Probar Conexión</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <div *ngIf="updateState"  class="card o-hidden border-0 shadow-lg my-5">
+            <div *ngIf="updateState" class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
                         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
-                                <button (click)="actualizarState()" type="button" class="btn btn-secondary">← Regresar</button>
+                                <button (click)="actualizarState()" type="button" class="btn btn-secondary">←
+                                    Regresar</button>
 
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
                                 </div>
 
                                 <div *ngIf="error!==''"
-                                    style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(233, 32, 32); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                         Error: {{error}}</p>
                                 </div>
                                 <div *ngIf="success!==''"
-                                    style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(5, 148, 0); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                         Muy bien: {{success}}</p>
@@ -222,7 +231,8 @@
                                         <div class="col-sm-6 mb-3 mb-sm-0 ">
                                             <input type="text" name="prueba" #prueba="ngModel"
                                                 [(ngModel)]="banco.prueba" required
-                                                class="form-control form-control-user" placeholder="Dirección de prueba" />
+                                                class="form-control form-control-user"
+                                                placeholder="Dirección de prueba" />
                                             <span *ngIf="prueba.touched && !prueba.valid">
                                                 * Dirección de prueba es obligatorio
                                             </span>
@@ -230,7 +240,8 @@
                                         <div class="col-sm-6">
                                             <input type="text" name="transferir" #transferir="ngModel"
                                                 [(ngModel)]="banco.transferir" required
-                                                class="form-control form-control-user" placeholder="Dirección de transferencia" />
+                                                class="form-control form-control-user"
+                                                placeholder="Dirección de transferencia" />
                                             <span *ngIf="transferir.touched && !transferir.valid">
                                                 * Dirección de transferencia es obligatorio
                                             </span>
@@ -239,7 +250,10 @@
                                     <br>
                                     <div *ngIf="prueba.valid && dominio.valid" class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0 ">
-                                            <button (click)="handleConnection($event)" type="button" class="btn btn-secondary" style="padding: 10px 20px; margin-left: 30px; border-radius: 10px;">Probar Conexión</button>
+                                            <button (click)="handleConnection($event)" type="button"
+                                                class="btn btn-secondary"
+                                                style="padding: 10px 20px; margin-left: 30px; border-radius: 10px;">Probar
+                                                Conexión</button>
                                         </div>
                                     </div>
                                     <br>

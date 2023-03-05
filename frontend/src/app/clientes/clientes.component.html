@@ -10,7 +10,7 @@
             <div class="sidebar-brand-icon">
                 <i class="fa fa-solid fa-user"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">BM Admin </div>
+            <div class="sidebar-brand-text mx-3">BM Cliente </div>
         </a>
 
         <!-- Divider -->
@@ -30,7 +30,7 @@
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEmpl"
                 aria-expanded="true" aria-controls="collapseEmpl">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Mis Cuentas &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i
+                <span>Mi Cuenta &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i
                         class="fa fa-fw fa-chevron-down"></i>
                 </span>
             </a>
@@ -38,9 +38,12 @@
             <div id="collapseEmpl" class="collapse" aria-labelledby="headingEmpl" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <input #cuenta id="cuenta" type="hidden" value="cuenta">
-                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cuenta.value)">Mi Cuenta</a>
-                    <a class="collapse-item" (click)=activarComponente(2) (click)="getInputValue(cuenta.value)">Transferir al mismo banco</a>
-                    <a class="collapse-item" (click)=activarComponente(3) (click)="getInputValue(cuenta.value)">Transferir a otro banco
+                    <a class="collapse-item" (click)=activarComponente(1) (click)="getInputValue(cuenta.value)">Mis
+                        Cuentas</a>
+                    <a class="collapse-item" (click)=activarComponente(2)
+                        (click)="getInputValue(cuenta.value)">Transferir al mismo banco</a>
+                    <a class="collapse-item" (click)=activarComponente(3)
+                        (click)="getInputValue(cuenta.value)">Transferir a otro banco
                     </a>
 
                 </div>
@@ -124,16 +127,19 @@
 
                     </div>
                 </div>
-                
-                
+
+
                 <div *ngIf="option == 1">
-                    <app-cleer [objR]="objR" [cuenta]="cuenta1"  [recuperarCuenta]=recuperarCuenta [a]="ab" (setCuenta)="setCuentaExt($event)"  (activarComponente)="activarComponente($event)"></app-cleer>
+                    <app-cleer [objR]="objR" [cuenta]="cuenta1" [recuperarCuenta]=recuperarCuenta [a]="ab"
+                        (setCuenta)="setCuentaExt($event)" (activarComponente)="activarComponente($event)"></app-cleer>
                 </div>
                 <div *ngIf="option == 2">
-                    <app-transferencia-interna [objR]="objR" [cuenta]="cuenta1" (activarComponente)="activarComponente($event)"></app-transferencia-interna>
+                    <app-transferencia-interna [objR]="objR" [cuenta]="cuenta1"
+                        (activarComponente)="activarComponente($event)"></app-transferencia-interna>
                 </div>
                 <div *ngIf="option == 3">
-                    <app-transferencia-externa [objR]="objR" [cuenta]="cuenta1" (activarComponente)="activarComponente($event)" ></app-transferencia-externa>
+                    <app-transferencia-externa [objR]="objR" [cuenta]="cuenta1"
+                        (activarComponente)="activarComponente($event)"></app-transferencia-externa>
                 </div>
 
 

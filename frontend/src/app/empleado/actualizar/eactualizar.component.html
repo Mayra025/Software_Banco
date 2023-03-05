@@ -52,13 +52,13 @@
                                 </div>
 
                                 <div *ngIf="error!==''"
-                                    style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(233, 32, 32); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                         Error: {{error}}</p>
                                 </div>
                                 <div *ngIf="success!==''"
-                                    style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(5, 148, 0); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                         Muy bien: {{success}}</p>
@@ -133,9 +133,9 @@
 
                                     <div class="form-group">
                                         <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.usuario.email"
-                                            required class="form-control form-control-user" placeholder="Email" />
+                                            required pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$" class="form-control form-control-user" placeholder="Email" />
                                         <span *ngIf="email.touched && !email.valid">
-                                            * Correo es obligatorio
+                                            * Correo es obligatorio,de formato válido
                                         </span>
 
                                     </div>
@@ -161,10 +161,10 @@
             <table *ngIf="!updateState" datatable [dtOptions]="dtoptions" class="table table-hover">
                 <thead>
                     <tr>
-                        <th style="width: 10%">Identificación</th>
+                        <th style="width: 30%">Identificación</th>
                         <th style="width: 10%">Saldo</th>
                         <th style="width: 10%">Tipo</th>
-                        <th style="width: 60%">Clientes asociados a esta cuenta</th>
+                        <th style="width: 40%">Clientes asociados a esta cuenta</th>
                         <th style="width: 10%"></th>
                     </tr>
                 </thead>
@@ -198,13 +198,13 @@
                                     <h1 class="h4 text-gray-900 mb-4">{{title}} {{objR}}</h1>
                                 </div>
                                 <div *ngIf="error!==''"
-                                    style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(233, 32, 32); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                         Error: {{error}}</p>
                                 </div>
                                 <div *ngIf="success!==''"
-                                    style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                    style="background-color: rgb(5, 148, 0); display: flex; align-items: center;">
                                     <p
                                         style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                         Muy bien: {{success}}</p>
@@ -238,8 +238,8 @@
 
 
                                     <div class="form-group">
-                                        <input type="number" step="any" name="monto" #monto="ngModel"
-                                            [(ngModel)]="cta.monto" required class="form-control form-control-user" />
+                                        <input type="number" step="any"  min="1" name="monto" #monto="ngModel"
+                                            [(ngModel)]="cta.monto" required pattern="^[0-9]+" class="form-control form-control-user" />
                                         <span *ngIf="monto.touched && !monto.valid">
                                             * Defina un valor
                                         </span>

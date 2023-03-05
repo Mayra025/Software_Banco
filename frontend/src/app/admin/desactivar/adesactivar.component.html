@@ -6,10 +6,10 @@
             <table datatable [dtOptions]="dtoptions" class="table">
                 <thead>
                     <tr>
-                        <th style="width: 22%">Identificación</th>
-                        <th style="width: 22%">Nombre</th>
-                        <th style="width: 22%">Apellido</th>
-                        <th style="width: 22%">Correo</th>
+                        <th style="width: 30%">Identificación</th>
+                        <th style="width: 20%">Nombre</th>
+                        <th style="width: 20%">Apellido</th>
+                        <th style="width: 20%">Correo</th>
                         <th style="width: 10%"></th>
 
                     </tr>
@@ -21,7 +21,7 @@
                         <td>{{empleado.apellido}}</td>
                         <td>{{empleado.usuario.email}}</td>
                         <td style="white-space: nowrap">
-                            <a class="btn btn-danger" (click)="activar(empleado._id)">
+                            <a class="btn btn-success" (click)="activar(empleado._id)">
                                 Activar
                             </a>
                         </td>

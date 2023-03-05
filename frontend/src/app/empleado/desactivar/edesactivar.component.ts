@@ -49,15 +49,15 @@ export class EdesactivarComponent implements OnInit {
 
     ngOnInit(): void {
         this.dtoptions = {
-            pagingType: 'full_numbers'
-            /*,
-            searching: true,
-            //  paging:false
-            lengthChange: false,
+            pagingType: 'full_numbers',
+            searching: false,
+            paging: false,
+            ordering: false,
+            info: false,
             language: {
-                searchPlaceholder: 'Escribir Nombre'
-            }
-*/
+                emptyTable: "",
+                zeroRecords: "",
+            },
         };
     }
 
@@ -67,16 +67,22 @@ export class EdesactivarComponent implements OnInit {
                 this._EmpleadoService.deleteCliente(id).subscribe(resp=>{
                     alert("Cliente activado")
                     this.error = ""
+                    window.location.reload();
                 },err=>{
                     this.error = err.error.message
                 })
+              
+
             } else {
                 this._EmpleadoService.deleteCuenta(id).subscribe(resp=>{
                     alert("Cuenta activada")
                     this.error = ""
+                    window.location.reload();
                 },err=>{
                     this.error = err.error.message
                 })
+           
+
             }
             // this._EmpleadoService.
         }

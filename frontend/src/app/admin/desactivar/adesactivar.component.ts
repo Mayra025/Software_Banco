@@ -33,10 +33,10 @@ export class AdesactivarComponent implements OnInit {
         private _router: Router,
         private _AdminService: AdminService
     ) {
-        this._AdminService.getEmpleados().subscribe(resp=>{
+        this._AdminService.getEmpleados().subscribe(resp => {
             this.empleados = resp.data;
-            this.empleados = this.empleados.filter((ele:any) => ele.activo===false)           
-        }, err=>{
+            this.empleados = this.empleados.filter((ele: any) => ele.activo === false)
+        }, err => {
             this._router.navigate(['/login']);
         })
     }
@@ -44,26 +44,28 @@ export class AdesactivarComponent implements OnInit {
 
     ngOnInit(): void {
         this.dtoptions = {
-            pagingType: 'full_numbers'
-            /*,
-            searching: true,
-            //  paging:false
-            lengthChange: false,
+            pagingType: 'full_numbers',
+            searching: false,
+            paging: false,
+            ordering: false,
+            info: false,
             language: {
-                searchPlaceholder: 'Escribir Nombre'
-            }
-*/
+                emptyTable: "",
+                zeroRecords: "",
+                //searchPlaceholder: 'búsqueda'
+            },
         };
     }
-    activar(id:string) {
+    activar(id: string) {
         if (confirm('¿Estás seguro de querer activar?')) {
             if (this.objR == 'empleado') {
-                this._AdminService.deleteEmpleado(id).subscribe(resp=>{
+                this._AdminService.deleteEmpleado(id).subscribe(resp => {
                     alert("Cliente activado")
                     this.error = ""
-                },err=>{
+                }, err => {
                     this.error = err.error.message
                 })
+                window.location.reload();
             }
         }
     }

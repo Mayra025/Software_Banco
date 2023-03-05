@@ -79,13 +79,13 @@
                             </div>
 
                             <div *ngIf="error!==''"
-                                style="background-color: rgb(241, 105, 105); display: flex; align-items: center;">
+                                style="background-color: rgb(233, 32, 32); display: flex; align-items: center;">
                                 <p
                                     style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                     Error: {{error}}</p>
                             </div>
                             <div *ngIf="success!==''"
-                                style="background-color: rgb(110, 241, 105); display: flex; align-items: center;">
+                                style="background-color: rgb(5, 148, 0); display: flex; align-items: center;">
                                 <p
                                     style="margin: 5px 10px; padding: 5px 10px; color: white; border-left: 2.5px solid white;">
                                     Muy bien: {{success}}</p>
@@ -100,7 +100,7 @@
                                                 pattern="[0-9]{10,10}" class="form-control form-control-user"
                                                 placeholder="Identificación" />
                                             <span *ngIf="id.touched && !id.valid">
-                                                * La identificación es obligatoria, de 10 dígitos
+                                                * Identificación es obligatoria, de 10 dígitos
                                             </span>
                                             <br>
                                         </div>
@@ -165,9 +165,10 @@
 
                                     <div class="form-group">
                                         <input type="text" name="email" #email="ngModel" [(ngModel)]="cli.email"
-                                            required class="form-control form-control-user" placeholder="Email" />
+                                            required pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$"
+                                            class="form-control form-control-user" placeholder="Email" />
                                         <span *ngIf="email.touched && !email.valid">
-                                            * Correo es obligatorio
+                                            * Correo es obligatorio, de formato válido
                                         </span>
 
                                     </div>

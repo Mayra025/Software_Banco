@@ -42,10 +42,13 @@ export class EcrearClienteComponent {
     }).subscribe(resp=>{
       this.error = "";
       this.success = "Cliente creado"
+      this.cli = new ClienteB('', '', '', false)
+
     }, err=>{
       this.error = err.error.message;
       this.success = ""
     })
+
 
   }
 

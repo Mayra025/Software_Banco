@@ -23,7 +23,7 @@ export class AactualizarComponent implements OnInit {
     title = "Actualizar";
     @Input() objR: string;
     public cta: CuentaB;
-    public updateState:boolean = false
+    public updateState: boolean = false
 
 
     public usuario: any;  //empleado
@@ -41,49 +41,58 @@ export class AactualizarComponent implements OnInit {
     constructor(
         private _router: Router,
         private service: MasterService,
-        private _AdminService:AdminService
+        private _AdminService: AdminService
     ) {
         this.usuario = null;
         this.banco = new BancoB('', '', '', "", "", "", "");
 
-        this._AdminService.getEmpleados().subscribe(resp=>{
+        this._AdminService.getEmpleados().subscribe(resp => {
             this.empleados = resp.data;
-            this.empleados = this.empleados.filter((ele:any) => ele.activo===true)           
-        }, err=>{
+            this.empleados = this.empleados.filter((ele: any) => ele.activo === true)
+        }, err => {
             this._router.navigate(['/login']);
         })
 
-        this._AdminService.getBancos().subscribe(resp=>{
+        this._AdminService.getBancos().subscribe(resp => {
             this.bancos = resp.data;
-        }, err=>{
+        }, err => {
             this._router.navigate(['/login']);
         })
     }
 
     ngOnInit(): void {
         this.dtoptions = {
-            pagingType: 'full_numbers'
+            pagingType: 'full_numbers',
+            searching: false,
+            paging: false,
+            ordering: false,
+            info: false,
+            language: {
+                emptyTable: "",
+                zeroRecords: "",
+                //searchPlaceholder: 'búsqueda'
+            },
         }
     }
 
     onSubmit(form: NgForm) {
         console.log(form.value);
-        
+
         if (this.objR == 'empleado') {
             this._AdminService.updateEmpleado({
                 nombre: form.value.nombre,
                 apellido: form.value.apellido,
                 correo: form.value.email
-            }, form.value.id).subscribe(resp=> {
+            }, form.value.id).subscribe(resp => {
                 this.error = "";
                 this.success = "Empleado actualizado"
-            }, err=> {
+            }, err => {
                 console.log(err);
-                
+
                 this.error = err.error.message;
                 this.success = ""
             })
-            this.usuario = null;
+            // this.usuario = null;
         } else {
             this._AdminService.updateBanco({
                 nombre: form.value.nombre,
@@ -92,14 +101,14 @@ export class AactualizarComponent implements OnInit {
                 password: form.value.password,
                 prueba: form.value.prueba,
                 transferir: form.value.transferir,
-            }, form.value.id).subscribe(resp=> {
+            }, form.value.id).subscribe(resp => {
                 this.error = "";
                 this.success = "Banco actualizado"
-            }, err=> {
+            }, err => {
                 this.error = err.error.message;
                 this.success = ""
             })
-            this.banco = new BancoB('', '', '', "", "", "", "");
+            //    this.banco = new BancoB('', '', '', "", "", "", "");
         }
 
     }
@@ -110,69 +119,76 @@ export class AactualizarComponent implements OnInit {
         })
     }
 
-    desactivar(id:string) {
+    desactivar(id: string) {
         if (confirm('¿Estás seguro de desactivarlo/Eliminarlo?')) {
             if (this.objR == 'empleado') {
-                this._AdminService.deleteEmpleado(id).subscribe(resp=>{
+                this._AdminService.deleteEmpleado(id).subscribe(resp => {
                     alert("Empleado desactivado")
                     this.error = ""
-                },err=>{
+                }, err => {
                     this.error = err.error.message
                 })
                 this.usuario = null;
+                window.location.reload();
             } else {
-                this._AdminService.deleteBanco(id).subscribe(resp=>{
+                this._AdminService.deleteBanco(id).subscribe(resp => {
                     alert("Banco Eliminado")
                     this.error = ""
-                },err=>{
+                }, err => {
                     this.error = err.error.message
                 })
                 this.banco = new BancoB('', '', '', "", "", "", "");
+                window.location.reload();
+
             }
+
+
         }
     }
 
-    handleConnection($event, bancos?:BancoB){
+    handleConnection($event, bancos?: BancoB) {
         $event.preventDefault()
         $event.target.innerHTML = "Conectando..."
         if (!bancos) {
-            this._AdminService.testConnection(this.banco.dominio+this.banco.prueba).subscribe(resp=>{
+            this._AdminService.testConnection(this.banco.dominio + this.banco.prueba).subscribe(resp => {
                 $event.target.innerHTML = "Conectado"
                 $event.target.style.background = "#28a745";
                 setTimeout(() => {
-                  $event.target.innerHTML = "Probar conexión"
-                  $event.target.style.background = "#6c757d"
+                    $event.target.innerHTML = "Probar conexión"
+                    $event.target.style.background = "#6c757d"
                 }, 2000);
-              }, err=>{
+            }, err => {
                 $event.target.innerHTML = "No hay conexión"
                 $event.target.style.background = "#dc3545";
                 setTimeout(() => {
-                  $event.target.innerHTML = "Probar conexión"
-                  $event.target.style.background = "#6c757d"
+                    $event.target.innerHTML = "Probar conexión"
+                    $event.target.style.background = "#6c757d"
                 }, 2000);
-              })
+            })
         } else {
-            this._AdminService.testConnection(bancos.dominio+bancos.prueba).subscribe(resp=>{
+            this._AdminService.testConnection(bancos.dominio + bancos.prueba).subscribe(resp => {
                 $event.target.innerHTML = "Conectado"
                 $event.target.style.background = "#28a745";
                 setTimeout(() => {
-                  $event.target.innerHTML = "Probar conexión"
-                  $event.target.style.background = "#6c757d"
+                    $event.target.innerHTML = "Probar conexión"
+                    $event.target.style.background = "#6c757d"
                 }, 2000);
-              }, err=>{
+            }, err => {
                 $event.target.innerHTML = "No hay conexión"
                 $event.target.style.background = "#dc3545";
                 setTimeout(() => {
-                  $event.target.innerHTML = "Probar conexión"
-                  $event.target.style.background = "#6c757d"
+                    $event.target.innerHTML = "Probar conexión"
+                    $event.target.style.background = "#6c757d"
                 }, 2000);
-              })
+            })
         }
 
-      }
+    }
 
-    actualizarState(){
+    actualizarState() {
         this.updateState = !this.updateState;
+        this.success = "";
+        this.error = "";
     }
 
     editar(obj: any) {

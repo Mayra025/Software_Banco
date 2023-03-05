@@ -49,14 +49,16 @@ export class EleerComponent implements OnInit {
 
     ngOnInit(): void {
         this.dtoptions = {
-            pagingType: 'full_numbers'
-            ,
-            searching: true,
-            //  paging:false
+            pagingType: 'full_numbers',
+            searching: false,
+            paging: false,
+            ordering: false,
+            info: false,
             language: {
-                searchPlaceholder: 'Escribir Nombre'
-            }
-
+                emptyTable: "",
+                zeroRecords: "",
+                //searchPlaceholder: 'búsqueda'
+            },
         };
         this.LoadInvoice();
 
