@@ -1,10 +1,8 @@
 //Admin lee: Banco y Empleado
 
 import { Component, OnInit, Input } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
 import { BancoB } from 'src/app/models/banco';
-import axios from 'axios';
 import { Subject } from 'rxjs';
 import { MasterService } from 'src/app/service/login.service';
 
@@ -61,18 +59,7 @@ export class AleerComponent implements OnInit {
     ngOnInit(): void {
         this.dtoptions = {
             pagingType: 'full_numbers'
-            /*,
-            searching: true,
-            //  paging:false
-            lengthChange: false,
-            language: {
-                searchPlaceholder: 'Escribir Nombre'
-            }
-*/
         };
-        // this.LoadInvoice();
-
-
     }
 
     handleConnection($event, bancos:BancoB){

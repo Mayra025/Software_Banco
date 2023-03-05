@@ -1,13 +1,8 @@
 //Admin desactiva: Banco y Empleado
 
 import { Component, OnInit, Input } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Usuario } from 'src/app/models/usuario';
-import { BancoB } from 'src/app/models/banco';
-import axios from 'axios';
 
 import { Router } from '@angular/router';
-import { CuentaB } from 'src/app/models/cuenta';
 import { AdminService } from '../service/admin.service';
 
 
@@ -45,14 +40,6 @@ export class AdesactivarComponent implements OnInit {
     ngOnInit(): void {
         this.dtoptions = {
             pagingType: 'full_numbers'
-            /*,
-            searching: true,
-            //  paging:false
-            lengthChange: false,
-            language: {
-                searchPlaceholder: 'Escribir Nombre'
-            }
-*/
         };
     }
     activar(id:string) {
